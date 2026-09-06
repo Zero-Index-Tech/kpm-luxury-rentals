@@ -31,7 +31,7 @@ const concepts: Array<{ id: Concept; number: string; name: string; note: string 
   { id: "signature", number: "01", name: "Signature Services", note: "Premium service grid" },
   { id: "institutional", number: "02", name: "Quiet Authority", note: "Corporate & embassy" },
   { id: "fleet", number: "03", name: "Fleet Store", note: "Vehicle-first catalogue" },
-  { id: "elite", number: "04", name: "Elite Car Dreams", note: "Provided concept" },
+  { id: "elite", number: "04", name: "Luxe Concierge", note: "Concierge-led experience" },
 ];
 
 const fleet = [
@@ -368,10 +368,6 @@ function LuxeConcierge({ quote }: { quote: (source: string) => void }) {
   );
 }
 
-function EliteConcept() {
-  return <iframe title="Elite Car Dreams concept" src="http://localhost:5175/" style={{ display: "block", width: "100%", height: "calc(100vh - 94px)", minHeight: "720px", border: 0 }} />;
-}
-
 export default function ConceptClient({ initialActive = "signature" }: { initialActive?: Concept }) {
   const active = initialActive;
   const [quoteOpen, setQuoteOpen] = useState(false);
@@ -389,7 +385,7 @@ export default function ConceptClient({ initialActive = "signature" }: { initial
         {active === "signature" && <SignatureServices quote={openQuote} />}
         {active === "institutional" && <Institutional quote={openQuote} />}
         {active === "fleet" && <FleetStore quote={openQuote} />}
-        {active === "elite" && <EliteConcept />}
+        {active === "elite" && <LuxeConcierge quote={openQuote} />}
       </div>
       <FloatingConcierge quote={openQuote} />
       <QuotePanel open={quoteOpen} onClose={() => setQuoteOpen(false)} source={quoteSource} />

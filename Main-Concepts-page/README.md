@@ -5,7 +5,7 @@ Four premium homepage directions for KPM Luxe Rentals:
 1. **Signature Services** - a polished landing slider with image-led service cards.
 2. **Quiet Authority** - a corporate and embassy-focused direction.
 3. **Fleet Store** - a vehicle-first catalogue direction.
-4. **Elite Car Dreams** - the provided concept added into the main concept mix.
+4. **Luxe Concierge** - a concierge-led premium rental experience.
 
 ## Run Locally
 
