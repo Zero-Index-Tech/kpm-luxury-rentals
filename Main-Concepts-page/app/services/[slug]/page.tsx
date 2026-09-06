@@ -14,7 +14,7 @@ const services: Record<string, Service> = {
   corporate: {
     title: "Corporate Rentals",
     eyebrow: "Executive mobility",
-    image: "/assets/kpm-suv.webp",
+    image: "/assets/fleet-mercedes-e220d.jpg",
     intro: "Premium vehicle support for executives, visiting clients, production teams and high-value business movement.",
     promise: "KPM can position the right vehicle class around meeting schedules, airport movement, client hosting and longer business requirements, with a clean enquiry path that feels suitable for a premium client.",
     points: [
@@ -26,7 +26,7 @@ const services: Record<string, Service> = {
   embassies: {
     title: "Embassy Rentals",
     eyebrow: "Discreet institutional support",
-    image: "/assets/kpm-people-mover.webp",
+    image: "/assets/fleet-mercedes-v-class.jpg",
     intro: "Consistent premium rentals for diplomatic, delegation and institutional transport requirements.",
     promise: "This service page frames KPM as calm, reliable and detail aware: clear terms, suitable vehicle classes and a booking journey that avoids unnecessary friction for official movement.",
     points: [
@@ -38,7 +38,7 @@ const services: Record<string, Service> = {
   "matric-dance": {
     title: "Matric Dance Rentals",
     eyebrow: "Arrival moments",
-    image: "/assets/kpm-hatch.webp",
+    image: "/assets/fleet-vw-golf-r.jpg",
     intro: "A polished rental path for students and families who want the arrival to feel memorable, premium and well organised.",
     promise: "The page keeps the glamour of the moment while making the practical side clear: availability, arrival timing, vehicle preference, photos and handover expectations.",
     points: [
@@ -50,7 +50,7 @@ const services: Record<string, Service> = {
   weddings: {
     title: "Wedding Rentals",
     eyebrow: "Ceremony arrivals",
-    image: "/assets/kpm-hero.png",
+    image: "/assets/fleet-bmw-m440i.jpg",
     intro: "Elegant premium vehicles for ceremony arrival, reception movement and the moments that become part of the wedding record.",
     promise: "KPM can present wedding rental as an experience, not a vehicle list: calm planning, refined options and a clear route from enquiry to availability confirmation.",
     points: [
@@ -62,7 +62,7 @@ const services: Record<string, Service> = {
   "long-term-rental": {
     title: "Long-Term Rentals",
     eyebrow: "Monthly premium access",
-    image: "/assets/kpm-people-mover.webp",
+    image: "/assets/fleet-toyota-fortuner.webp",
     intro: "Flexible monthly premium vehicle access for professionals, founders, families and teams who need confidence without ownership.",
     promise: "This page focuses on stability: term length, vehicle class, support expectations, mileage needs and a direct line into the availability process.",
     points: [
@@ -74,7 +74,7 @@ const services: Record<string, Service> = {
   "short-term-rental": {
     title: "Short-Term Rentals",
     eyebrow: "Day and weekend mobility",
-    image: "/assets/kpm-suv.webp",
+    image: "/assets/fleet-bmw-x5.jpg",
     intro: "Luxury rental access for travel windows, weekends, shoots, client hosting and personal plans that call for a premium vehicle.",
     promise: "The service page keeps the decision simple: choose the occasion, confirm the dates, match the class and request availability without digging through a generic catalogue.",
     points: [
@@ -86,7 +86,7 @@ const services: Record<string, Service> = {
   events: {
     title: "Short-Term & Events",
     eyebrow: "High-impact rentals",
-    image: "/assets/kpm-hero.png",
+    image: "/assets/fleet-bmw-m440i.jpg",
     intro: "Premium vehicles for launches, weddings, matric dances, weekends and short-term moments where arrival matters.",
     promise: "This combined page lets a concept keep the simple three-card structure while still opening into a dedicated, more complete event rental story.",
     points: [

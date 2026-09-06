@@ -35,27 +35,27 @@ const concepts: Array<{ id: Concept; number: string; name: string; note: string 
 ];
 
 const fleet = [
-  { name: "BMW X5", detail: "Luxury SUV | 3.0d / M50d xDrive", category: "SUV", image: "/assets/kpm-suv.webp" },
-  { name: "Mercedes-Benz V-Class", detail: "People mover | V300d / V250d", category: "People Movers", image: "/assets/kpm-people-mover.webp" },
-  { name: "Volkswagen Golf 8R", detail: "Performance | 2025", category: "Performance", image: "/assets/kpm-hatch.webp" },
-  { name: "Toyota Fortuner", detail: "SUV | 2025 2.8 GD-6 VX", category: "SUV", image: "/assets/kpm-suv.webp" },
-  { name: "BMW M440i Convertible", detail: "Performance | 2024", category: "Performance", image: "/assets/kpm-hero.png" },
-  { name: "Mercedes-Benz E220d", detail: "Sedan | 2025 AMG Line", category: "Sedans", image: "/assets/kpm-hero.png" },
+  { name: "BMW X5", detail: "Luxury SUV | 3.0d / M50d xDrive", category: "SUV", image: "/assets/fleet-bmw-x5.jpg" },
+  { name: "Mercedes-Benz V-Class", detail: "People mover | V300d / V250d", category: "People Movers", image: "/assets/fleet-mercedes-v-class.jpg" },
+  { name: "Volkswagen Golf 8R", detail: "Performance | 2025", category: "Performance", image: "/assets/fleet-vw-golf-r.jpg" },
+  { name: "Toyota Fortuner", detail: "SUV | 2025 2.8 GD-6 VX", category: "SUV", image: "/assets/fleet-toyota-fortuner.webp" },
+  { name: "BMW M440i Convertible", detail: "Performance | 2024", category: "Performance", image: "/assets/fleet-bmw-m440i.jpg" },
+  { name: "Mercedes-Benz E220d", detail: "Sedan | 2025 AMG Line", category: "Sedans", image: "/assets/fleet-mercedes-e220d.jpg" },
 ];
 
 const essentialServices: ServiceItem[] = [
-  { title: "Corporate", slug: "corporate", image: "/assets/kpm-suv.webp", copy: "Executive rental support for meetings, client hosting, productions and board-level movement.", icon: BriefcaseBusiness },
-  { title: "Long-Term Rental", slug: "long-term-rental", image: "/assets/kpm-people-mover.webp", copy: "Flexible monthly arrangements for founders, teams, partners and clients who need reliable premium mobility.", icon: Clock3 },
-  { title: "Short-Term & Events", slug: "events", image: "/assets/kpm-hero.png", copy: "High-impact vehicles for weekends, launches, leisure, weddings and landmark arrivals.", icon: CalendarDays },
+  { title: "Corporate", slug: "corporate", image: "/assets/fleet-mercedes-e220d.jpg", copy: "Executive rental support for meetings, client hosting, productions and board-level movement.", icon: BriefcaseBusiness },
+  { title: "Long-Term Rental", slug: "long-term-rental", image: "/assets/fleet-mercedes-v-class.jpg", copy: "Flexible monthly arrangements for founders, teams, partners and clients who need reliable premium mobility.", icon: Clock3 },
+  { title: "Short-Term & Events", slug: "events", image: "/assets/fleet-bmw-m440i.jpg", copy: "High-impact vehicles for weekends, launches, leisure, weddings and landmark arrivals.", icon: CalendarDays },
 ];
 
 const signatureServices: ServiceItem[] = [
-  { title: "Corporate", slug: "corporate", image: "/assets/kpm-suv.webp", copy: "Polished mobility for executives, guests and high-value business movements.", icon: BriefcaseBusiness },
-  { title: "Embassies", slug: "embassies", image: "/assets/kpm-people-mover.webp", copy: "Discreet, consistent transport support for diplomatic and institutional requirements.", icon: Landmark },
-  { title: "Matric Dance", slug: "matric-dance", image: "/assets/kpm-hatch.webp", copy: "Memorable arrivals with the right vehicle presence and a clear booking flow.", icon: Sparkles },
-  { title: "Weddings", slug: "weddings", image: "/assets/kpm-hero.png", copy: "Elegant arrival and photo-moment vehicles for ceremony, reception and guest movement.", icon: Heart },
-  { title: "Long-Term Rental", slug: "long-term-rental", image: "/assets/kpm-people-mover.webp", copy: "Monthly premium vehicle access with tailored terms and direct support.", icon: Clock3 },
-  { title: "Short-Term Rental", slug: "short-term-rental", image: "/assets/kpm-suv.webp", copy: "Luxury self-drive and chauffeur-ready options for days, weekends and travel windows.", icon: CalendarDays },
+  { title: "Corporate", slug: "corporate", image: "/assets/fleet-mercedes-e220d.jpg", copy: "Polished mobility for executives, guests and high-value business movements.", icon: BriefcaseBusiness },
+  { title: "Embassies", slug: "embassies", image: "/assets/fleet-mercedes-v-class.jpg", copy: "Discreet, consistent transport support for diplomatic and institutional requirements.", icon: Landmark },
+  { title: "Matric Dance", slug: "matric-dance", image: "/assets/fleet-vw-golf-r.jpg", copy: "Memorable arrivals with the right vehicle presence and a clear booking flow.", icon: Sparkles },
+  { title: "Weddings", slug: "weddings", image: "/assets/fleet-bmw-m440i.jpg", copy: "Elegant arrival and photo-moment vehicles for ceremony, reception and guest movement.", icon: Heart },
+  { title: "Long-Term Rental", slug: "long-term-rental", image: "/assets/fleet-toyota-fortuner.webp", copy: "Monthly premium vehicle access with tailored terms and direct support.", icon: Clock3 },
+  { title: "Short-Term Rental", slug: "short-term-rental", image: "/assets/fleet-bmw-x5.jpg", copy: "Luxury self-drive and chauffeur-ready options for days, weekends and travel windows.", icon: CalendarDays },
 ];
 
 const conciergePrompts = [
@@ -65,9 +65,9 @@ const conciergePrompts = [
 ];
 
 const slides = [
-  { label: "Luxury in motion", title: "Premium cars, prepared around the occasion.", image: "/assets/kpm-hero.png" },
-  { label: "Fleet confidence", title: "From executive SUVs to people movers.", image: "/assets/kpm-suv.webp" },
-  { label: "Concierge-led", title: "A smarter path from interest to booking.", image: "/assets/kpm-people-mover.webp" },
+  { label: "Luxury in motion", title: "Premium cars, prepared around the occasion.", image: "/assets/fleet-bmw-m440i.jpg" },
+  { label: "Fleet confidence", title: "From executive SUVs to people movers.", image: "/assets/fleet-bmw-x5.jpg" },
+  { label: "Concierge-led", title: "A smarter path from interest to booking.", image: "/assets/fleet-mercedes-v-class.jpg" },
 ];
 
 function BrandMark({ inverse = false }: { inverse?: boolean }) {
@@ -326,7 +326,7 @@ function Institutional({ quote }: { quote: (source: string) => void }) {
       <header className="nav light"><BrandMark /><nav><a href="#inst-services">Solutions</a><a href="#inst-process">Process</a><a href="#inst-ai">AI Concierge</a></nav><button type="button" onClick={() => quote("Quiet Authority nav")}>Request proposal</button></header>
       <section className="authority-hero">
         <div><span className="pill"><ShieldCheck size={15} /> Professional mobility partner</span><h1>Premium movement for organisations with standards.</h1><p>For embassies, corporate offices, rental partners and private clients who expect reliability, discretion and a polished client-facing experience.</p><button type="button" onClick={() => quote("Quiet Authority hero")}>Discuss requirements <ArrowRight size={18} /></button></div>
-        <img src="/assets/kpm-suv.webp" alt="Executive SUV rental" />
+        <img src="/assets/fleet-bmw-x5.jpg" alt="Executive BMW X5 rental" />
       </section>
       <section className="section light" id="inst-services"><div className="section-head"><span>Core solutions</span><h2>Business-first services without losing luxury.</h2></div><ServiceCards items={signatureServices.slice(0, 6)} /></section>
       <section className="process-strip" id="inst-process"><div><span>01</span><strong>Request</strong><p>Dates, class, pickup and service type.</p></div><div><span>02</span><strong>Confirm</strong><p>KPM verifies availability and terms.</p></div><div><span>03</span><strong>Secure</strong><p>The booking moves into payment and handover.</p></div></section>
@@ -343,7 +343,7 @@ function FleetStore({ quote }: { quote: (source: string) => void }) {
   return (
     <main className="fleet-store concept" id="top">
       <header className="nav dark"><BrandMark inverse /><nav><a href="#fleet-catalogue">Fleet</a><a href="#fleet-services">Services</a><a href="#fleet-ai">AI Concierge</a></nav><button type="button" onClick={() => quote("Fleet Store nav")}>Reserve interest</button></header>
-      <section className="storefront-hero"><div><span>Fleet showroom</span><h1>Browse the fleet like a premium showroom.</h1><p>Explore vehicle categories, compare the right class for your plans and request availability with direct KPM support.</p><button type="button" onClick={() => quote("Fleet Store hero")}>Check vehicle availability <ArrowRight size={18} /></button></div></section>
+      <section className="storefront-hero fleet-photo-hero"><div><span>Fleet showroom</span><h1>Browse the fleet like a premium showroom.</h1><p>Explore vehicle categories, compare the right class for your plans and request availability with direct KPM support.</p><button type="button" onClick={() => quote("Fleet Store hero")}>Check vehicle availability <ArrowRight size={18} /></button></div></section>
       <section className="section warm" id="fleet-services"><div className="section-head"><span>Rental paths</span><h2>Start with the service, then choose the vehicle.</h2></div><ServiceCards items={essentialServices} compact /></section>
       <section className="catalogue" id="fleet-catalogue"><div className="section-head"><span>Fleet preview</span><h2>Filter by vehicle need.</h2></div><div className="filters">{filters.map((item) => <button type="button" key={item} className={filter === item ? "active" : ""} onClick={() => setFilter(item)}>{item}</button>)}</div><div className="fleet-grid">{visibleFleet.map((vehicle) => <article key={vehicle.name}><img src={vehicle.image} alt={`${vehicle.name} rental`} /><div><small>{vehicle.category}</small><h3>{vehicle.name}</h3><p>{vehicle.detail}</p><button type="button" onClick={() => quote(vehicle.name)}>Request this vehicle <ArrowRight size={16} /></button></div></article>)}</div></section>
       <div id="fleet-ai"><AiConcierge tone="light" quote={quote} /></div>
@@ -356,7 +356,7 @@ function LuxeConcierge({ quote }: { quote: (source: string) => void }) {
   return (
     <main className="luxe concept" id="top">
       <header className="nav dark glass"><BrandMark inverse /><nav><a href="#luxe-services">Services</a><a href="#luxe-fleet">Fleet</a><a href="#luxe-ai">AI Concierge</a></nav><button type="button" onClick={() => quote("Luxe Concierge nav")}>Plan journey</button></header>
-      <section className="luxe-hero">
+      <section className="luxe-hero real-photo-hero">
         <div className="luxe-copy"><span>Private concierge rental</span><h1>Luxury mobility with a concierge mind.</h1><p>A bright, premium rental experience where clients can choose a service, browse the fleet and let the concierge guide the next step.</p><button type="button" onClick={() => quote("Luxe Concierge hero")}>Plan with concierge <ArrowRight size={18} /></button></div>
         <div className="concierge-card"><Bot size={26} /><strong>What are you booking for?</strong><p>Corporate guest, embassy movement, wedding arrival, matric dance, long-term rental or short-term self-drive.</p></div>
       </section>
