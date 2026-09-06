@@ -3,6 +3,10 @@ node_modules/
 .next/
 dist/
 build/
+!build/
+!build/sites-vite-plugin.ts
+!Main-Concepts-page/build/
+!Main-Concepts-page/build/sites-vite-plugin.ts
 out/
 .vite/
 .wrangler/
