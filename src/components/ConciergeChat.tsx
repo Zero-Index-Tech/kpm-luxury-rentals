@@ -86,12 +86,25 @@ export default function ConciergeChat() {
         onClick={() => setOpen((v) => !v)}
         data-cursor
         aria-label={open ? 'Close AI concierge' : 'Open AI concierge chat'}
-        className="fixed bottom-4 right-4 z-[96] flex items-center gap-2.5 rounded-full bg-gold px-5 py-3 text-[#121110] shadow-[0_18px_44px_-14px_rgba(199,191,174,0.7)] transition-transform duration-300 hover:scale-[1.04] active:scale-95 md:bottom-6 md:right-6"
+        className={cn(
+          'fixed bottom-4 right-4 z-[96] flex h-14 items-center rounded-full bg-gold text-[#121110] shadow-[0_18px_44px_-14px_rgba(199,191,174,0.7)] transition-transform duration-300 hover:scale-[1.04] active:scale-95 md:bottom-6 md:right-6',
+          open ? 'gap-2.5 px-5' : 'w-14 justify-center px-0',
+        )}
       >
-        {open ? <X size={17} strokeWidth={2.4} /> : <Sparkles size={17} strokeWidth={2.2} />}
-        <span className="text-[11px] font-bold uppercase tracking-[0.18em]">
-          {open ? 'Close' : 'AI Concierge'}
-        </span>
+        {open ? (
+          <>
+            <X size={17} strokeWidth={2.4} />
+            <span className="text-[11px] font-bold uppercase tracking-[0.18em]">Close</span>
+          </>
+        ) : (
+          <img
+            src="/logo-black.png"
+            alt=""
+            width={34}
+            height={34}
+            className="h-[34px] w-[34px] object-contain"
+          />
+        )}
       </motion.button>
 
       {/* chat panel */}
