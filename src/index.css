@@ -1,0 +1,241 @@
+@tailwind base;
+
+@keyframes sheen {
+  from {
+    transform: translateX(-180%) skewX(-20deg);
+  }
+  to {
+    transform: translateX(260%) skewX(-20deg);
+  }
+}
+
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* shadcn primitives on the V2 ivory theme */
+    --background: 40 11% 95%;
+    --foreground: 25 5% 28%;
+    --card: 40 14% 97%;
+    --card-foreground: 25 5% 28%;
+    --popover: 40 14% 97%;
+    --popover-foreground: 25 5% 28%;
+    --primary: 30 3% 7%;
+    --primary-foreground: 40 11% 95%;
+    --secondary: 30 9% 91%;
+    --secondary-foreground: 25 5% 28%;
+    --muted: 30 9% 91%;
+    --muted-foreground: 25 8% 50%;
+    --accent: 30 9% 91%;
+    --accent-foreground: 25 5% 28%;
+    --destructive: 14 48% 46%;
+    --destructive-foreground: 40 11% 95%;
+    --border: 25 8% 50% / 0.28;
+    --input: 25 8% 50% / 0.28;
+    --ring: 25 5% 28%;
+    --radius: 0.875rem;
+  }
+
+  html {
+    scroll-behavior: auto; /* Lenis owns scrolling */
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  body {
+    @apply bg-ivory font-sans text-charcoal antialiased;
+    font-weight: 400;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(139, 124, 115, 0.35);
+    color: #121110;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #ece8e3;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #c8c0b8;
+    border: 2px solid #ece8e3;
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #8b7c73;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* ── Glass materials (design.md §2) — use only over imagery/contrast ── */
+  .glass-light {
+    background: rgba(244, 242, 239, 0.55);
+    -webkit-backdrop-filter: blur(20px) saturate(1.3);
+    backdrop-filter: blur(20px) saturate(1.3);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  .glass-dark {
+    background: rgba(18, 17, 16, 0.38);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
+    backdrop-filter: blur(20px) saturate(1.2);
+    border: 1px solid rgba(244, 242, 239, 0.14);
+  }
+
+  .glass-card-dark {
+    background: rgba(244, 242, 239, 0.06);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(244, 242, 239, 0.12);
+  }
+
+  /* V2 eyebrow label: — LABEL (dash 24px, Manrope 11px/700 caps) */
+  .eyebrow {
+    @apply font-sans text-[11px] font-bold uppercase tracking-[0.32em] text-taupe;
+  }
+  .eyebrow-on-dark {
+    @apply text-ivory-45;
+  }
+
+  /* V2 nav link: charcoal/70, taupe dot on hover (added in Navbar markup) */
+  .nav-link {
+    @apply relative text-[12px] font-semibold uppercase tracking-[0.16em] text-charcoal/70 transition-colors duration-300 hover:text-charcoal;
+  }
+  .nav-link.active {
+    @apply text-charcoal;
+  }
+
+  /* Fixed film grain (3% opacity, mix-blend-overlay) */
+  .grain-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    pointer-events: none;
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Warm taupe glow on dark bands / CTA slabs (design.md §2) */
+  .taupe-glow {
+    background: radial-gradient(
+      ellipse 55% 45% at 50% 120%,
+      rgba(139, 124, 115, 0.22),
+      transparent 70%
+    );
+  }
+
+  /* Warm CSS grade for V1 photography sitting on ivory (design.md §9) */
+  .img-warm {
+    filter: sepia(0.12) saturate(0.9);
+  }
+
+  /* ── Legacy V1 utilities kept for un-restyled pages ── */
+  .btn-sheen {
+    @apply relative overflow-hidden;
+  }
+  .btn-sheen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+    transform: translateX(-180%) skewX(-20deg);
+    pointer-events: none;
+  }
+  .btn-sheen:hover::before {
+    animation: sheen 0.6s ease-out;
+  }
+
+  .gold-glow {
+    background: radial-gradient(ellipse 60% 50% at 50% 120%, rgba(199, 191, 174, 0.1), transparent 70%);
+  }
+
+  /* ── Concept 1 (dark/gold) namespaced components ── */
+  .c1-eyebrow {
+    @apply font-c1sans text-[11px] font-semibold uppercase tracking-[0.35em] text-gold;
+  }
+
+  .c1-nav-link {
+    @apply relative text-[12px] font-medium uppercase tracking-[0.18em] text-ivory-secondary transition-colors duration-300 hover:text-gold;
+  }
+  .c1-nav-link::after {
+    content: '';
+    @apply absolute -bottom-1.5 left-0 h-px w-full origin-center scale-x-0 bg-gold transition-transform duration-300;
+  }
+  .c1-nav-link:hover::after,
+  .c1-nav-link.active::after {
+    @apply scale-x-100;
+  }
+  .c1-nav-link.active {
+    @apply text-gold;
+  }
+}
+
+@layer base {
+  /* Concept 1 scoped shadcn vars + sharp radius — applied on the C1 layout
+     wrapper so its shadcn primitives (select, dialog) render dark-luxury
+     without touching Concept 2's global ivory theme. */
+  .c1-root {
+    --background: 240 7% 4%;
+    --foreground: 40 20% 93%;
+    --card: 240 6% 8%;
+    --card-foreground: 40 20% 93%;
+    --popover: 240 6% 8%;
+    --popover-foreground: 40 20% 93%;
+    --primary: 38 45% 57%;
+    --primary-foreground: 240 7% 4%;
+    --secondary: 240 5% 12%;
+    --secondary-foreground: 40 20% 93%;
+    --muted: 240 5% 12%;
+    --muted-foreground: 35 5% 42%;
+    --accent: 240 5% 12%;
+    --accent-foreground: 40 20% 93%;
+    --destructive: 17 49% 52%;
+    --destructive-foreground: 40 20% 93%;
+    --border: 0 0% 100% / 0.07;
+    --input: 0 0% 100% / 0.07;
+    --ring: 38 45% 57%;
+    --radius: 2px;
+  }
+
+  .c1-root ::selection {
+    background: rgba(200, 165, 92, 0.35);
+    color: #f2efe8;
+  }
+
+  /* Concept 1 dark scrollbar for its window scroll */
+  body:has(.c1-root) {
+    background: #0a0a0b;
+  }
+  body:has(.c1-root)::-webkit-scrollbar-track {
+    background: #0a0a0b;
+  }
+  body:has(.c1-root)::-webkit-scrollbar-thumb {
+    background: #26262b;
+    border-color: #0a0a0b;
+    border-radius: 0;
+  }
+}
