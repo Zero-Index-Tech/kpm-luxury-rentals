@@ -59,13 +59,13 @@ function BrandMarquee() {
   return (
     <section
       ref={ref}
-      className="group/marquee overflow-hidden border-y border-subtle bg-night-elevated py-16 md:py-20"
+      className="group/marquee overflow-hidden border-y border-subtle bg-night-elevated theme-dark py-16 md:py-20"
       aria-label="Partner brands"
     >
       {/* Loop keyframes live here so global stylesheets stay untouched. */}
       <style>{'@keyframes kpm-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}'}</style>
 
-      <p className="marquee-label text-center text-[10px] font-semibold uppercase tracking-[0.25em] text-gold">
+      <p className="marquee-label text-center text-[10px] font-semibold uppercase tracking-[0.25em] text-copy-accent">
         Direct Elite Partnerships &amp; Manufacturer Standards
       </p>
 
@@ -76,7 +76,7 @@ function BrandMarquee() {
               {BRANDS.map((brand) => (
                 <span
                   key={brand}
-                  className="wordmark whitespace-nowrap px-10 font-c1serif text-2xl uppercase tracking-[0.12em] text-gold-dim/60 transition-colors duration-300 hover:text-gold"
+                  className="wordmark whitespace-nowrap px-10 font-c1serif text-2xl uppercase tracking-[0.12em] text-gold-dim/60 transition-colors duration-300 hover:text-copy-accent"
                 >
                   {brand}
                 </span>

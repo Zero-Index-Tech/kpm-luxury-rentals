@@ -59,8 +59,8 @@ export default function GoldButton({
   const base = cn(
     'inline-flex items-center justify-center gap-2 px-9 py-4 text-[12px] font-semibold uppercase tracking-[0.15em] rounded-[2px] transition-all duration-300 active:scale-[0.97] select-none',
     variant === 'primary'
-      ? 'btn-sheen bg-gold text-ink hover:bg-gold-bright hover:-translate-y-0.5'
-      : 'border border-[rgba(199,191,174,0.4)] text-ivory hover:border-gold hover:bg-[rgba(199,191,174,0.08)] hover:text-gold',
+      ? 'btn-sheen bg-sand text-ink hover:bg-ivory hover:-translate-y-0.5'
+      : 'border border-white/40 text-white hover:border-white hover:bg-white/10',
     className,
   )
 

@@ -62,8 +62,8 @@ function BrandMarquee() {
       {/* Loop keyframes live here so global stylesheets stay untouched. */}
       <style>{'@keyframes kpm-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}'}</style>
 
-      <div className="group/marquee overflow-hidden rounded-[24px] bg-ivory-deep py-14 md:py-16">
-        <p className="marquee-label text-center text-[10px] font-bold uppercase tracking-[0.25em] text-taupe">
+      <div className="group/marquee overflow-hidden rounded-[24px] bg-ivory-deep theme-light py-14 md:py-16">
+        <p className="marquee-label text-center text-[10px] font-bold uppercase tracking-[0.25em] text-copy-muted">
           Direct Elite Partnerships &amp; Manufacturer Standards
         </p>
 
@@ -74,7 +74,7 @@ function BrandMarquee() {
                 {BRANDS.map((brand) => (
                   <span
                     key={brand}
-                    className="wordmark whitespace-nowrap px-10 font-display text-[1.4rem] font-bold uppercase tracking-[0.08em] text-charcoal/35 transition-colors duration-300 hover:text-charcoal"
+                    className="wordmark whitespace-nowrap px-10 font-display text-[1.4rem] font-bold uppercase tracking-[0.08em] text-copy/35 transition-colors duration-300 hover:text-copy"
                   >
                     {brand}
                   </span>

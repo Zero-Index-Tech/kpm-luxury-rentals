@@ -14,15 +14,15 @@ export default function Fleet() {
   }, [filter])
 
   return (
-    <div className="bg-white">
+    <div className="bg-taupe theme-canvas">
       <Ghost text="The fleet" className="pt-10" />
       <div className="mx-auto max-w-[1280px] px-6 pb-24">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <h1 className="font-lxrtitle text-5xl font-semibold leading-[1.02] tracking-tight text-lxr-ink sm:text-6xl">
-              The <em className="font-lxrbody font-medium italic text-lxr-olive">Fleet.</em>
+            <h1 className="font-lxrtitle text-5xl font-semibold leading-[1.02] tracking-tight text-copy sm:text-6xl">
+              The <em className="font-lxrbody font-medium italic text-copy-accent">Fleet.</em>
             </h1>
-            <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-lxr-muted">
+            <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-copy-muted">
               Flagship performance coupes, executive saloons and ultra-prestige marques — every
               vehicle maintained to showroom standard and delivered to your door.
             </p>
@@ -34,8 +34,8 @@ export default function Fleet() {
                 onClick={() => setFilter(f)}
                 className={`rounded-full border px-5 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] transition-all duration-300 ${
                   filter === f
-                    ? 'border-lxr-black bg-lxr-black text-white'
-                    : 'border-lxr-line text-lxr-muted hover:border-lxr-ink hover:text-lxr-ink'
+                    ? 'border-lxr-black bg-lxr-black theme-dark text-white'
+                    : 'border-lxr-line text-copy-muted hover:border-lxr-ink hover:text-copy'
                 }`}
               >
                 {f}

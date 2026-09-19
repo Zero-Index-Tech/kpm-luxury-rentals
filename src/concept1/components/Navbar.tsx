@@ -42,7 +42,7 @@ export default function Navbar() {
     <>
       <header
         className={cn(
-          'fixed inset-x-0 top-0 z-[80] h-[76px] bg-lxr-black transition-shadow duration-300',
+          'fixed inset-x-0 top-0 z-[80] h-[76px] bg-lxr-black theme-dark transition-shadow duration-300',
           scrolled ? 'shadow-[0_12px_36px_-18px_rgba(0,0,0,0.7)]' : '',
         )}
       >
@@ -111,7 +111,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[70] flex flex-col justify-center bg-lxr-black px-8 lg:hidden"
+            className="fixed inset-0 z-[70] flex flex-col justify-center bg-lxr-black theme-dark px-8 lg:hidden"
           >
             <nav className="flex flex-col gap-6" aria-label="Mobile">
               {NAV_LINKS.map((link, i) => (
@@ -135,7 +135,7 @@ export default function Navbar() {
                       onClick={() => setOpen(false)}
                       className={cn(
                         'font-lxrtitle text-[1.9rem] font-semibold transition-colors',
-                        location.pathname === link.to ? 'text-lxr-sand' : 'text-white',
+                        location.pathname === link.to ? 'text-copy-accent' : 'text-white',
                       )}
                     >
                       {link.label}

@@ -22,7 +22,7 @@ export default function SectionHead({
     <div className={`${align === 'center' ? 'text-center' : ''} ${className}`}>
       <h2
         className={`font-lxrtitle text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-[3.4rem] ${
-          dark ? 'text-white' : 'text-lxr-ink'
+          dark ? 'text-white' : 'text-copy'
         }`}
       >
         {title}
@@ -31,7 +31,7 @@ export default function SectionHead({
             {' '}
             <em
               className={`font-lxrbody font-medium italic ${
-                dark ? 'text-lxr-sand' : 'text-lxr-olive'
+                dark ? 'text-copy-accent' : 'text-copy-accent'
               }`}
             >
               {accent}
@@ -42,7 +42,7 @@ export default function SectionHead({
       {copy && (
         <p
           className={`mt-5 max-w-xl text-[15px] leading-relaxed ${
-            dark ? 'text-white/60' : 'text-lxr-muted'
+            dark ? 'text-white/60' : 'text-copy-muted'
           } ${align === 'center' ? 'mx-auto' : ''}`}
         >
           {copy}

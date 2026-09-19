@@ -26,23 +26,23 @@ export default function CTABand({
   buttonTo = '/contact',
 }: CTABandProps) {
   return (
-    <section className="relative overflow-hidden border-y border-hairline bg-night-elevated py-20">
+    <section className="relative overflow-hidden border-y border-hairline bg-night-elevated theme-dark py-20">
       <div className="gold-glow pointer-events-none absolute inset-0" aria-hidden />
       <div className="container relative flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between">
         <Reveal y={0} x={-40} duration={0.9} start="top 80%" className="max-w-2xl">
           {eyebrow && <Eyebrow className="mb-6">{eyebrow}</Eyebrow>}
           <KineticHeadline
             lines={[title]}
-            className="text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-ivory"
+            className="text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-copy"
           />
-          <p className="mt-6 text-[15px] font-light leading-[1.75] text-ivory-secondary">{copy}</p>
+          <p className="mt-6 text-[15px] font-light leading-[1.75] text-copy-muted">{copy}</p>
         </Reveal>
         <Reveal y={0} x={40} duration={0.9} start="top 80%" className="flex flex-col items-start gap-6 lg:items-end">
           <GoldButton to={buttonTo}>{buttonLabel}</GoldButton>
           <a
             href={CONTACT.phoneHref}
             data-cursor
-            className="flex items-center gap-3 font-c1serif text-[1.4rem] text-gold transition-colors duration-300 hover:text-gold-bright"
+            className="flex items-center gap-3 font-c1serif text-[1.4rem] text-copy-accent transition-colors duration-300 hover:text-copy-accent"
           >
             <Phone size={18} aria-hidden />
             {CONTACT.phone}

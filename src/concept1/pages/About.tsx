@@ -80,16 +80,16 @@ const SECTORS = [
 
 export default function About() {
   return (
-    <div className="bg-white">
+    <div className="bg-taupe theme-canvas">
       {/* Hero */}
-      <section className="bg-lxr-gray">
+      <section className="bg-taupe theme-canvas">
         <div className="mx-auto grid max-w-[1280px] items-center gap-12 px-6 py-20 lg:grid-cols-2">
           <motion.div initial="hidden" animate="show" variants={rise}>
-            <h1 className="font-lxrtitle text-5xl font-semibold leading-[1.02] tracking-tight text-lxr-ink sm:text-6xl">
+            <h1 className="font-lxrtitle text-5xl font-semibold leading-[1.02] tracking-tight text-copy sm:text-6xl">
               The House of{' '}
-              <em className="font-lxrbody font-medium italic text-lxr-olive">KPM.</em>
+              <em className="font-lxrbody font-medium italic text-copy-accent">KPM.</em>
             </h1>
-            <p className="mt-6 max-w-md text-[15px] leading-relaxed text-lxr-muted">
+            <p className="mt-6 max-w-md text-[15px] leading-relaxed text-copy-muted">
               Sandton's benchmark for elite motoring — a premium private fleet, white-glove
               concierge service, and bespoke rental frameworks trusted across Gauteng for over
               three years.
@@ -114,7 +114,7 @@ export default function About() {
       </section>
 
       {/* Stats band */}
-      <section className="bg-lxr-black text-white">
+      <section className="bg-lxr-black theme-dark text-white">
         <div className="mx-auto grid max-w-[1280px] grid-cols-2 gap-y-10 px-6 py-16 sm:grid-cols-3 lg:grid-cols-5">
           {STATS.map((s, i) => (
             <motion.div
@@ -126,7 +126,7 @@ export default function About() {
               viewport={{ once: true, margin: '-60px' }}
               className="text-center"
             >
-              <div className="font-lxrtitle text-4xl font-semibold text-lxr-sand">{s.value}</div>
+              <div className="font-lxrtitle text-4xl font-semibold text-copy-accent">{s.value}</div>
               <div className="mt-2 text-[11px] uppercase tracking-[0.18em] text-white/45">
                 {s.label}
               </div>
@@ -136,13 +136,13 @@ export default function About() {
       </section>
 
       {/* Legacy */}
-      <section className="bg-white">
+      <section className="bg-taupe theme-canvas">
         <Ghost text="Legacy" />
         <div className="mx-auto grid max-w-[1280px] gap-14 px-6 pb-24 lg:grid-cols-[1fr_1.2fr]">
           <SectionHead title="A Legacy of" accent="Prestige." />
           <div className="space-y-6">
             {LEGACY_PARAGRAPHS.map((p) => (
-              <p key={p.slice(0, 24)} className="text-[15px] leading-[1.8] text-lxr-muted">
+              <p key={p.slice(0, 24)} className="text-[15px] leading-[1.8] text-copy-muted">
                 {p}
               </p>
             ))}
@@ -151,7 +151,7 @@ export default function About() {
       </section>
 
       {/* Pillars */}
-      <section className="bg-lxr-gray">
+      <section className="bg-taupe theme-canvas">
         <div className="mx-auto max-w-[1280px] px-6 py-24">
           <SectionHead title="What We" accent="Stand For." />
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -163,13 +163,13 @@ export default function About() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, margin: '-60px' }}
-                className="rounded-[6px] border border-lxr-line bg-white p-8"
+                className="rounded-[6px] border border-lxr-line bg-white theme-light p-8"
               >
-                <p.icon className="h-7 w-7 text-lxr-olive" strokeWidth={1.6} />
-                <h3 className="mt-6 font-lxrtitle text-base font-semibold text-lxr-ink">
+                <p.icon className="h-7 w-7 text-copy-accent" strokeWidth={1.6} />
+                <h3 className="mt-6 font-lxrtitle text-base font-semibold text-copy">
                   {p.title}
                 </h3>
-                <p className="mt-2.5 text-[13px] leading-relaxed text-lxr-muted">{p.body}</p>
+                <p className="mt-2.5 text-[13px] leading-relaxed text-copy-muted">{p.body}</p>
               </motion.div>
             ))}
           </div>
@@ -177,7 +177,7 @@ export default function About() {
       </section>
 
       {/* Sectors */}
-      <section className="bg-lxr-black text-white">
+      <section className="bg-lxr-black theme-dark text-white">
         <div className="mx-auto max-w-[1280px] px-6 py-24">
           <SectionHead
             dark
@@ -187,8 +187,8 @@ export default function About() {
           />
           <div className="mt-12 grid gap-px overflow-hidden rounded-[6px] border border-lxr-linedark bg-lxr-linedark sm:grid-cols-2 lg:grid-cols-3">
             {SECTORS.map((s) => (
-              <div key={s.title} className="bg-lxr-black p-9">
-                <h3 className="font-lxrtitle text-base font-semibold text-lxr-sand">{s.title}</h3>
+              <div key={s.title} className="bg-lxr-black theme-dark p-9">
+                <h3 className="font-lxrtitle text-base font-semibold text-copy-accent">{s.title}</h3>
                 <p className="mt-2.5 text-[13.5px] leading-relaxed text-white/60">{s.body}</p>
               </div>
             ))}
@@ -197,13 +197,13 @@ export default function About() {
       </section>
 
       {/* CTA */}
-      <section className="bg-lxr-gray">
+      <section className="bg-taupe theme-canvas">
         <div className="mx-auto max-w-[1280px] px-6 py-24 text-center">
-          <h2 className="mx-auto max-w-3xl font-lxrtitle text-4xl font-semibold leading-[1.05] tracking-tight text-lxr-ink sm:text-5xl">
+          <h2 className="mx-auto max-w-3xl font-lxrtitle text-4xl font-semibold leading-[1.05] tracking-tight text-copy sm:text-5xl">
             Experience the{' '}
-            <em className="font-lxrbody font-medium italic text-lxr-olive">KPM Difference</em>
+            <em className="font-lxrbody font-medium italic text-copy-accent">KPM Difference</em>
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-lxr-muted">
+          <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-copy-muted">
             Connect directly with our Sandton-based concierge team to configure your custom
             itinerary, coordinate private airport tarmac arrivals, or secure multi-month corporate
             embassy leases.

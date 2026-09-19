@@ -160,7 +160,7 @@ function CtaBar({ to, label, dark }: { to: string; label: string; dark?: boolean
       data-cursor
       className={cn(
         'cta-bar group flex min-h-[76px] items-center justify-between px-8 py-5 md:px-12',
-        dark ? 'bg-ink text-ivory' : 'glass-light text-charcoal',
+        dark ? 'bg-ink theme-dark text-ivory' : 'glass-light text-copy',
       )}
     >
       <span className="text-[13px] font-bold uppercase tracking-[0.14em] transition-[letter-spacing] duration-300 group-hover:tracking-[0.18em]">
@@ -202,7 +202,7 @@ function StatsBand() {
     { scope: ref },
   )
   return (
-    <section ref={ref} className="bg-ivory py-16">
+    <section ref={ref} className="bg-taupe theme-canvas py-16">
       <div className="container grid grid-cols-2 lg:grid-cols-4">
         {STATS.map((s, i) => (
           <div key={s.label} className="relative flex items-center justify-center px-4 py-4">
@@ -223,7 +223,7 @@ function StatsBand() {
 /* ---------- Section 4 — The Showroom Collection ---------- */
 function Collection() {
   return (
-    <section className="bg-ivory pb-32 pt-8">
+    <section className="bg-taupe theme-canvas pb-32 pt-8">
       <div className="container">
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
@@ -231,11 +231,11 @@ function Collection() {
             <KineticHeadline
               lines={['Curated Performance & Prestige']}
               accentWords={['Prestige']}
-              accentClassName="font-accent font-normal italic text-umber"
-              className="mt-6 text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-charcoal"
+              accentClassName="font-accent font-normal italic text-copy-accent"
+              className="mt-6 text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-copy"
             />
             <Reveal y={24} duration={1} delay={0.15}>
-              <p className="mt-6 max-w-xl text-[15px] font-normal leading-[1.75] text-taupe">
+              <p className="mt-6 max-w-xl text-[15px] font-normal leading-[1.75] text-copy-muted">
                 Our handpicked flagship models. Maintained in pristine showroom condition,
                 prepared for your immediate departure in Johannesburg.
               </p>
@@ -264,10 +264,10 @@ function ArrowRowLink({ to, label }: { to: string; label: string }) {
       data-cursor
       className="group flex items-center justify-between gap-10 pb-2"
     >
-      <span className="text-[13px] font-bold uppercase tracking-[0.14em] text-charcoal transition-[letter-spacing] duration-300 group-hover:tracking-[0.18em]">
+      <span className="text-[13px] font-bold uppercase tracking-[0.14em] text-copy transition-[letter-spacing] duration-300 group-hover:tracking-[0.18em]">
         {label}
       </span>
-      <span className="flex h-11 w-11 items-center justify-center rounded-full border border-taupe-soft text-charcoal transition-all duration-300 group-hover:bg-ink group-hover:text-ivory">
+      <span className="flex h-11 w-11 items-center justify-center rounded-full border border-taupe-soft text-copy transition-all duration-300 group-hover:bg-ink group-hover:text-ivory">
         <ArrowUpRight size={18} aria-hidden />
       </span>
     </Link>
@@ -312,7 +312,7 @@ function Services() {
   )
 
   return (
-    <section id="services" ref={ref} className="relative scroll-mt-[100px] overflow-hidden bg-ink py-24 md:py-32">
+    <section id="services" ref={ref} className="relative scroll-mt-[100px] overflow-hidden bg-ink theme-dark py-24 md:py-32">
       <div className="taupe-glow pointer-events-none absolute inset-0" aria-hidden />
       <div className="container relative">
         <div className="mx-auto max-w-2xl text-center">
@@ -322,7 +322,7 @@ function Services() {
           <KineticHeadline
             lines={['Bespoke Luxury Mobility Solutions']}
             accentWords={['Luxury']}
-            accentClassName="font-accent font-normal italic text-[#B4A89E]"
+            accentClassName="font-accent font-normal italic text-sand"
             className="mt-6 text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-ivory"
           />
           <Reveal y={24} duration={1} delay={0.15}>
@@ -386,7 +386,7 @@ function WhyKpm() {
   )
 
   return (
-    <section ref={ref} className="bg-ivory py-24 md:py-32">
+    <section ref={ref} className="bg-taupe theme-canvas py-24 md:py-32">
       <div className="container grid items-center gap-10 lg:grid-cols-[55fr_45fr] lg:gap-14">
         {/* image with editorial offset outline */}
         <div className="relative">
@@ -412,27 +412,27 @@ function WhyKpm() {
           <KineticHeadline
             lines={['Designed for Discerning Taste']}
             accentWords={['Discerning']}
-            accentClassName="font-accent font-normal italic text-umber"
-            className="mt-6 text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-charcoal"
+            accentClassName="font-accent font-normal italic text-copy-accent"
+            className="mt-6 text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-copy"
           />
           <Reveal staggerChildren={0.15} x={36} y={0} start="top 78%" className="mt-10 space-y-2">
             {CHECKLIST.map((item) => (
               <div
                 key={item.title}
-                className="group flex items-start gap-4 rounded-[16px] p-4 transition-colors duration-300 hover:bg-[rgba(139,124,115,0.06)]"
+                className="group flex items-start gap-4 rounded-[16px] p-4 transition-colors duration-300 hover:bg-[rgba(128,112,104,0.06)]"
               >
-                <span className="mt-1 flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-full bg-[rgba(139,124,115,0.12)] transition-colors duration-300 group-hover:bg-ink">
+                <span className="mt-1 flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-full bg-[rgba(128,112,104,0.12)] transition-colors duration-300 group-hover:bg-ink">
                   <Check
                     size={14}
-                    className="text-charcoal transition-colors duration-300 group-hover:text-ivory"
+                    className="text-copy transition-colors duration-300 group-hover:text-ivory"
                     aria-hidden
                   />
                 </span>
                 <div>
-                  <h3 className="font-display text-[1.05rem] font-bold tracking-[-0.015em] text-charcoal">
+                  <h3 className="font-display text-[1.05rem] font-bold tracking-[-0.015em] text-copy">
                     {item.title}
                   </h3>
-                  <p className="mt-1.5 text-sm font-normal leading-[1.75] text-taupe">{item.body}</p>
+                  <p className="mt-1.5 text-sm font-normal leading-[1.75] text-copy-muted">{item.body}</p>
                 </div>
               </div>
             ))}
@@ -446,16 +446,16 @@ function WhyKpm() {
 /* ---------- Section 7 — Testimonials ---------- */
 function Testimonials() {
   return (
-    <section className="bg-ivory-deep py-24 md:py-32">
+    <section className="bg-taupe theme-canvas py-24 md:py-32">
       <div className="container">
         <div className="mx-auto max-w-2xl text-center">
           <Eyebrow center>Verifiable Excellence</Eyebrow>
           <KineticHeadline
             lines={['The KPM Client Experience']}
-            className="mt-6 text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-charcoal"
+            className="mt-6 text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-copy"
           />
           <Reveal y={24} duration={1} delay={0.15}>
-            <p className="mt-6 text-[15px] font-normal leading-[1.75] text-taupe">
+            <p className="mt-6 text-[15px] font-normal leading-[1.75] text-copy-muted">
               Read direct perspectives from our private individuals, wedding organizers, corporate
               clients, and embassy planners across Johannesburg.
             </p>

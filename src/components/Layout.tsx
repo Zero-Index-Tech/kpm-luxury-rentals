@@ -37,7 +37,7 @@ export default function Layout() {
   }, [location.pathname, location.hash])
 
   return (
-    <div className="min-h-[100dvh] bg-ivory text-charcoal">
+    <div className="min-h-[100dvh] bg-taupe theme-canvas text-copy">
       <Navbar />
       <main style={{ paddingTop: NAV_HEIGHT }}>
         <Outlet />

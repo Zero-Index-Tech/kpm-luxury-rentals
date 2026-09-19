@@ -208,7 +208,7 @@ function Hero() {
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(180deg, rgba(11,10,9,0.35) 0%, rgba(11,10,9,0.35) 50%, rgba(11,10,9,0.85) 100%)',
+              'linear-gradient(180deg, rgba(24,24,24,0.35) 0%, rgba(24,24,24,0.35) 50%, rgba(24,24,24,0.85) 100%)',
           }}
         />
       </div>
@@ -226,7 +226,7 @@ function Hero() {
             'About KPM',
             <span key="l2">
               {chars('Luxury ')}
-              {chars('Rentals', 'font-accent font-normal italic text-[#B4A89E]')}
+              {chars('Rentals', 'font-accent font-normal italic text-sand')}
             </span>,
           ]}
           className="mt-8 text-[clamp(3rem,7vw,6rem)] font-extrabold leading-[0.98] tracking-[-0.035em] text-ivory"
@@ -267,7 +267,7 @@ function StatsBand() {
     { scope: ref },
   )
   return (
-    <section ref={ref} className="bg-ivory py-16">
+    <section ref={ref} className="bg-taupe theme-canvas py-16">
       <div className="container grid grid-cols-2 lg:grid-cols-5">
         {STATS.map((s, i) => (
           <div
@@ -333,7 +333,7 @@ function Legacy() {
     { scope: ref },
   )
   return (
-    <section ref={ref} className="bg-ivory py-24 md:py-32">
+    <section ref={ref} className="bg-taupe theme-canvas py-24 md:py-32">
       <div className="container grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
         {/* copy */}
         <div>
@@ -341,12 +341,12 @@ function Legacy() {
           <KineticHeadline
             lines={['Luxury Lived. Memories Captured.']}
             accentWords={['Captured']}
-            accentClassName="font-accent font-normal italic text-umber"
-            className="mt-6 text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-charcoal"
+            accentClassName="font-accent font-normal italic text-copy-accent"
+            className="mt-6 text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-copy"
           />
           <Reveal staggerChildren={0.18} y={24} start="top 78%" className="mt-10 space-y-6">
             {LEGACY_PARAGRAPHS.map((p, i) => (
-              <p key={i} className="text-[15px] font-normal leading-[1.75] text-taupe">
+              <p key={i} className="text-[15px] font-normal leading-[1.75] text-copy-muted">
                 {p}
               </p>
             ))}
@@ -357,7 +357,7 @@ function Legacy() {
         <div className="group relative">
           <span
             aria-hidden
-            className="legacy-frame absolute -bottom-4 -right-4 h-full w-full rounded-[28px] border border-taupe-soft transition-colors duration-700 group-hover:border-[rgba(75,71,69,0.4)]"
+            className="legacy-frame absolute -bottom-4 -right-4 h-full w-full rounded-[28px] border border-taupe-soft transition-colors duration-700 group-hover:border-[rgba(55,51,49,0.4)]"
           />
           <div className="legacy-clip relative overflow-hidden rounded-[28px]">
             <Parallax from={-5} to={5} className="absolute inset-[-8%]">
@@ -412,7 +412,7 @@ function Pillars() {
     { scope: ref },
   )
   return (
-    <section ref={ref} className="relative overflow-hidden bg-ink py-24 md:py-32">
+    <section ref={ref} className="relative overflow-hidden bg-ink theme-dark py-24 md:py-32">
       <div className="taupe-glow pointer-events-none absolute inset-0" aria-hidden />
       <div className="container relative">
         <div className="mx-auto max-w-2xl text-center">
@@ -422,7 +422,7 @@ function Pillars() {
           <KineticHeadline
             lines={['Our Core Value Pillars']}
             accentWords={['Value']}
-            accentClassName="font-accent font-normal italic text-[#B4A89E]"
+            accentClassName="font-accent font-normal italic text-sand"
             className="mt-6 text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-ivory"
           />
           <Reveal y={24} duration={1} delay={0.15}>
@@ -474,18 +474,18 @@ function Sectors() {
     { scope: ref },
   )
   return (
-    <section ref={ref} className="bg-ivory py-24 md:py-32">
+    <section ref={ref} className="bg-taupe theme-canvas py-24 md:py-32">
       <div className="container">
         <div className="max-w-2xl">
           <Eyebrow>Our Clients</Eyebrow>
           <KineticHeadline
             lines={['Bespoke Mobility for Every Elite Sector']}
             accentWords={['Elite']}
-            accentClassName="font-accent font-normal italic text-umber"
-            className="mt-6 text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-charcoal"
+            accentClassName="font-accent font-normal italic text-copy-accent"
+            className="mt-6 text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-copy"
           />
           <Reveal y={24} duration={1} delay={0.15}>
-            <p className="mt-6 text-[15px] font-normal leading-[1.75] text-taupe">
+            <p className="mt-6 text-[15px] font-normal leading-[1.75] text-copy-muted">
               We specialize in custom fleet architecture matched to Sandton's complex requirements.
             </p>
           </Reveal>
@@ -500,16 +500,16 @@ function Sectors() {
           {SECTORS.map((s) => (
             <div
               key={s.title}
-              className="group relative min-h-[150px] rounded-[24px] border border-taupe-soft bg-[#FBFAF7] p-8 transition-all duration-500 hover:-translate-y-1 hover:border-[rgba(75,71,69,0.4)] hover:shadow-card-lift"
+              className="group relative min-h-[150px] rounded-[24px] border border-taupe-soft bg-[#FBFAF7] theme-light p-8 transition-all duration-500 hover:-translate-y-1 hover:border-[rgba(55,51,49,0.4)] hover:shadow-card-lift"
             >
               <span
                 aria-hidden
                 className="sector-dot absolute right-6 top-6 h-1.5 w-1.5 rounded-full bg-taupe"
               />
-              <h3 className="font-display text-[1.4rem] font-bold leading-[1.15] tracking-[-0.015em] text-charcoal transition-colors duration-500 group-hover:text-umber">
+              <h3 className="font-display text-[1.4rem] font-bold leading-[1.15] tracking-[-0.015em] text-copy transition-colors duration-500 group-hover:text-copy-accent">
                 {s.title}
               </h3>
-              <p className="mt-3 text-[13px] font-normal leading-[1.75] text-taupe transition-colors duration-500 group-hover:text-umber">
+              <p className="mt-3 text-[13px] font-normal leading-[1.75] text-copy-muted transition-colors duration-500 group-hover:text-copy-accent">
                 {s.body}
               </p>
             </div>
@@ -523,16 +523,16 @@ function Sectors() {
 /* ---------- Section 6 — Testimonials (about.md §6) ---------- */
 function Testimonials() {
   return (
-    <section className="bg-ivory-deep py-24 md:py-32">
+    <section className="bg-taupe theme-canvas py-24 md:py-32">
       <div className="container">
         <div className="mx-auto max-w-2xl text-center">
           <Eyebrow center>Verifiable Excellence</Eyebrow>
           <KineticHeadline
             lines={['The KPM Client Experience']}
-            className="mt-6 text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-charcoal"
+            className="mt-6 text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-copy"
           />
           <Reveal y={24} duration={1} delay={0.15}>
-            <p className="mt-6 text-[15px] font-normal leading-[1.75] text-taupe">
+            <p className="mt-6 text-[15px] font-normal leading-[1.75] text-copy-muted">
               Perspectives from corporate planners, private collectors, and signature wedding
               organizers.
             </p>

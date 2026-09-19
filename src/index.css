@@ -16,24 +16,24 @@
   :root {
     /* shadcn primitives on the V2 ivory theme */
     --background: 40 11% 95%;
-    --foreground: 25 5% 28%;
+    --foreground: 20 5.77% 20.39%;
     --card: 40 14% 97%;
-    --card-foreground: 25 5% 28%;
+    --card-foreground: 20 5.77% 20.39%;
     --popover: 40 14% 97%;
-    --popover-foreground: 25 5% 28%;
-    --primary: 30 3% 7%;
+    --popover-foreground: 20 5.77% 20.39%;
+    --primary: 0 0% 9.41%;
     --primary-foreground: 40 11% 95%;
     --secondary: 30 9% 91%;
-    --secondary-foreground: 25 5% 28%;
+    --secondary-foreground: 20 5.77% 20.39%;
     --muted: 30 9% 91%;
-    --muted-foreground: 25 8% 50%;
+    --muted-foreground: 20 10.34% 45.49%;
     --accent: 30 9% 91%;
-    --accent-foreground: 25 5% 28%;
+    --accent-foreground: 20 5.77% 20.39%;
     --destructive: 14 48% 46%;
     --destructive-foreground: 40 11% 95%;
-    --border: 25 8% 50% / 0.28;
-    --input: 25 8% 50% / 0.28;
-    --ring: 25 5% 28%;
+    --border: 20 10.34% 45.49% / 0.28;
+    --input: 20 10.34% 45.49% / 0.28;
+    --ring: 20 5.77% 20.39%;
     --radius: 0.875rem;
   }
 
@@ -51,14 +51,14 @@
   }
 
   body {
-    @apply bg-ivory font-sans text-charcoal antialiased;
+    @apply bg-taupe font-sans text-white antialiased;
     font-weight: 400;
     overflow-x: hidden;
   }
 
   ::selection {
-    background: rgba(139, 124, 115, 0.35);
-    color: #121110;
+    background: rgba(128, 112, 104, 0.35);
+    color: #181818;
   }
 
   ::-webkit-scrollbar {
@@ -68,12 +68,12 @@
     background: #ece8e3;
   }
   ::-webkit-scrollbar-thumb {
-    background: #c8c0b8;
+    background: #C7BFAE;
     border: 2px solid #ece8e3;
     border-radius: 8px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #8b7c73;
+    background: #807068;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -88,6 +88,29 @@
 }
 
 @layer components {
+  /* Contextual text keeps the taupe canvas and inset cards readable. */
+  .theme-canvas {
+    --copy-foreground: 255 255 255;
+    --copy-muted: 255 255 255;
+    --copy-accent: 255 255 255;
+    color: rgb(var(--copy-foreground));
+  }
+
+  .theme-light,
+  .glass-light {
+    --copy-foreground: 55 51 49;
+    --copy-muted: 128 112 104;
+    --copy-accent: 128 112 104;
+    color: rgb(var(--copy-foreground));
+  }
+
+  .theme-dark {
+    --copy-foreground: 244 244 242;
+    --copy-muted: 199 191 174;
+    --copy-accent: 199 191 174;
+    color: rgb(var(--copy-foreground));
+  }
+
   /* ── Glass materials (design.md §2) — use only over imagery/contrast ── */
   .glass-light {
     background: rgba(244, 242, 239, 0.55);
@@ -97,7 +120,7 @@
   }
 
   .glass-dark {
-    background: rgba(18, 17, 16, 0.38);
+    background: rgba(24, 24, 24, 0.38);
     -webkit-backdrop-filter: blur(20px) saturate(1.2);
     backdrop-filter: blur(20px) saturate(1.2);
     border: 1px solid rgba(244, 242, 239, 0.14);
@@ -112,7 +135,7 @@
 
   /* V2 eyebrow label: — LABEL (dash 24px, Manrope 11px/700 caps) */
   .eyebrow {
-    @apply font-sans text-[11px] font-bold uppercase tracking-[0.32em] text-taupe;
+    @apply font-sans text-[11px] font-bold uppercase tracking-[0.32em] text-copy-accent;
   }
   .eyebrow-on-dark {
     @apply text-ivory-45;
@@ -141,7 +164,7 @@
   .taupe-glow {
     background: radial-gradient(
       ellipse 55% 45% at 50% 120%,
-      rgba(139, 124, 115, 0.22),
+      rgba(128, 112, 104, 0.22),
       transparent 70%
     );
   }
@@ -170,16 +193,16 @@
   }
 
   .gold-glow {
-    background: radial-gradient(ellipse 60% 50% at 50% 120%, rgba(199, 191, 174, 0.1), transparent 70%);
+    background: radial-gradient(ellipse 60% 50% at 50% 120%, rgba(128, 112, 104, 0.1), transparent 70%);
   }
 
-  /* ── Concept 1 (dark/gold) namespaced components ── */
+  /* ── Concept 2 (dark/taupe) namespaced components ── */
   .c1-eyebrow {
-    @apply font-c1sans text-[11px] font-semibold uppercase tracking-[0.35em] text-gold;
+    @apply font-c1sans text-[11px] font-semibold uppercase tracking-[0.35em] text-copy-accent;
   }
 
   .c1-nav-link {
-    @apply relative text-[12px] font-medium uppercase tracking-[0.18em] text-ivory-secondary transition-colors duration-300 hover:text-gold;
+    @apply relative text-[12px] font-medium uppercase tracking-[0.18em] text-ivory-secondary transition-colors duration-300 hover:text-sand;
   }
   .c1-nav-link::after {
     content: '';
@@ -190,52 +213,52 @@
     @apply scale-x-100;
   }
   .c1-nav-link.active {
-    @apply text-gold;
+    @apply text-sand;
   }
 }
 
 @layer base {
-  /* Concept 1 scoped shadcn vars + sharp radius — applied on the C1 layout
+  /* Concept 2 scoped shadcn vars + sharp radius — applied on the C2 layout
      wrapper so its shadcn primitives (select, dialog) render dark-luxury
-     without touching Concept 2's global ivory theme. */
+     without touching Concept 3's global ivory theme. */
   .c1-root {
-    --background: 240 7% 4%;
+    --background: 0 0% 9.41%;
     --foreground: 40 20% 93%;
-    --card: 240 6% 8%;
+    --card: 20 5.77% 20.39%;
     --card-foreground: 40 20% 93%;
-    --popover: 240 6% 8%;
+    --popover: 20 5.77% 20.39%;
     --popover-foreground: 40 20% 93%;
-    --primary: 38 45% 57%;
-    --primary-foreground: 240 7% 4%;
-    --secondary: 240 5% 12%;
+    --primary: 20 10.34% 45.49%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 20 5.77% 20.39%;
     --secondary-foreground: 40 20% 93%;
-    --muted: 240 5% 12%;
-    --muted-foreground: 35 5% 42%;
-    --accent: 240 5% 12%;
+    --muted: 20 5.77% 20.39%;
+    --muted-foreground: 40.8 18.25% 73.14%;
+    --accent: 20 5.77% 20.39%;
     --accent-foreground: 40 20% 93%;
     --destructive: 17 49% 52%;
     --destructive-foreground: 40 20% 93%;
     --border: 0 0% 100% / 0.07;
     --input: 0 0% 100% / 0.07;
-    --ring: 38 45% 57%;
+    --ring: 20 10.34% 45.49%;
     --radius: 2px;
   }
 
   .c1-root ::selection {
-    background: rgba(200, 165, 92, 0.35);
+    background: rgba(128, 112, 104, 0.35);
     color: #f2efe8;
   }
 
-  /* Concept 1 dark scrollbar for its window scroll */
+  /* Concept 2 dark scrollbar for its window scroll */
   body:has(.c1-root) {
-    background: #0a0a0b;
+    background: #807068;
   }
   body:has(.c1-root)::-webkit-scrollbar-track {
-    background: #0a0a0b;
+    background: #181818;
   }
   body:has(.c1-root)::-webkit-scrollbar-thumb {
-    background: #26262b;
-    border-color: #0a0a0b;
+    background: #373331;
+    border-color: #181818;
     border-radius: 0;
   }
 }

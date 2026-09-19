@@ -33,7 +33,7 @@ export default function CTABand({
   return (
     <section className="py-20">
       <div className="container">
-        <div className="relative overflow-hidden rounded-[28px] border border-hairline-dark bg-ink px-8 py-14 md:px-14 md:py-20">
+        <div className="relative overflow-hidden rounded-[28px] border border-hairline-dark bg-ink theme-dark px-8 py-14 md:px-14 md:py-20">
           <div className="taupe-glow pointer-events-none absolute inset-0" aria-hidden />
           <div className="relative flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between">
             <Reveal y={0} x={-40} duration={0.9} start="top 80%" className="max-w-2xl">
@@ -41,7 +41,7 @@ export default function CTABand({
               <KineticHeadline
                 lines={[title]}
                 accentWords={accentWord ? [accentWord] : undefined}
-                accentClassName="font-accent font-normal italic text-[#B4A89E]"
+                accentClassName="font-accent font-normal italic text-sand"
                 className="text-[clamp(2.2rem,4vw,3.4rem)] font-bold leading-[1.05] tracking-[-0.03em] text-ivory"
               />
               <p className="mt-6 text-[15px] font-normal leading-[1.75] text-ivory-70">{copy}</p>
@@ -53,7 +53,7 @@ export default function CTABand({
               start="top 80%"
               className="flex flex-col items-start gap-6 lg:items-end"
             >
-              <GoldButton to={buttonTo} className="bg-ivory text-ink hover:bg-ivory-deep">
+              <GoldButton to={buttonTo} className="bg-ivory theme-light text-ink hover:bg-ivory-deep">
                 {buttonLabel}
               </GoldButton>
               <a

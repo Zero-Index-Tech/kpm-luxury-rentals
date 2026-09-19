@@ -33,9 +33,9 @@ export default function IconCard({ icon: Icon, title, body, to, state, className
         }
       }}
       className={cn(
-        'group relative border border-subtle bg-surface p-8 transition-all duration-500',
+        'group relative border border-subtle bg-surface theme-dark p-8 transition-all duration-500',
         to && 'cursor-pointer',
-        'hover:border-[rgba(199,191,174,0.3)] hover:bg-surface-hover',
+        'hover:border-[rgba(128,112,104,0.3)] hover:bg-surface-hover',
         className,
       )}
     >
@@ -47,12 +47,12 @@ export default function IconCard({ icon: Icon, title, body, to, state, className
       <span className="icon-chip flex h-10 w-10 items-center justify-center rounded-full bg-gold/10 transition-colors duration-500 group-hover:bg-gold/20">
         <Icon
           size={18}
-          className="text-gold transition-transform duration-500 group-hover:-rotate-6"
+          className="text-copy-accent transition-transform duration-500 group-hover:-rotate-6"
           aria-hidden
         />
       </span>
-      <h3 className="mt-6 font-c1serif text-[1.35rem] leading-[1.25] text-ivory">{title}</h3>
-      <p className="mt-3 text-sm font-light leading-[1.75] text-ivory-secondary">{body}</p>
+      <h3 className="mt-6 font-c1serif text-[1.35rem] leading-[1.25] text-copy">{title}</h3>
+      <p className="mt-3 text-sm font-light leading-[1.75] text-copy-muted">{body}</p>
     </div>
   )
 }

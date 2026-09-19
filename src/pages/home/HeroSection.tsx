@@ -87,7 +87,7 @@ export default function HeroSection() {
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(180deg, rgba(244,242,239,0.78) 0%, rgba(244,242,239,0.42) 34%, rgba(244,242,239,0.04) 58%, rgba(244,242,239,0) 72%, rgba(244,242,239,0.5) 100%)',
+              'linear-gradient(180deg, rgba(128,112,104,0.94) 0%, rgba(128,112,104,0.88) 34%, rgba(128,112,104,0.18) 58%, rgba(128,112,104,0.08) 72%, #807068 100%)',
           }}
         />
       </div>
@@ -103,14 +103,14 @@ export default function HeroSection() {
             delay={0.6}
             stagger={0.028}
             lines={['Luxury Lived.', 'Memories Captured.']}
-            lineClasses={['', 'font-accent font-medium italic text-umber']}
-            className="mt-7 text-[clamp(3.5rem,9vw,8rem)] font-extrabold leading-[0.98] tracking-[-0.035em] text-charcoal"
+            lineClasses={['', 'font-accent font-medium italic text-copy-accent']}
+            className="mt-7 text-[clamp(3.5rem,9vw,8rem)] font-extrabold leading-[0.98] tracking-[-0.035em] text-copy"
           />
         </div>
 
         {/* frosted glass panel over the terrace zone */}
         <div className="hero-panel glass-light max-w-xl rounded-[28px] p-8 shadow-glass md:p-10">
-          <p className="text-[15px] font-medium leading-[1.7] text-charcoal/80">
+          <p className="text-[15px] font-medium leading-[1.7] text-copy/80">
             South Africa's premier luxury vehicle rental experience. Experience the pinnacle of
             performance, comfort, and white-glove service in Gauteng.
           </p>
@@ -131,7 +131,7 @@ export default function HeroSection() {
 
       {/* scroll cue — bottom right */}
       <div className="hero-cue absolute bottom-10 right-6 flex flex-col items-center gap-3 md:right-10">
-        <span className="text-[9px] font-bold uppercase tracking-[0.35em] text-taupe">Scroll</span>
+        <span className="text-[9px] font-bold uppercase tracking-[0.35em] text-copy-muted">Scroll</span>
         <span className="relative block h-10 w-px bg-charcoal/30">
           <span className="absolute left-1/2 top-0 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-charcoal animate-scroll-dot" />
         </span>

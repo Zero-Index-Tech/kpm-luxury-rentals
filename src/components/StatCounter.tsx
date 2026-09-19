@@ -69,7 +69,7 @@ export default function StatCounter({
       <p
         className={cn(
           'stat-numeral font-display text-[clamp(2.6rem,4.5vw,3.8rem)] font-extrabold leading-none tracking-[-0.03em] transition-colors duration-300',
-          tone === 'dark' ? 'text-ivory group-hover:text-ivory-70' : 'text-charcoal group-hover:text-umber',
+          tone === 'dark' ? 'text-ivory group-hover:text-ivory-70' : 'text-copy group-hover:text-copy-accent',
         )}
       >
         <span className="stat-numeral-value">0{suffix}</span>
@@ -77,7 +77,7 @@ export default function StatCounter({
       <p
         className={cn(
           'stat-label mt-3 text-[10px] font-bold uppercase tracking-[0.22em]',
-          tone === 'dark' ? 'text-ivory-45' : 'text-taupe',
+          tone === 'dark' ? 'text-ivory-45' : 'text-copy-muted',
         )}
       >
         {label}

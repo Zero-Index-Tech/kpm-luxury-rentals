@@ -41,7 +41,7 @@ export default function Eyebrow({ children, center, className }: EyebrowProps) {
 
   return (
     <div ref={ref} className={cn('flex items-center gap-6', center && 'justify-center', className)}>
-      <span className="eyebrow-rule inline-block h-px w-6 origin-left bg-gold" aria-hidden />
+      <span className="eyebrow-rule inline-block h-px w-6 origin-left bg-copy-accent" aria-hidden />
       <span className="eyebrow-label c1-eyebrow">{children}</span>
     </div>
   )

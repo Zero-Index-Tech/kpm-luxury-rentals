@@ -107,20 +107,20 @@ const EASE = [0.22, 1, 0.36, 1] as const
 
 export default function Contact() {
   return (
-    <div className="bg-white">
+    <div className="bg-taupe theme-canvas">
       {/* Hero */}
-      <section className="bg-lxr-gray">
+      <section className="bg-taupe theme-canvas">
         <div className="mx-auto max-w-[1280px] px-6 pb-16 pt-16 lg:pt-20">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: EASE }}
           >
-            <h1 className="font-lxrtitle text-5xl font-semibold leading-[1.02] tracking-tight text-lxr-ink sm:text-6xl lg:text-7xl">
+            <h1 className="font-lxrtitle text-5xl font-semibold leading-[1.02] tracking-tight text-copy sm:text-6xl lg:text-7xl">
               Get in{' '}
-              <em className="font-lxrbody font-medium italic text-lxr-olive">Touch.</em>
+              <em className="font-lxrbody font-medium italic text-copy-accent">Touch.</em>
             </h1>
-            <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-lxr-muted">
+            <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-copy-muted">
               We are ready to curate your luxury experience. Reach out directly to our Sandton
               team to coordinate custom itineraries and tailored agreements.
             </p>
@@ -129,7 +129,7 @@ export default function Contact() {
       </section>
 
       {/* Enquiry + showroom */}
-      <section id="enquiry" className="scroll-mt-24 bg-lxr-gray pb-24">
+      <section id="enquiry" className="scroll-mt-24 bg-taupe theme-canvas pb-24">
         <div className="mx-auto grid max-w-[1280px] gap-8 px-6 lg:grid-cols-[55fr_45fr]">
           <EnquiryForm />
           <ShowroomPanel />
@@ -137,7 +137,7 @@ export default function Contact() {
       </section>
 
       {/* Channels */}
-      <section className="bg-lxr-black py-24 text-white">
+      <section className="bg-lxr-black theme-dark py-24 text-white">
         <div className="mx-auto max-w-[1280px] px-6">
           <SectionHead
             dark
@@ -150,13 +150,13 @@ export default function Contact() {
               <a
                 key={c.label}
                 href={c.href}
-                className="group rounded-[6px] border border-lxr-linedark bg-lxr-panel p-7 transition-colors duration-300 hover:border-white/30"
+                className="group rounded-[6px] border border-lxr-linedark bg-lxr-panel theme-dark p-7 transition-colors duration-300 hover:border-white/30"
               >
-                <c.icon className="h-6 w-6 text-lxr-sand" strokeWidth={1.6} />
+                <c.icon className="h-6 w-6 text-copy-accent" strokeWidth={1.6} />
                 <div className="mt-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/40">
                   {c.label}
                 </div>
-                <div className="mt-1.5 font-lxrtitle text-[15px] font-semibold text-white transition-colors group-hover:text-lxr-sand">
+                <div className="mt-1.5 font-lxrtitle text-[15px] font-semibold text-white transition-colors group-hover:text-copy-accent">
                   {c.value}
                 </div>
               </a>
@@ -166,7 +166,7 @@ export default function Contact() {
       </section>
 
       {/* FAQ */}
-      <section className="bg-white py-24">
+      <section className="bg-taupe theme-canvas py-24">
         <div className="mx-auto grid max-w-[1280px] gap-14 px-6 lg:grid-cols-[1fr_1.4fr]">
           <SectionHead
             title="Common"
@@ -213,9 +213,9 @@ function FaqRow({ q, a }: { q: string; a: string }) {
         aria-expanded={open}
         className="flex w-full items-center justify-between gap-6 py-6 text-left"
       >
-        <span className="font-lxrtitle text-[15px] font-semibold text-lxr-ink">{q}</span>
+        <span className="font-lxrtitle text-[15px] font-semibold text-copy">{q}</span>
         <ChevronDown
-          className={cn('h-4 w-4 shrink-0 text-lxr-mist transition-transform duration-300', open && 'rotate-180')}
+          className={cn('h-4 w-4 shrink-0 text-copy-muted transition-transform duration-300', open && 'rotate-180')}
         />
       </button>
       <AnimatePresence initial={false}>
@@ -227,7 +227,7 @@ function FaqRow({ q, a }: { q: string; a: string }) {
             transition={{ duration: 0.35, ease: EASE }}
             className="overflow-hidden"
           >
-            <p className="pb-6 text-[14px] leading-[1.75] text-lxr-muted">{a}</p>
+            <p className="pb-6 text-[14px] leading-[1.75] text-copy-muted">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -252,7 +252,7 @@ type FormErrors = Partial<Record<'name' | 'email' | 'phone', string>>
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const inputClass =
-  'w-full rounded-[4px] border border-lxr-line bg-white px-4 py-3.5 text-sm text-lxr-ink placeholder:text-lxr-mist transition-all duration-300 focus:border-lxr-ink focus:outline-none focus:ring-1 focus:ring-lxr-ink/20'
+  'w-full rounded-[4px] border border-lxr-line bg-white theme-light px-4 py-3.5 text-sm text-copy placeholder:text-copy-muted transition-all duration-300 focus:border-lxr-ink focus:outline-none focus:ring-1 focus:ring-lxr-ink/20'
 
 function Field({
   label,
@@ -265,7 +265,7 @@ function Field({
 }) {
   return (
     <div className="group">
-      <label className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.2em] text-lxr-mist transition-colors duration-300 group-focus-within:text-lxr-ink">
+      <label className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.2em] text-copy-muted transition-colors duration-300 group-focus-within:text-copy">
         {label}
       </label>
       {children}
@@ -337,7 +337,7 @@ function EnquiryForm() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '0px 0px -15% 0px' }}
       transition={{ duration: 0.9, ease: EASE }}
-      className="rounded-[6px] border border-lxr-line bg-white p-8 shadow-[0_24px_60px_-32px_rgba(17,17,18,0.25)] md:p-10"
+      className="rounded-[6px] border border-lxr-line bg-white theme-light p-8 shadow-[0_24px_60px_-32px_rgba(55,51,49,0.25)] md:p-10"
     >
       <AnimatePresence mode="wait">
         {submitted ? (
@@ -354,12 +354,12 @@ function EnquiryForm() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.6, ease: [0.34, 1.56, 0.64, 1], delay: 0.15 }}
             >
-              <CircleCheck size={56} className="text-lxr-olive" aria-hidden />
+              <CircleCheck size={56} className="text-copy-accent" aria-hidden />
             </motion.div>
-            <h3 className="mt-8 font-lxrtitle text-2xl font-semibold text-lxr-ink">
+            <h3 className="mt-8 font-lxrtitle text-2xl font-semibold text-copy">
               Enquiry Received
             </h3>
-            <p className="mt-4 max-w-sm text-sm leading-[1.75] text-lxr-muted">
+            <p className="mt-4 max-w-sm text-sm leading-[1.75] text-copy-muted">
               Our private client concierge will contact you shortly to curate your reservation.
             </p>
             <div className="mt-10">
@@ -376,10 +376,10 @@ function EnquiryForm() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="font-lxrtitle text-2xl font-semibold text-lxr-ink">
+            <h3 className="font-lxrtitle text-2xl font-semibold text-copy">
               Send a Bespoke Enquiry
             </h3>
-            <p className="mt-3 text-[13px] text-lxr-muted">
+            <p className="mt-3 text-[13px] text-copy-muted">
               Fill out your requirements below and our private client concierge will contact you
               shortly.
             </p>
@@ -439,11 +439,11 @@ function EnquiryForm() {
                   >
                     <SelectTrigger
                       aria-label="Vehicle Interest"
-                      className="h-auto w-full justify-between rounded-[4px] border-lxr-line bg-white px-4 py-3.5 text-sm text-lxr-ink shadow-none focus:border-lxr-ink focus:ring-1 focus:ring-lxr-ink/20 data-[placeholder]:text-lxr-mist"
+                      className="h-auto w-full justify-between rounded-[4px] border-lxr-line bg-white theme-light px-4 py-3.5 text-sm text-copy shadow-none focus:border-lxr-ink focus:ring-1 focus:ring-lxr-ink/20 data-[placeholder]:text-copy-muted"
                     >
                       <SelectValue placeholder="Select your preferred flagship model" />
                     </SelectTrigger>
-                    <SelectContent className="rounded-[4px] border-lxr-line bg-white text-lxr-ink">
+                    <SelectContent className="rounded-[4px] border-lxr-line bg-white theme-light text-copy">
                       {VEHICLE_OPTIONS.map((v) => (
                         <SelectItem key={v.slug} value={v.name} className="text-sm">
                           {v.name}
@@ -459,11 +459,11 @@ function EnquiryForm() {
                   >
                     <SelectTrigger
                       aria-label="Rental Type"
-                      className="h-auto w-full justify-between rounded-[4px] border-lxr-line bg-white px-4 py-3.5 text-sm text-lxr-ink shadow-none focus:border-lxr-ink focus:ring-1 focus:ring-lxr-ink/20 data-[placeholder]:text-lxr-mist"
+                      className="h-auto w-full justify-between rounded-[4px] border-lxr-line bg-white theme-light px-4 py-3.5 text-sm text-copy shadow-none focus:border-lxr-ink focus:ring-1 focus:ring-lxr-ink/20 data-[placeholder]:text-copy-muted"
                     >
                       <SelectValue placeholder="Short-Term / Long-Term / Event" />
                     </SelectTrigger>
-                    <SelectContent className="rounded-[4px] border-lxr-line bg-white text-lxr-ink">
+                    <SelectContent className="rounded-[4px] border-lxr-line bg-white theme-light text-copy">
                       {RENTAL_TYPES.map((r) => (
                         <SelectItem key={r} value={r} className="text-sm">
                           {r}
@@ -502,7 +502,7 @@ function EnquiryForm() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full rounded-[4px] bg-lxr-black px-9 py-4 text-[12px] font-semibold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-lxr-panel active:scale-[0.98] disabled:cursor-wait disabled:opacity-80"
+                  className="w-full rounded-[4px] bg-lxr-black theme-dark px-9 py-4 text-[12px] font-semibold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-lxr-panel active:scale-[0.98] disabled:cursor-wait disabled:opacity-80"
                 >
                   {submitting ? 'Submitting…' : 'Submit Enquiry'}
                 </button>
@@ -527,12 +527,12 @@ function ShowroomPanel() {
       transition={{ duration: 0.9, ease: EASE }}
       className="scroll-mt-24"
     >
-      <h3 className="font-lxrtitle text-2xl font-semibold text-lxr-ink">The Sandton Showroom</h3>
-      <p className="mt-4 text-sm leading-[1.75] text-lxr-muted">
+      <h3 className="font-lxrtitle text-2xl font-semibold text-copy">The Sandton Showroom</h3>
+      <p className="mt-4 text-sm leading-[1.75] text-copy-muted">
         Located in the heart of Africa's richest square mile, our flagship showroom houses our
         premier luxury and secure performance portfolio.
       </p>
-      <p className="mt-6 font-lxrtitle text-[15px] font-semibold text-lxr-ink">
+      <p className="mt-6 font-lxrtitle text-[15px] font-semibold text-copy">
         82 Rivonia Road, Sandton, Johannesburg, 2196
       </p>
 
@@ -543,14 +543,14 @@ function ShowroomPanel() {
               {row.href ? (
                 <a
                   href={row.href}
-                  className="group flex items-center gap-4 text-sm text-lxr-muted transition-colors duration-300 hover:text-lxr-ink"
+                  className="group flex items-center gap-4 text-sm text-copy-muted transition-colors duration-300 hover:text-copy"
                 >
-                  <row.icon size={16} className="shrink-0 text-lxr-olive" aria-hidden />
+                  <row.icon size={16} className="shrink-0 text-copy-accent" aria-hidden />
                   {row.text}
                 </a>
               ) : (
-                <span className="flex items-center gap-4 text-sm text-lxr-muted">
-                  <row.icon size={16} className="shrink-0 text-lxr-olive" aria-hidden />
+                <span className="flex items-center gap-4 text-sm text-copy-muted">
+                  <row.icon size={16} className="shrink-0 text-copy-accent" aria-hidden />
                   {row.text}
                 </span>
               )}

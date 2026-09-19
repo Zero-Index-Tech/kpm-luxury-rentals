@@ -172,12 +172,12 @@ function Hero() {
   )
 
   return (
-    <section ref={root} className="relative overflow-hidden bg-ivory pb-16 pt-40">
+    <section ref={root} className="relative overflow-hidden bg-taupe theme-canvas pb-16 pt-40">
       {/* warm taupe wash in the lower-left corner so the ivory isn't flat */}
       <div
         className="contact-hero-glow pointer-events-none absolute inset-0"
         style={{
-          background: 'radial-gradient(circle at 15% 100%, rgba(139,124,115,0.16), transparent 55%)',
+          background: 'radial-gradient(circle at 15% 100%, rgba(128,112,104,0.16), transparent 55%)',
         }}
         aria-hidden
       />
@@ -191,11 +191,11 @@ function Hero() {
           stagger={0.04}
           lines={[
             'Get In',
-            <span key="l2">{chars('Touch', 'font-accent font-normal italic text-umber')}</span>,
+            <span key="l2">{chars('Touch', 'font-accent font-normal italic text-copy-accent')}</span>,
           ]}
-          className="mt-8 text-[clamp(3rem,7vw,6rem)] font-extrabold leading-[0.98] tracking-[-0.035em] text-charcoal"
+          className="mt-8 text-[clamp(3rem,7vw,6rem)] font-extrabold leading-[0.98] tracking-[-0.035em] text-copy"
         />
-        <p className="contact-hero-sub mt-8 max-w-xl text-[15px] font-normal leading-[1.75] text-taupe md:text-base">
+        <p className="contact-hero-sub mt-8 max-w-xl text-[15px] font-normal leading-[1.75] text-copy-muted md:text-base">
           We are ready to curate your luxury experience. Reach out directly to our Sandton team to
           coordinate custom itineraries and tailored agreements.
         </p>
@@ -207,7 +207,7 @@ function Hero() {
 /* ---------- Section 2 — Enquiry form + showroom panel (contact.md §2) ---------- */
 function EnquirySection() {
   return (
-    <section id="enquiry" className="scroll-mt-[100px] bg-ivory pb-28">
+    <section id="enquiry" className="scroll-mt-[100px] bg-taupe theme-canvas pb-28">
       <div className="container grid gap-10 lg:grid-cols-[55fr_45fr]">
         <EnquiryForm />
         <ShowroomPanel />
@@ -231,12 +231,12 @@ type FormErrors = Partial<Record<'name' | 'email' | 'phone', string>>
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const inputClass =
-  'w-full rounded-[14px] border border-taupe-soft bg-white/60 px-4 py-3.5 text-sm font-normal text-charcoal placeholder:text-taupe/70 backdrop-blur-sm transition-all duration-300 focus:border-charcoal focus:outline-none focus:ring-2 focus:ring-[rgba(75,71,69,0.15)]'
+  'w-full rounded-[14px] border border-taupe-soft bg-white/60 theme-light px-4 py-3.5 text-sm font-normal text-copy placeholder:text-copy-muted/70 backdrop-blur-sm transition-all duration-300 focus:border-charcoal focus:outline-none focus:ring-2 focus:ring-[rgba(55,51,49,0.15)]'
 
 const selectTriggerClass =
-  'h-auto w-full justify-between rounded-[14px] border-taupe-soft bg-white/60 px-4 py-3.5 text-sm font-normal text-charcoal shadow-none backdrop-blur-sm focus-visible:border-charcoal focus-visible:ring-2 focus-visible:ring-[rgba(75,71,69,0.15)] data-[placeholder]:text-taupe/70'
+  'h-auto w-full justify-between rounded-[14px] border-taupe-soft bg-white/60 theme-light px-4 py-3.5 text-sm font-normal text-copy shadow-none backdrop-blur-sm focus-visible:border-charcoal focus-visible:ring-2 focus-visible:ring-[rgba(55,51,49,0.15)] data-[placeholder]:text-copy-muted/70'
 
-const selectContentClass = 'rounded-[14px] border-taupe-soft bg-[#FBFAF7] text-charcoal'
+const selectContentClass = 'rounded-[14px] border-taupe-soft bg-[#FBFAF7] theme-light text-copy'
 
 function Field({
   label,
@@ -249,7 +249,7 @@ function Field({
 }) {
   return (
     <div className="group">
-      <label className="mb-2 block text-[10px] font-bold uppercase tracking-[0.2em] text-taupe transition-colors duration-300 group-focus-within:text-charcoal">
+      <label className="mb-2 block text-[10px] font-bold uppercase tracking-[0.2em] text-copy-muted transition-colors duration-300 group-focus-within:text-copy">
         {label}
       </label>
       {children}
@@ -320,12 +320,12 @@ function EnquiryForm() {
         aria-hidden
         className="pointer-events-none absolute -inset-8"
         style={{
-          background: 'radial-gradient(circle at 20% 0%, rgba(139,124,115,0.18), transparent 60%)',
+          background: 'radial-gradient(circle at 20% 0%, rgba(128,112,104,0.18), transparent 60%)',
         }}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-10 left-8 h-[240px] w-[240px] rounded-full bg-[rgba(139,124,115,0.25)] blur-3xl"
+        className="pointer-events-none absolute -top-10 left-8 h-[240px] w-[240px] rounded-full bg-[rgba(128,112,104,0.25)] blur-3xl"
       />
       <motion.div
         initial={{ opacity: 0, y: 36, filter: 'blur(10px)' }}
@@ -348,14 +348,14 @@ function EnquiryForm() {
                 initial={{ scale: 0.5, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.6, ease: [0.34, 1.56, 0.64, 1], delay: 0.15 }}
-                className="flex h-14 w-14 items-center justify-center rounded-full bg-ink"
+                className="flex h-14 w-14 items-center justify-center rounded-full bg-ink theme-dark"
               >
                 <Check size={26} className="text-ivory" aria-hidden />
               </motion.div>
-              <h3 className="mt-8 font-display text-[1.5rem] font-bold tracking-[-0.015em] text-charcoal">
+              <h3 className="mt-8 font-display text-[1.5rem] font-bold tracking-[-0.015em] text-copy">
                 Enquiry Received
               </h3>
-              <p className="mt-4 max-w-sm text-sm font-normal leading-[1.75] text-taupe">
+              <p className="mt-4 max-w-sm text-sm font-normal leading-[1.75] text-copy-muted">
                 Our private client concierge will contact you shortly to curate your reservation.
               </p>
               <div className="mt-10">
@@ -372,10 +372,10 @@ function EnquiryForm() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <h3 className="font-display text-[1.5rem] font-bold tracking-[-0.015em] text-charcoal">
+              <h3 className="font-display text-[1.5rem] font-bold tracking-[-0.015em] text-copy">
                 Send a Bespoke Enquiry
               </h3>
-              <p className="mt-3 text-[13px] font-normal text-taupe">
+              <p className="mt-3 text-[13px] font-normal text-copy-muted">
                 Fill out your requirements below and our private client concierge will contact you
                 shortly.
               </p>
@@ -493,7 +493,7 @@ function EnquiryForm() {
                     type="submit"
                     disabled={submitting}
                     data-cursor
-                    className="w-full rounded-full bg-ink px-8 py-4 text-[12px] font-bold uppercase tracking-[0.14em] text-ivory transition-all duration-300 hover:-translate-y-0.5 hover:bg-umber active:scale-[0.97] disabled:cursor-wait disabled:opacity-80"
+                    className="w-full rounded-full bg-ink theme-dark px-8 py-4 text-[12px] font-bold uppercase tracking-[0.14em] text-ivory transition-all duration-300 hover:-translate-y-0.5 hover:bg-umber active:scale-[0.97] disabled:cursor-wait disabled:opacity-80"
                   >
                     {submitting ? 'Submitting…' : 'Submit Enquiry'}
                   </button>
@@ -571,14 +571,14 @@ function ShowroomPanel() {
 
   return (
     <div ref={ref} id="showroom" className="scroll-mt-[100px]">
-      <h3 className="font-display text-[1.5rem] font-bold tracking-[-0.015em] text-charcoal">
+      <h3 className="font-display text-[1.5rem] font-bold tracking-[-0.015em] text-copy">
         The Sandton Showroom
       </h3>
-      <p className="mt-4 text-sm font-normal leading-[1.75] text-taupe">
+      <p className="mt-4 text-sm font-normal leading-[1.75] text-copy-muted">
         Located in the heart of Africa's richest square mile, our flagship showroom houses our
         premier luxury and secure performance portfolio.
       </p>
-      <p className="mt-6 font-display text-[15px] font-bold tracking-[-0.01em] text-charcoal">
+      <p className="mt-6 font-display text-[15px] font-bold tracking-[-0.01em] text-copy">
         82 Rivonia Road, Sandton, Johannesburg, 2196
       </p>
 
@@ -587,10 +587,10 @@ function ShowroomPanel() {
           {SHOWROOM_ROWS.map((row) => {
             const inner = (
               <>
-                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[rgba(139,124,115,0.12)] transition-colors duration-300 group-hover:bg-ink">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[rgba(128,112,104,0.12)] transition-colors duration-300 group-hover:bg-ink">
                   <row.icon
                     size={12}
-                    className="text-charcoal transition-colors duration-300 group-hover:text-ivory"
+                    className="text-copy transition-colors duration-300 group-hover:text-ivory"
                     aria-hidden
                   />
                 </span>
@@ -603,12 +603,12 @@ function ShowroomPanel() {
                   <a
                     href={row.href}
                     data-cursor
-                    className="group flex items-center gap-4 text-sm font-normal text-charcoal transition-colors duration-300 hover:text-ink"
+                    className="group flex items-center gap-4 text-sm font-normal text-copy transition-colors duration-300 hover:text-ink"
                   >
                     {inner}
                   </a>
                 ) : (
-                  <span className="group flex items-center gap-4 text-sm font-normal text-charcoal">
+                  <span className="group flex items-center gap-4 text-sm font-normal text-copy">
                     {inner}
                   </span>
                 )}
@@ -626,7 +626,7 @@ function ShowroomPanel() {
           className="aspect-[10/7] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
           loading="lazy"
         />
-        <span className="glass-light absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-charcoal transition-shadow duration-500 group-hover:shadow-glass">
+        <span className="glass-light absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-copy transition-shadow duration-500 group-hover:shadow-glass">
           KPM Showroom
         </span>
       </div>
@@ -637,17 +637,17 @@ function ShowroomPanel() {
 /* ---------- Section 3 — Immediate Dispatch Channels (contact.md §3) ---------- */
 function DispatchChannels() {
   return (
-    <section className="bg-ivory-deep py-28">
+    <section className="bg-taupe theme-canvas py-28">
       <div className="container">
         <div className="max-w-2xl">
           <KineticHeadline
             lines={['Immediate Dispatch Channels']}
             accentWords={['Dispatch']}
-            accentClassName="font-accent font-normal italic text-umber"
-            className="text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-charcoal"
+            accentClassName="font-accent font-normal italic text-copy-accent"
+            className="text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-copy"
           />
           <Reveal y={24} duration={1} delay={0.15}>
-            <p className="mt-6 text-[15px] font-normal leading-[1.75] text-taupe">
+            <p className="mt-6 text-[15px] font-normal leading-[1.75] text-copy-muted">
               Direct access lines for active bookings, urgent corporate logistics, and short-notice
               airport arrivals.
             </p>
@@ -675,19 +675,19 @@ function DispatchChannels() {
                   : undefined
               }
               data-cursor
-              className="group rounded-[24px] border border-taupe-soft bg-[#FBFAF7] p-8 transition-all duration-500 hover:-translate-y-1 hover:border-[rgba(75,71,69,0.4)] hover:shadow-card-lift"
+              className="group rounded-[24px] border border-taupe-soft bg-[#FBFAF7] theme-light p-8 transition-all duration-500 hover:-translate-y-1 hover:border-[rgba(55,51,49,0.4)] hover:shadow-card-lift"
             >
-              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(139,124,115,0.12)] transition-colors duration-500 group-hover:bg-ink">
+              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(128,112,104,0.12)] transition-colors duration-500 group-hover:bg-ink">
                 <c.icon
                   size={18}
-                  className="text-charcoal transition-colors duration-500 group-hover:text-ivory"
+                  className="text-copy transition-colors duration-500 group-hover:text-ivory"
                   aria-hidden
                 />
               </span>
-              <p className="mt-6 text-[10px] font-bold uppercase tracking-[0.2em] text-taupe">
+              <p className="mt-6 text-[10px] font-bold uppercase tracking-[0.2em] text-copy-muted">
                 {c.label}
               </p>
-              <p className="mt-2 font-display text-[1.05rem] font-bold tracking-[-0.01em] text-charcoal transition-colors duration-300 group-hover:text-umber">
+              <p className="mt-2 font-display text-[1.05rem] font-bold tracking-[-0.01em] text-copy transition-colors duration-300 group-hover:text-copy-accent">
                 {c.value}
               </p>
             </a>
@@ -704,18 +704,18 @@ function Faq() {
   const reduced = prefersReducedMotion()
 
   return (
-    <section className="bg-ivory py-24 md:py-32">
+    <section className="bg-taupe theme-canvas py-24 md:py-32">
       <div className="container">
         <div className="mx-auto max-w-2xl text-center">
           <Eyebrow center>Rental Protocols</Eyebrow>
           <KineticHeadline
             lines={['Frequently Asked Questions']}
             accentWords={['Asked']}
-            accentClassName="font-accent font-normal italic text-umber"
-            className="mt-6 text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-charcoal"
+            accentClassName="font-accent font-normal italic text-copy-accent"
+            className="mt-6 text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-copy"
           />
           <Reveal y={24} duration={1} delay={0.15}>
-            <p className="mt-6 text-[15px] font-normal leading-[1.75] text-taupe">
+            <p className="mt-6 text-[15px] font-normal leading-[1.75] text-copy-muted">
               Clear terms to help guide your elite rental experience smoothly from booking
               confirmation to delivery.
             </p>
@@ -739,16 +739,16 @@ function Faq() {
                 >
                   <span
                     className={cn(
-                      'font-display text-[1.25rem] font-bold leading-[1.3] tracking-[-0.015em] text-charcoal transition-colors duration-300 group-hover:text-umber',
-                      isOpen && 'text-umber',
+                      'font-display text-[1.25rem] font-bold leading-[1.3] tracking-[-0.015em] text-copy transition-colors duration-300 group-hover:text-copy-accent',
+                      isOpen && 'text-copy-accent',
                     )}
                   >
                     {item.q}
                   </span>
                   <span
                     className={cn(
-                      'flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-taupe-soft text-charcoal transition-all duration-300 group-hover:border-[rgba(75,71,69,0.4)]',
-                      isOpen && 'border-[rgba(75,71,69,0.4)]',
+                      'flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-taupe-soft text-copy transition-all duration-300 group-hover:border-[rgba(55,51,49,0.4)]',
+                      isOpen && 'border-[rgba(55,51,49,0.4)]',
                     )}
                   >
                     <Plus
@@ -773,7 +773,7 @@ function Faq() {
                       }
                       className="overflow-hidden"
                     >
-                      <p className="max-w-3xl pb-7 text-sm font-normal leading-[1.75] text-taupe">
+                      <p className="max-w-3xl pb-7 text-sm font-normal leading-[1.75] text-copy-muted">
                         {item.a}
                       </p>
                     </motion.div>

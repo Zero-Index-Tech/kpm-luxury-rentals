@@ -19,7 +19,7 @@ export default function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
     <Link
       to={`/c3/fleet/${vehicle.slug}`}
       data-cursor
-      className="group block overflow-hidden rounded-[24px] border border-taupe-soft bg-[#FBFAF7] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-card-lift"
+      className="group block overflow-hidden rounded-[24px] border border-taupe-soft bg-[#FBFAF7] theme-light transition-all duration-500 hover:-translate-y-1.5 hover:shadow-card-lift"
     >
       <div className="relative aspect-[3/2] overflow-hidden">
         <Parallax from={-5} to={5} className="absolute inset-[-8%]">
@@ -33,17 +33,17 @@ export default function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
         {/* circular arrow button — fades + slides in on hover */}
         <span
           aria-hidden
-          className="absolute right-4 top-4 flex h-11 w-11 translate-y-2 items-center justify-center rounded-full bg-ink text-ivory opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
+          className="absolute right-4 top-4 flex h-11 w-11 translate-y-2 items-center justify-center rounded-full bg-ink theme-dark text-ivory opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
         >
           <ArrowUpRight size={18} />
         </span>
       </div>
 
       <div className="p-6">
-        <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-taupe">
+        <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-copy-muted">
           {vehicle.category}
         </p>
-        <h3 className="mt-2.5 font-display text-[1.5rem] font-bold leading-[1.15] tracking-[-0.015em] text-charcoal">
+        <h3 className="mt-2.5 font-display text-[1.5rem] font-bold leading-[1.15] tracking-[-0.015em] text-copy">
           {vehicle.name}
         </h3>
 
@@ -54,10 +54,10 @@ export default function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
               key={s.label}
               className={i > 0 ? 'border-l border-taupe-soft pl-3' : ''}
             >
-              <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-taupe">
+              <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-copy-muted">
                 {s.label}
               </p>
-              <p className="mt-1.5 font-display text-[0.95rem] font-bold leading-none tracking-[-0.01em] text-charcoal">
+              <p className="mt-1.5 font-display text-[0.95rem] font-bold leading-none tracking-[-0.01em] text-copy">
                 {s.value}
               </p>
             </div>

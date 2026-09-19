@@ -134,7 +134,7 @@ function StatsBand() {
     { scope: ref },
   )
   return (
-    <section ref={ref} className="border-y border-hairline bg-night-elevated py-14">
+    <section ref={ref} className="border-y border-hairline bg-night-elevated theme-dark py-14">
       <div className="container grid grid-cols-2 lg:grid-cols-4">
         {STATS.map((s, i) => (
           <div key={s.label} className="relative flex items-center justify-center px-4 py-4">
@@ -155,17 +155,17 @@ function StatsBand() {
 /* ---------- Section 3 — The Showroom Collection ---------- */
 function Collection() {
   return (
-    <section className="bg-night py-24 md:py-32">
+    <section className="bg-taupe theme-canvas py-24 md:py-32">
       <div className="container">
         <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
             <Eyebrow>The Showroom Collection</Eyebrow>
             <KineticHeadline
               lines={['Curated Performance & Prestige']}
-              className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-ivory"
+              className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-copy"
             />
             <Reveal y={24} className="mt-6">
-              <p className="text-[15px] font-light leading-[1.75] text-ivory-secondary">
+              <p className="text-[15px] font-light leading-[1.75] text-copy-muted">
                 Our handpicked flagship models. Maintained in pristine showroom condition, prepared
                 for your immediate departure in Johannesburg.
               </p>
@@ -217,16 +217,16 @@ function Services() {
     { scope: ref },
   )
   return (
-    <section id="services" ref={ref} className="scroll-mt-[88px] bg-night-elevated py-24 md:py-32">
+    <section id="services" ref={ref} className="scroll-mt-[88px] bg-night-elevated theme-dark py-24 md:py-32">
       <div className="container">
         <div className="mx-auto max-w-2xl text-center">
           <Eyebrow center>Our Services</Eyebrow>
           <KineticHeadline
             lines={['Bespoke Luxury Mobility Solutions']}
-            className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-ivory"
+            className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-copy"
           />
           <Reveal y={24} className="mt-6">
-            <p className="text-[15px] font-light leading-[1.75] text-ivory-secondary">
+            <p className="text-[15px] font-light leading-[1.75] text-copy-muted">
               Whether navigating Sandton's financial hub or hosting high-profile international
               dignitaries, KPM shapes mobility around your calendar.
             </p>
@@ -293,7 +293,7 @@ function WhyKpm() {
     { scope: ref },
   )
   return (
-    <section ref={ref} className="bg-night py-24 md:py-32">
+    <section ref={ref} className="bg-taupe theme-canvas py-24 md:py-32">
       <div className="container grid items-center gap-10 lg:grid-cols-[55fr_45fr] lg:gap-16">
         {/* image with offset gold matting frame */}
         <div className="relative">
@@ -318,7 +318,7 @@ function WhyKpm() {
           <Eyebrow>Why KPM Luxury</Eyebrow>
           <KineticHeadline
             lines={['Designed for Discerning Taste']}
-            className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-ivory"
+            className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-copy"
           />
           <Reveal staggerChildren={0.15} x={40} y={0} start="top 78%" className="mt-10 space-y-8">
             {CHECKLIST.map((item) => (
@@ -328,12 +328,12 @@ function WhyKpm() {
               >
                 <CircleCheck
                   size={22}
-                  className="mt-0.5 shrink-0 text-gold transition-colors duration-300 group-hover:text-gold-bright"
+                  className="mt-0.5 shrink-0 text-copy-accent transition-colors duration-300 group-hover:text-copy-accent"
                   aria-hidden
                 />
                 <div>
-                  <h3 className="text-[15px] font-semibold text-ivory">{item.title}</h3>
-                  <p className="mt-2 text-sm font-light leading-[1.75] text-ivory-secondary">
+                  <h3 className="text-[15px] font-semibold text-copy">{item.title}</h3>
+                  <p className="mt-2 text-sm font-light leading-[1.75] text-copy-muted">
                     {item.body}
                   </p>
                 </div>
@@ -349,16 +349,16 @@ function WhyKpm() {
 /* ---------- Section 6 — Testimonials ---------- */
 function Testimonials() {
   return (
-    <section className="bg-night-elevated py-24 md:py-32">
+    <section className="bg-night-elevated theme-dark py-24 md:py-32">
       <div className="container">
         <div className="mx-auto max-w-2xl text-center">
           <Eyebrow center>Verifiable Excellence</Eyebrow>
           <KineticHeadline
             lines={['The KPM Client Experience']}
-            className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-ivory"
+            className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-copy"
           />
           <Reveal y={24} className="mt-6">
-            <p className="text-[15px] font-light leading-[1.75] text-ivory-secondary">
+            <p className="text-[15px] font-light leading-[1.75] text-copy-muted">
               Read direct perspectives from our private individuals, wedding organizers, corporate
               clients, and embassy planners across Johannesburg.
             </p>

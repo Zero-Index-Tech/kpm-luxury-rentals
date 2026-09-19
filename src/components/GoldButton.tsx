@@ -10,7 +10,7 @@ interface GoldButtonProps {
   children: ReactNode
   to?: string
   href?: string
-  /** primary = bg-ink pill · glass = frosted glass-light · outline = on-dark ghost pill */
+  /** primary = bg-ink theme-dark pill · glass = frosted glass-light · outline = on-dark ghost pill */
   variant?: 'primary' | 'glass' | 'outline'
   className?: string
   type?: 'button' | 'submit'
@@ -64,7 +64,7 @@ export default function GoldButton({
 
   const base = cn(
     'group/btn inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-[12px] font-bold uppercase tracking-[0.14em] transition-all duration-300 active:scale-[0.97] select-none',
-    variant === 'primary' && 'bg-ink text-ivory hover:-translate-y-0.5 hover:bg-umber',
+    variant === 'primary' && 'bg-ink theme-dark text-ivory hover:-translate-y-0.5 hover:bg-umber',
     variant === 'glass' &&
       'glass-light text-charcoal hover:-translate-y-0.5 hover:bg-[rgba(244,242,239,0.75)] hover:border-[rgba(255,255,255,0.7)]',
     variant === 'outline' &&

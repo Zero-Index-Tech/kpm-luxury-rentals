@@ -29,7 +29,7 @@ export default function Layout() {
   }, [location.pathname, location.hash])
 
   return (
-    <div className="min-h-[100dvh] bg-white font-lxrbody text-lxr-ink antialiased">
+    <div className="min-h-[100dvh] bg-taupe theme-canvas font-lxrbody text-copy antialiased">
       <Navbar />
       <main style={{ paddingTop: NAV_HEIGHT }}>
         <Outlet />

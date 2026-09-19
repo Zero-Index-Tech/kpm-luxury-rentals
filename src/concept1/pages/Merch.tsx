@@ -47,7 +47,7 @@ function ProductCard({ product, tall = false }: { product: MerchProduct; tall?: 
       viewport={{ once: true, margin: '-60px' }}
       className="group"
     >
-      <div className="overflow-hidden rounded-[6px] border border-lxr-linedark bg-lxr-panel">
+      <div className="overflow-hidden rounded-[6px] border border-lxr-linedark bg-lxr-panel theme-dark">
         <img
           src={product.image}
           alt={product.name}
@@ -60,9 +60,9 @@ function ProductCard({ product, tall = false }: { product: MerchProduct; tall?: 
       <div className="mt-4 flex items-start justify-between gap-4">
         <div>
           <h3 className="font-lxrtitle text-[15px] font-semibold text-white">{product.name}</h3>
-          <p className="mt-1 text-[12.5px] text-white/50">{product.tagline}</p>
+          <p className="mt-1 text-[12.5px] text-copy-muted">{product.tagline}</p>
         </div>
-        <span className="shrink-0 font-lxrtitle text-[15px] font-semibold text-lxr-sand">
+        <span className="shrink-0 font-lxrtitle text-[15px] font-semibold text-copy-accent">
           {product.price}
         </span>
       </div>
@@ -72,7 +72,7 @@ function ProductCard({ product, tall = false }: { product: MerchProduct; tall?: 
 
 export default function Merch() {
   return (
-    <div className="bg-lxr-black text-white">
+    <div className="bg-taupe theme-canvas text-white">
       {/* Header */}
       <section className="border-b border-lxr-linedark">
         <div className="mx-auto max-w-[1280px] px-6 pb-16 pt-20 text-center lg:pt-24">
@@ -88,7 +88,7 @@ export default function Merch() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.25 }}
-            className="mt-4 text-[12px] font-medium uppercase tracking-[0.5em] text-lxr-sand"
+            className="mt-4 text-[12px] font-medium uppercase tracking-[0.5em] text-copy-accent"
           >
             Luxury in Motion.
           </motion.p>
@@ -96,7 +96,7 @@ export default function Merch() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4, ease: EASE }}
-            className="mx-auto mt-8 max-w-2xl text-[15px] leading-[1.8] text-white/60"
+            className="mx-auto mt-8 max-w-2xl text-[15px] leading-[1.8] text-copy-muted"
           >
             KPMLXR represents more than luxury car rentals — it's a lifestyle built on presence,
             precision and arrival. The brand merch collection carries that identity off the road:
@@ -119,12 +119,12 @@ export default function Merch() {
               className="text-center"
             >
               <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-lxr-linedark">
-                <p.icon className="h-6 w-6 text-lxr-sand" strokeWidth={1.6} />
+                <p.icon className="h-6 w-6 text-copy-accent" strokeWidth={1.6} />
               </div>
               <h3 className="mt-5 font-lxrtitle text-sm font-semibold uppercase tracking-[0.3em]">
                 {p.title}
               </h3>
-              <p className="mx-auto mt-3 max-w-xs text-[13px] leading-relaxed text-white/55">
+              <p className="mx-auto mt-3 max-w-xs text-[13px] leading-relaxed text-copy-muted">
                 {p.body}
               </p>
             </motion.div>
@@ -150,7 +150,7 @@ export default function Merch() {
       </section>
 
       {/* Branding details */}
-      <section className="bg-lxr-panel">
+      <section className="bg-lxr-panel theme-dark">
         <div className="mx-auto max-w-[1280px] px-6 py-24">
           <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.3fr]">
             <div>
@@ -184,7 +184,7 @@ export default function Merch() {
                       loading="lazy"
                     />
                   </div>
-                  <figcaption className="mt-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50">
+                  <figcaption className="mt-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-copy-muted">
                     {d.title}
                   </figcaption>
                 </motion.figure>
@@ -229,7 +229,7 @@ export default function Merch() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, margin: '-60px' }}
-                className="flex items-center gap-5 rounded-[6px] border border-lxr-linedark bg-lxr-panel p-6"
+                className="flex items-center gap-5 rounded-[6px] border border-lxr-linedark bg-lxr-panel theme-dark p-6"
               >
                 <span
                   className="h-14 w-14 shrink-0 rounded-full border border-white/15"
@@ -238,7 +238,7 @@ export default function Merch() {
                 />
                 <div>
                   <div className="font-lxrtitle text-[15px] font-semibold text-white">{c.name}</div>
-                  <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-white/45">
+                  <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-copy-muted">
                     {c.swatch}
                   </div>
                 </div>
@@ -250,9 +250,9 @@ export default function Merch() {
           <div className="mt-24 text-center">
             <h2 className="mx-auto max-w-2xl font-lxrtitle text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl">
               Wear the{' '}
-              <em className="font-lxrbody font-medium italic text-lxr-sand">Arrival.</em>
+              <em className="font-lxrbody font-medium italic text-copy-accent">Arrival.</em>
             </h2>
-            <p className="mx-auto mt-5 max-w-lg text-[15px] leading-relaxed text-white/60">
+            <p className="mx-auto mt-5 max-w-lg text-[15px] leading-relaxed text-copy-muted">
               Merch enquiries, sizing and bulk corporate orders are handled directly by our
               concierge team.
             </p>

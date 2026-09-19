@@ -13,7 +13,7 @@ const EXPLORE = [
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-lxr-black text-white">
+    <footer className="relative overflow-hidden bg-lxr-black theme-dark text-white">
       <div className="mx-auto max-w-[1280px] px-6 pt-20 pb-10">
         <div className="grid gap-14 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
@@ -84,19 +84,19 @@ export default function Footer() {
             </h4>
             <ul className="mt-5 space-y-4 text-sm text-white/70">
               <li className="flex items-start gap-3">
-                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-lxr-sand" />
+                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-copy-accent" />
                 <a href={CONTACT.phoneHref} className="transition-colors hover:text-white">
                   {CONTACT.phone}
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-lxr-sand" />
+                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-copy-accent" />
                 <a href={`mailto:${CONTACT.email}`} className="transition-colors hover:text-white">
                   {CONTACT.email}
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-lxr-sand" />
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-copy-accent" />
                 <span>{CONTACT.address}</span>
               </li>
             </ul>

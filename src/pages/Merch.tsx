@@ -52,12 +52,12 @@ function SectionTitle({
     <div>
       <h2
         className={`font-display text-[clamp(2rem,4vw,3.2rem)] font-bold leading-[1.08] tracking-[-0.01em] ${
-          dark ? 'text-ivory' : 'text-ink'
+          dark ? 'text-ivory' : 'text-copy'
         }`}
       >
         {title}
         {accent && (
-          <em className={`font-serif font-medium italic ${dark ? 'text-taupe' : 'text-taupe'}`}>
+          <em className={`font-serif font-medium italic ${dark ? 'text-copy-muted' : 'text-copy-muted'}`}>
             {' '}
             {accent}
           </em>
@@ -66,7 +66,7 @@ function SectionTitle({
       {copy && (
         <p
           className={`mt-5 max-w-xl text-[14px] leading-[1.75] ${
-            dark ? 'text-ivory-70' : 'text-taupe'
+            dark ? 'text-ivory-70' : 'text-copy-muted'
           }`}
         >
           {copy}
@@ -85,7 +85,7 @@ function ProductCard({ product, tall = false }: { product: MerchProduct; tall?: 
       viewport={{ once: true, margin: '-60px' }}
       className="group"
     >
-      <div className="overflow-hidden rounded-[20px] border border-taupe-soft bg-ink">
+      <div className="overflow-hidden rounded-[20px] border border-taupe-soft bg-ink theme-dark">
         <img
           src={product.image}
           alt={product.name}
@@ -97,10 +97,10 @@ function ProductCard({ product, tall = false }: { product: MerchProduct; tall?: 
       </div>
       <div className="mt-4 flex items-start justify-between gap-4 px-1">
         <div>
-          <h3 className="font-display text-[15px] font-bold text-ink">{product.name}</h3>
-          <p className="mt-1 text-[12.5px] text-taupe">{product.tagline}</p>
+          <h3 className="font-display text-[15px] font-bold text-copy">{product.name}</h3>
+          <p className="mt-1 text-[12.5px] text-copy-muted">{product.tagline}</p>
         </div>
-        <span className="shrink-0 font-display text-[15px] font-bold text-umber">
+        <span className="shrink-0 font-display text-[15px] font-bold text-copy-accent">
           {product.price}
         </span>
       </div>
@@ -110,9 +110,9 @@ function ProductCard({ product, tall = false }: { product: MerchProduct; tall?: 
 
 export default function Merch() {
   return (
-    <div className="bg-ivory text-ink">
+    <div className="bg-taupe theme-canvas">
       {/* Header */}
-      <section className="bg-ink text-ivory">
+      <section className="bg-ink theme-dark text-ivory">
         <div className="container pb-16 pt-20 text-center lg:pt-24">
           <motion.h1
             initial={{ opacity: 0, y: 28 }}
@@ -126,7 +126,7 @@ export default function Merch() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.25 }}
-            className="mt-4 text-[12px] font-bold uppercase tracking-[0.5em] text-taupe"
+            className="mt-4 text-[12px] font-bold uppercase tracking-[0.5em] text-copy-muted"
           >
             Luxury in Motion.
           </motion.p>
@@ -156,11 +156,11 @@ export default function Merch() {
               viewport={{ once: true, margin: '-60px' }}
               className="text-center"
             >
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-taupe-soft bg-white/60">
-                <p.icon className="h-6 w-6 text-umber" strokeWidth={1.6} />
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-taupe-soft bg-white/60 theme-light">
+                <p.icon className="h-6 w-6 text-copy-accent" strokeWidth={1.6} />
               </div>
               <h3 className="mt-5 text-sm font-bold uppercase tracking-[0.3em]">{p.title}</h3>
-              <p className="mx-auto mt-3 max-w-xs text-[13px] leading-relaxed text-taupe">
+              <p className="mx-auto mt-3 max-w-xs text-[13px] leading-relaxed text-copy-muted">
                 {p.body}
               </p>
             </motion.div>
@@ -185,7 +185,7 @@ export default function Merch() {
       </section>
 
       {/* Branding details */}
-      <section className="bg-ink text-ivory">
+      <section className="bg-ink theme-dark text-ivory">
         <div className="container py-24">
           <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.3fr]">
             <div>
@@ -250,7 +250,7 @@ export default function Merch() {
       </section>
 
       {/* Colourways */}
-      <section className="border-t border-taupe-soft bg-ivory-deep">
+      <section className="border-t border-taupe-soft bg-taupe theme-canvas">
         <div className="container py-24">
           <SectionTitle
             title="Brand"
@@ -266,7 +266,7 @@ export default function Merch() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, margin: '-60px' }}
-                className="flex items-center gap-5 rounded-[20px] border border-taupe-soft bg-white/70 p-6"
+                className="flex items-center gap-5 rounded-[20px] border border-taupe-soft bg-white/70 theme-light p-6"
               >
                 <span
                   className="h-14 w-14 shrink-0 rounded-full border border-ink/10"
@@ -274,8 +274,8 @@ export default function Merch() {
                   aria-hidden
                 />
                 <div>
-                  <div className="font-display text-[15px] font-bold text-ink">{c.name}</div>
-                  <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-taupe">
+                  <div className="font-display text-[15px] font-bold text-copy">{c.name}</div>
+                  <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-copy-muted">
                     {c.swatch}
                   </div>
                 </div>
@@ -285,24 +285,24 @@ export default function Merch() {
 
           {/* CTA */}
           <div className="mt-24 text-center">
-            <h2 className="mx-auto max-w-2xl font-display text-4xl font-bold leading-[1.08] tracking-[-0.01em] text-ink sm:text-5xl">
-              Wear the <em className="font-serif font-medium italic text-taupe">Arrival.</em>
+            <h2 className="mx-auto max-w-2xl font-display text-4xl font-bold leading-[1.08] tracking-[-0.01em] text-copy sm:text-5xl">
+              Wear the <em className="font-serif font-medium italic text-copy-muted">Arrival.</em>
             </h2>
-            <p className="mx-auto mt-5 max-w-lg text-[15px] leading-relaxed text-taupe">
+            <p className="mx-auto mt-5 max-w-lg text-[15px] leading-relaxed text-copy-muted">
               Merch enquiries, sizing and bulk corporate orders are handled directly by our
               concierge team.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <Link
                 to="/c3/contact"
-                className="group inline-flex items-center gap-2.5 rounded-full bg-ink px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.18em] text-ivory transition-colors duration-300 hover:bg-umber"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-ink theme-dark px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.18em] text-ivory transition-colors duration-300 hover:bg-umber"
               >
                 Enquire Now
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
               <Link
                 to="/c3/fleet"
-                className="group inline-flex items-center gap-2.5 rounded-full border border-ink/20 px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.18em] text-ink transition-all duration-300 hover:border-ink hover:bg-ink hover:text-ivory"
+                className="group inline-flex items-center gap-2.5 rounded-full border border-ink/20 px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.18em] text-copy transition-all duration-300 hover:border-ink hover:bg-ink hover:text-ivory"
               >
                 Browse the Fleet
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

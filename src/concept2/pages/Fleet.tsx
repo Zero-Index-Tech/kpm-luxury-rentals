@@ -41,7 +41,7 @@ export default function Fleet() {
   return (
     <PageTransition>
       {/* Section 1 — Page hero (fleet.md §1) */}
-      <section className="bg-night pt-40 pb-16">
+      <section className="bg-taupe theme-canvas pt-40 pb-16">
         <div className="container flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <Eyebrow>The Showroom Collection</Eyebrow>
@@ -51,10 +51,10 @@ export default function Fleet() {
               split="words"
               trigger="load"
               delay={0.5}
-              className="mt-6 text-[clamp(2.6rem,5.6vw,4.75rem)] font-semibold leading-[1.05] tracking-[-0.01em] text-ivory"
+              className="mt-6 text-[clamp(2.6rem,5.6vw,4.75rem)] font-semibold leading-[1.05] tracking-[-0.01em] text-copy"
             />
             <Reveal y={24} duration={1} delay={1}>
-              <p className="mt-6 text-[15px] font-light leading-[1.75] text-ivory-secondary md:text-base">
+              <p className="mt-6 text-[15px] font-light leading-[1.75] text-copy-muted md:text-base">
                 Explore peerless luxury lived and captured. Each vehicle is meticulously
                 inspected, detailed, and delivered in pristine showroom condition to Sandton
                 or your requested location across Gauteng.
@@ -65,12 +65,12 @@ export default function Fleet() {
           <Reveal x={40} y={0} duration={1} delay={0.9} className="shrink-0">
             <div
               data-cursor
-              className="group flex items-center gap-5 rounded-[2px] border border-[rgba(199,191,174,0.3)] px-8 py-6 transition-colors duration-500 hover:border-gold"
+              className="group flex items-center gap-5 rounded-[2px] border border-[rgba(128,112,104,0.3)] px-8 py-6 transition-colors duration-500 hover:border-gold"
             >
-              <span className="btn-sheen font-c1serif text-[2.5rem] leading-none text-gold-bright transition-transform duration-500 group-hover:scale-[1.04]">
+              <span className="btn-sheen font-c1serif text-[2.5rem] leading-none text-copy-accent transition-transform duration-500 group-hover:scale-[1.04]">
                 200+
               </span>
-              <span className="flex flex-col gap-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-ivory-muted">
+              <span className="flex flex-col gap-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-copy-muted">
                 <span>Elite Vehicles</span>
                 <span>Available</span>
               </span>
@@ -80,7 +80,7 @@ export default function Fleet() {
       </section>
 
       {/* Section 2 — Filter tabs + fleet grid (fleet.md §2) */}
-      <section className="bg-night pb-32">
+      <section className="bg-taupe theme-canvas pb-32">
         <div className="container">
           <Reveal y={-16} duration={0.6} delay={1.1}>
             <div
@@ -97,8 +97,8 @@ export default function Fleet() {
                   className={cn(
                     'shrink-0 rounded-[2px] px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.15em] transition-colors duration-300',
                     active === filter
-                      ? 'bg-gold text-ink'
-                      : 'border border-subtle text-ivory-secondary hover:border-gold/50 hover:text-ivory',
+                      ? 'bg-ink text-white'
+                      : 'border border-subtle text-copy-muted hover:border-gold/50 hover:text-copy',
                   )}
                 >
                   {filter}
@@ -142,7 +142,7 @@ export default function Fleet() {
           {/* Defensive empty state (fleet.md §2) */}
           {filtered.length === 0 && (
             <div className="mt-16 flex flex-col items-center text-center">
-              <p className="max-w-md text-[15px] font-light leading-[1.75] text-ivory-muted">
+              <p className="max-w-md text-[15px] font-light leading-[1.75] text-copy-muted">
                 No vehicles in this category — speak to our concierge for bespoke sourcing.
               </p>
               <GoldButton to="/c2/contact" variant="outline" className="mt-8">

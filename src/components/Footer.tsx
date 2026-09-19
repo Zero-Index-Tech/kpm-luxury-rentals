@@ -10,7 +10,7 @@ import { CONTACT, FOOTER_FLEET, FOOTER_SERVICES } from '@/lib/site'
  */
 export default function Footer() {
   return (
-    <footer className="rounded-t-[28px] border-t border-hairline-dark bg-ink-deep">
+    <footer className="rounded-t-[28px] border-t border-hairline-dark bg-ink-deep theme-dark">
       <div className="container py-20">
         <Reveal staggerChildren={0.1} y={32} start="top 85%" className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
@@ -30,7 +30,7 @@ export default function Footer() {
                 </span>
               </p>
             </div>
-            <p className="mt-5 text-[9px] font-bold uppercase tracking-[0.3em] text-taupe">
+            <p className="mt-5 text-[9px] font-bold uppercase tracking-[0.3em] text-copy-muted">
               Luxury Lived. Memories Captured.
             </p>
             <p className="mt-6 max-w-xs text-[13px] font-normal leading-[1.8] text-ivory-45">
@@ -42,7 +42,7 @@ export default function Footer() {
 
           {/* The Fleet */}
           <nav aria-label="Fleet">
-            <h3 className="text-[11px] font-bold uppercase tracking-[0.25em] text-taupe">
+            <h3 className="text-[11px] font-bold uppercase tracking-[0.25em] text-copy-muted">
               The Fleet
             </h3>
             <ul className="mt-6 space-y-3">
@@ -61,7 +61,7 @@ export default function Footer() {
 
           {/* Services */}
           <nav aria-label="Services">
-            <h3 className="text-[11px] font-bold uppercase tracking-[0.25em] text-taupe">
+            <h3 className="text-[11px] font-bold uppercase tracking-[0.25em] text-copy-muted">
               Services
             </h3>
             <ul className="mt-6 space-y-3">
@@ -80,12 +80,12 @@ export default function Footer() {
 
           {/* Sandton Showroom */}
           <div>
-            <h3 className="text-[11px] font-bold uppercase tracking-[0.25em] text-taupe">
+            <h3 className="text-[11px] font-bold uppercase tracking-[0.25em] text-copy-muted">
               Sandton Showroom
             </h3>
             <address className="mt-6 space-y-3 not-italic">
               <p className="flex items-start gap-3 text-[13px] font-medium leading-relaxed text-ivory-70">
-                <MapPin size={14} className="mt-1 shrink-0 text-taupe" aria-hidden />
+                <MapPin size={14} className="mt-1 shrink-0 text-copy-muted" aria-hidden />
                 <span>{CONTACT.address.join(' ')}</span>
               </p>
               <p>
@@ -93,7 +93,7 @@ export default function Footer() {
                   href={CONTACT.phoneHref}
                   className="flex items-center gap-3 text-[13px] font-medium text-ivory-70 transition-colors hover:text-ivory"
                 >
-                  <Phone size={14} className="shrink-0 text-taupe" aria-hidden />
+                  <Phone size={14} className="shrink-0 text-copy-muted" aria-hidden />
                   {CONTACT.phone}
                 </a>
               </p>
@@ -102,12 +102,12 @@ export default function Footer() {
                   href={`mailto:${CONTACT.email}`}
                   className="flex items-center gap-3 text-[13px] font-medium text-ivory-70 transition-colors hover:text-ivory"
                 >
-                  <Mail size={14} className="shrink-0 text-taupe" aria-hidden />
+                  <Mail size={14} className="shrink-0 text-copy-muted" aria-hidden />
                   {CONTACT.email}
                 </a>
               </p>
               <p className="flex items-center gap-3 text-[13px] font-medium text-ivory-70">
-                <Share2 size={14} className="shrink-0 text-taupe" aria-hidden />
+                <Share2 size={14} className="shrink-0 text-copy-muted" aria-hidden />
                 TikTok: {CONTACT.tiktok}
               </p>
             </address>

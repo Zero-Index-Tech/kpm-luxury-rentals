@@ -9,7 +9,7 @@ import { CONTACT, FOOTER_FLEET, FOOTER_SERVICES } from '@/concept2/lib/site'
  */
 export default function Footer() {
   return (
-    <footer className="border-t border-hairline bg-night-deep">
+    <footer className="border-t border-hairline bg-night-deep theme-dark">
       <div className="container py-16 md:py-20">
         <Reveal staggerChildren={0.1} y={32} className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
@@ -19,11 +19,11 @@ export default function Footer() {
               alt="KPM Luxury Rentals logo"
               className="mb-5 h-11 w-11 object-contain"
             />
-            <p className="font-c1serif text-[22px] text-ivory">KPMLXR</p>
-            <p className="mt-1.5 text-[9px] font-semibold uppercase tracking-[0.35em] text-gold">
+            <p className="font-c1serif text-[22px] text-copy">KPMLXR</p>
+            <p className="mt-1.5 text-[9px] font-semibold uppercase tracking-[0.35em] text-copy-accent">
               Luxury Lived. Memories Captured.
             </p>
-            <p className="mt-6 max-w-xs text-[13px] font-light leading-[1.8] text-ivory-secondary">
+            <p className="mt-6 max-w-xs text-[13px] font-light leading-[1.8] text-copy-muted">
               Providing pristine elite vehicular fleet packages, diplomatic security-cleared
               transfers, and highly customizable personal rental experiences across Gauteng for
               over three years.
@@ -32,7 +32,7 @@ export default function Footer() {
 
           {/* The Fleet */}
           <nav aria-label="Fleet">
-            <h3 className="text-[11px] font-semibold uppercase tracking-[0.25em] text-gold">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.25em] text-copy-accent">
               The Fleet
             </h3>
             <ul className="mt-6 space-y-3">
@@ -40,7 +40,7 @@ export default function Footer() {
                 <li key={item}>
                   <Link
                     to="/c2/fleet"
-                    className="text-[13px] font-light text-ivory-secondary transition-colors duration-300 hover:text-gold"
+                    className="text-[13px] font-light text-copy-muted transition-colors duration-300 hover:text-copy-accent"
                   >
                     {item}
                   </Link>
@@ -51,7 +51,7 @@ export default function Footer() {
 
           {/* Services */}
           <nav aria-label="Services">
-            <h3 className="text-[11px] font-semibold uppercase tracking-[0.25em] text-gold">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.25em] text-copy-accent">
               Services
             </h3>
             <ul className="mt-6 space-y-3">
@@ -59,7 +59,7 @@ export default function Footer() {
                 <li key={item}>
                   <Link
                     to="/c2/#services"
-                    className="text-[13px] font-light text-ivory-secondary transition-colors duration-300 hover:text-gold"
+                    className="text-[13px] font-light text-copy-muted transition-colors duration-300 hover:text-copy-accent"
                   >
                     {item}
                   </Link>
@@ -70,34 +70,34 @@ export default function Footer() {
 
           {/* Sandton Showroom */}
           <div>
-            <h3 className="text-[11px] font-semibold uppercase tracking-[0.25em] text-gold">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.25em] text-copy-accent">
               Sandton Showroom
             </h3>
             <address className="mt-6 space-y-3 not-italic">
-              <p className="flex items-start gap-3 text-[13px] font-light leading-relaxed text-ivory-secondary">
-                <MapPin size={14} className="mt-1 shrink-0 text-gold" aria-hidden />
+              <p className="flex items-start gap-3 text-[13px] font-light leading-relaxed text-copy-muted">
+                <MapPin size={14} className="mt-1 shrink-0 text-copy-accent" aria-hidden />
                 <span>{CONTACT.address.join(' ')}</span>
               </p>
               <p>
                 <a
                   href={CONTACT.phoneHref}
-                  className="flex items-center gap-3 text-[13px] font-light text-ivory-secondary transition-colors hover:text-gold"
+                  className="flex items-center gap-3 text-[13px] font-light text-copy-muted transition-colors hover:text-copy-accent"
                 >
-                  <Phone size={14} className="shrink-0 text-gold" aria-hidden />
+                  <Phone size={14} className="shrink-0 text-copy-accent" aria-hidden />
                   {CONTACT.phone}
                 </a>
               </p>
               <p>
                 <a
                   href={`mailto:${CONTACT.email}`}
-                  className="flex items-center gap-3 text-[13px] font-light text-ivory-secondary transition-colors hover:text-gold"
+                  className="flex items-center gap-3 text-[13px] font-light text-copy-muted transition-colors hover:text-copy-accent"
                 >
-                  <Mail size={14} className="shrink-0 text-gold" aria-hidden />
+                  <Mail size={14} className="shrink-0 text-copy-accent" aria-hidden />
                   {CONTACT.email}
                 </a>
               </p>
-              <p className="flex items-center gap-3 text-[13px] font-light text-ivory-secondary">
-                <Share2 size={14} className="shrink-0 text-gold" aria-hidden />
+              <p className="flex items-center gap-3 text-[13px] font-light text-copy-muted">
+                <Share2 size={14} className="shrink-0 text-copy-accent" aria-hidden />
                 TikTok: {CONTACT.tiktok}
               </p>
             </address>
@@ -107,7 +107,7 @@ export default function Footer() {
 
       <div className="border-t border-subtle">
         <div className="container flex flex-col items-center justify-between gap-4 py-6 md:flex-row">
-          <p className="text-[11px] text-ivory-muted">
+          <p className="text-[11px] text-copy-muted">
             © 2024 KPM Luxury Rentals. All rights reserved.
           </p>
           <nav className="flex gap-8" aria-label="Legal">
@@ -116,7 +116,7 @@ export default function Footer() {
                 key={item}
                 href="#"
                 onClick={(e) => e.preventDefault()}
-                className="text-[11px] text-ivory-muted transition-colors duration-300 hover:text-gold"
+                className="text-[11px] text-copy-muted transition-colors duration-300 hover:text-copy-accent"
               >
                 {item}
               </a>

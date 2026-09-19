@@ -244,7 +244,7 @@ function Hero({
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(180deg, rgba(11,10,9,0.5) 0%, rgba(11,10,9,0.1) 45%, rgba(11,10,9,0.9) 100%)',
+              'linear-gradient(180deg, rgba(24,24,24,0.5) 0%, rgba(24,24,24,0.1) 45%, rgba(24,24,24,0.9) 100%)',
           }}
         />
       </div>
@@ -339,7 +339,7 @@ function GalleryStrip({
   // single-image fleets render as one wide rounded frame (vehicle.md appendix)
   if (gallery.length === 1) {
     return (
-      <section className="bg-ivory py-10" aria-label="Vehicle gallery">
+      <section className="bg-taupe theme-canvas py-10" aria-label="Vehicle gallery">
         <div className="container">
           <Reveal y={28} start="top 85%">
             <div className="group relative aspect-[16/9] overflow-hidden rounded-[24px] border border-taupe-soft md:aspect-[21/8]">
@@ -358,7 +358,7 @@ function GalleryStrip({
   }
 
   return (
-    <section className="bg-ivory py-10" aria-label="Vehicle gallery">
+    <section className="bg-taupe theme-canvas py-10" aria-label="Vehicle gallery">
       <div className="container">
         <Reveal
           className="grid grid-cols-2 gap-4 md:grid-cols-4"
@@ -420,7 +420,7 @@ function ExpandButton({ onClick, label }: { onClick: () => void; label?: string 
           onClick()
         }
       }}
-      className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-[rgba(244,242,239,0.72)] text-charcoal opacity-0 backdrop-blur-md transition-all duration-300 hover:bg-ivory group-hover:opacity-100"
+      className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-[rgba(244,242,239,0.72)] theme-light text-copy opacity-0 backdrop-blur-md transition-all duration-300 hover:bg-ivory group-hover:opacity-100"
     >
       <Expand size={14} aria-hidden />
     </span>
@@ -469,7 +469,7 @@ function TechnicalSection({
   )
 
   return (
-    <section className="bg-ivory-deep py-24 md:py-28">
+    <section className="bg-taupe theme-canvas py-24 md:py-28">
       <div className="container grid gap-12 lg:grid-cols-2 lg:gap-16">
         {/* left — spec grid */}
         <div>
@@ -478,8 +478,8 @@ function TechnicalSection({
             as="h2"
             lines={['Engineered Excellence']}
             accentWords={['Engineered']}
-            accentClassName="font-accent font-normal italic text-umber"
-            className="mt-6 text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-charcoal"
+            accentClassName="font-accent font-normal italic text-copy-accent"
+            className="mt-6 text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-copy"
           />
           <Reveal
             className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2"
@@ -490,12 +490,12 @@ function TechnicalSection({
             {detail.specGrid.map((cell) => (
               <div
                 key={cell.label}
-                className="group rounded-[18px] border border-taupe-soft bg-[#FBFAF7] p-5 transition-colors duration-500 hover:border-[rgba(75,71,69,0.4)]"
+                className="group rounded-[18px] border border-taupe-soft bg-[#FBFAF7] theme-light p-5 transition-colors duration-500 hover:border-[rgba(55,51,49,0.4)]"
               >
-                <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-taupe">
+                <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-copy-muted">
                   {cell.label}
                 </p>
-                <p className="mt-2 font-display text-[1rem] font-bold leading-tight text-charcoal transition-colors duration-500 group-hover:text-umber">
+                <p className="mt-2 font-display text-[1rem] font-bold leading-tight text-copy transition-colors duration-500 group-hover:text-copy-accent">
                   {cell.value}
                 </p>
               </div>
@@ -508,13 +508,13 @@ function TechnicalSection({
           <KineticHeadline
             as="h3"
             lines={[narrativeTitle]}
-            className="text-[1.6rem] font-bold leading-[1.15] tracking-[-0.015em] text-charcoal"
+            className="text-[1.6rem] font-bold leading-[1.15] tracking-[-0.015em] text-copy"
           />
           <Reveal className="mt-6 space-y-6" staggerChildren={0.15} y={24} start="top 82%">
             {narrative.map((paragraph) => (
               <p
                 key={paragraph.slice(0, 24)}
-                className="text-[15px] font-normal leading-[1.75] text-taupe"
+                className="text-[15px] font-normal leading-[1.75] text-copy-muted"
               >
                 {paragraph}
               </p>
@@ -523,14 +523,14 @@ function TechnicalSection({
 
           <div className="mt-10 lg:sticky lg:top-32">
             <div ref={rateRef} className="glass-light rounded-[24px] p-8 shadow-glass">
-              <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-taupe">
+              <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-copy-muted">
                 Direct Showroom Rate
               </p>
               <p className="mt-4">
-                <span className="font-display text-[2.25rem] font-extrabold leading-none tracking-[-0.02em] text-charcoal">
+                <span className="font-display text-[2.25rem] font-extrabold leading-none tracking-[-0.02em] text-copy">
                   {vehicle.price}
                 </span>
-                <span className="ml-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-taupe">
+                <span className="ml-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-copy-muted">
                   /day
                 </span>
               </p>
@@ -595,7 +595,7 @@ function EquipmentSection() {
   )
 
   return (
-    <section ref={ref} className="bg-ivory py-24 md:py-28">
+    <section ref={ref} className="bg-taupe theme-canvas py-24 md:py-28">
       <div className="container">
         <SectionHeader
           eyebrow="Premium Finishes"
@@ -606,17 +606,17 @@ function EquipmentSection() {
           {EQUIPMENT.map((item) => (
             <div
               key={item}
-              className="equip-chip group flex items-center gap-3 rounded-full border border-taupe-soft bg-[#FBFAF7] px-5 py-3.5 transition-all duration-500 hover:-translate-y-0.5 hover:border-[rgba(75,71,69,0.45)]"
+              className="equip-chip group flex items-center gap-3 rounded-full border border-taupe-soft bg-[#FBFAF7] theme-light px-5 py-3.5 transition-all duration-500 hover:-translate-y-0.5 hover:border-[rgba(55,51,49,0.45)]"
             >
-              <span className="equip-check flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-[rgba(139,124,115,0.12)] transition-colors duration-500 group-hover:bg-ink">
+              <span className="equip-check flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-[rgba(128,112,104,0.12)] transition-colors duration-500 group-hover:bg-ink">
                 <Check
                   size={12}
                   strokeWidth={3}
-                  className="text-charcoal transition-colors duration-500 group-hover:text-ivory"
+                  className="text-copy transition-colors duration-500 group-hover:text-ivory"
                   aria-hidden
                 />
               </span>
-              <span className="text-[13px] font-medium text-charcoal">{item}</span>
+              <span className="text-[13px] font-medium text-copy">{item}</span>
             </div>
           ))}
         </div>
@@ -671,7 +671,7 @@ function InclusionsSection() {
   )
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-ink py-24 md:py-28">
+    <section ref={ref} className="relative overflow-hidden bg-ink theme-dark py-24 md:py-28">
       <div className="taupe-glow pointer-events-none absolute inset-0" aria-hidden />
       <div className="container relative">
         <SectionHeader
@@ -697,7 +697,7 @@ function InclusionsSection() {
 
 function SiblingsSection({ siblings }: { siblings: Vehicle[] }) {
   return (
-    <section className="bg-ivory py-24 md:py-28">
+    <section className="bg-taupe theme-canvas py-24 md:py-28">
       <div className="container">
         <SectionHeader
           eyebrow="Explore Sibling Prestige"
@@ -743,11 +743,11 @@ function SectionHeader({
         lines={[title]}
         accentWords={accentWord ? [accentWord] : undefined}
         accentClassName={
-          dark ? 'font-accent font-normal italic text-[#B4A89E]' : 'font-accent font-normal italic text-umber'
+          dark ? 'font-accent font-normal italic text-sand' : 'font-accent font-normal italic text-copy-accent'
         }
         className={cn(
           'mt-6 text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em]',
-          dark ? 'text-ivory' : 'text-charcoal',
+          dark ? 'text-ivory' : 'text-copy',
         )}
       />
       {sub && (
@@ -755,7 +755,7 @@ function SectionHeader({
           <p
             className={cn(
               'mt-6 text-[15px] font-normal leading-[1.75]',
-              dark ? 'text-ivory-70' : 'text-taupe',
+              dark ? 'text-ivory-70' : 'text-copy-muted',
             )}
           >
             {sub}
@@ -803,7 +803,7 @@ function Lightbox({
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
       <DialogContent
         aria-describedby={undefined}
-        className="left-0 top-0 flex h-full w-full max-w-none translate-x-0 translate-y-0 items-center justify-center rounded-none border-none bg-[rgba(11,10,9,0.95)] p-0 backdrop-blur-md sm:max-w-none"
+        className="left-0 top-0 flex h-full w-full max-w-none translate-x-0 translate-y-0 items-center justify-center rounded-none border-none bg-[rgba(24,24,24,0.95)] p-0 backdrop-blur-md sm:max-w-none"
       >
         <DialogTitle className="sr-only">Vehicle gallery lightbox</DialogTitle>
         {index !== null && (
@@ -822,7 +822,7 @@ function Lightbox({
               onClick={() => step(-1)}
               data-cursor
               aria-label="Previous image"
-              className="absolute left-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-ivory text-ink transition-all duration-300 hover:scale-105 md:left-8"
+              className="absolute left-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-ivory theme-light text-ink transition-all duration-300 hover:scale-105 md:left-8"
             >
               <ChevronLeft size={20} aria-hidden />
             </button>
@@ -831,7 +831,7 @@ function Lightbox({
               onClick={() => step(1)}
               data-cursor
               aria-label="Next image"
-              className="absolute right-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-ivory text-ink transition-all duration-300 hover:scale-105 md:right-8"
+              className="absolute right-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-ivory theme-light text-ink transition-all duration-300 hover:scale-105 md:right-8"
             >
               <ChevronRight size={20} aria-hidden />
             </button>

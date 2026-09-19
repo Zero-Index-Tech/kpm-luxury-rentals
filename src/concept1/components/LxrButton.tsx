@@ -12,9 +12,9 @@ interface LxrButtonProps {
 }
 
 const STYLES: Record<Variant, string> = {
-  dark: 'bg-lxr-black text-white hover:bg-lxr-panel',
-  light: 'bg-white text-lxr-ink hover:bg-lxr-gray',
-  outline: 'border border-lxr-ink/25 text-lxr-ink hover:border-lxr-ink hover:bg-lxr-ink hover:text-white',
+  dark: 'bg-lxr-black theme-dark text-white hover:bg-lxr-panel',
+  light: 'bg-white theme-light text-lxr-ink hover:bg-lxr-gray',
+  outline: 'border border-copy/40 text-copy hover:border-lxr-ink hover:bg-lxr-ink hover:text-white',
   outlineLight:
     'border border-white/30 text-white hover:border-white hover:bg-white hover:text-lxr-ink',
   olive: 'bg-lxr-olive text-white hover:bg-lxr-olivedeep',

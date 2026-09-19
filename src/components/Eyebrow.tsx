@@ -47,7 +47,7 @@ export default function Eyebrow({ children, center, tone = 'light', className }:
       <span
         className={cn(
           'eyebrow-rule inline-block h-px w-6 origin-left',
-          tone === 'dark' ? 'bg-ivory-45' : 'bg-taupe',
+          tone === 'dark' ? 'bg-ivory-45' : 'bg-copy-accent',
         )}
         aria-hidden
       />

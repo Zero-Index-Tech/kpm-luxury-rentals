@@ -4,7 +4,7 @@ import { prefersReducedMotion } from '@/lib/gsap'
 
 /**
  * Custom cursor (design.md §5, desktop pointer:fine only): 8px charcoal dot +
- * 36px ring (border rgba(75,71,69,0.4)) lerping behind at 0.12. Both use
+ * 36px ring (border rgba(55,51,49,0.4)) lerping behind at 0.12. Both use
  * mix-blend-difference with ivory so the pair inverts over dark bands. Ring
  * scales 1.6 over interactive elements (a, button, [data-cursor]). Native
  * cursor stays visible. Hidden on touch devices / reduced motion.
@@ -39,7 +39,7 @@ export default function CustomCursor() {
       {/* dot — charcoal, inverts to ivory over dark bands */}
       <motion.div
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[100] h-2 w-2 rounded-full bg-ivory mix-blend-difference"
+        className="pointer-events-none fixed left-0 top-0 z-[100] h-2 w-2 rounded-full bg-ivory theme-light mix-blend-difference"
         style={{ x: mx, y: my, translateX: '-50%', translateY: '-50%' }}
       />
       {/* ring — lerps behind at ~0.12, scales 1.6 over interactive elements */}

@@ -14,9 +14,9 @@ interface TestimonialCardProps {
  */
 export default function TestimonialCard({ quote, name, role, avatar }: TestimonialCardProps) {
   return (
-    <figure className="group rounded-[24px] border border-taupe-soft bg-[#FBFAF7] p-8 transition-all duration-500 hover:-translate-y-1 hover:border-[rgba(139,124,115,0.5)] hover:shadow-card-lift">
-      <Quote size={26} className="text-taupe/50" aria-hidden />
-      <blockquote className="mt-6 font-accent text-[1.1rem] italic leading-[1.6] text-charcoal/85">
+    <figure className="group rounded-[24px] border border-taupe-soft bg-[#FBFAF7] theme-light p-8 transition-all duration-500 hover:-translate-y-1 hover:border-[rgba(128,112,104,0.5)] hover:shadow-card-lift">
+      <Quote size={26} className="text-copy-muted/50" aria-hidden />
+      <blockquote className="mt-6 font-accent text-[1.1rem] italic leading-[1.6] text-copy/85">
         “{quote}”
       </blockquote>
       <figcaption className="mt-8 flex items-center gap-4">
@@ -29,8 +29,8 @@ export default function TestimonialCard({ quote, name, role, avatar }: Testimoni
           className="h-11 w-11 rounded-full object-cover ring-2 ring-taupe-soft"
         />
         <div>
-          <p className="text-[13px] font-bold text-charcoal">{name}</p>
-          <p className="mt-0.5 text-[11px] font-medium text-taupe">{role}</p>
+          <p className="text-[13px] font-bold text-copy">{name}</p>
+          <p className="mt-0.5 text-[11px] font-medium text-copy-muted">{role}</p>
         </div>
       </figcaption>
     </figure>

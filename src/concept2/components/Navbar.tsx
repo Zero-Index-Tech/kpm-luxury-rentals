@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 
 /**
  * Navbar (design.md §7.1): fixed top, h-[88px], transparent over hero →
- * rgba(10,10,11,0.85) + blur + bottom hairline after 40px. Hides on
+ * rgba(24,24,24,0.85) + blur + bottom hairline after 40px. Hides on
  * scroll-down past 120px, reveals on scroll-up (0.3s slide). Mobile:
  * full-screen overlay menu with staggered Playfair links.
  */
@@ -55,10 +55,10 @@ export default function Navbar() {
     <>
       <header
         className={cn(
-          'fixed inset-x-0 top-0 z-[80] h-[88px] transition-all duration-300',
+          'theme-dark fixed inset-x-0 top-0 z-[80] h-[88px] transition-all duration-300',
           hidden && !open ? '-translate-y-full' : 'translate-y-0',
           scrolled || open
-            ? 'border-b border-hairline bg-[rgba(10,10,11,0.85)] backdrop-blur-xl'
+            ? 'border-b border-hairline bg-[rgba(24,24,24,0.85)] backdrop-blur-xl'
             : 'border-b border-transparent bg-transparent',
         )}
       >
@@ -70,10 +70,10 @@ export default function Navbar() {
               className="h-9 w-9 object-contain transition-opacity duration-300 group-hover:opacity-80"
             />
             <span className="flex flex-col leading-none">
-              <span className="font-c1serif text-[22px] tracking-wide text-ivory transition-colors group-hover:text-gold-bright">
+              <span className="font-c1serif text-[22px] tracking-wide text-copy transition-colors group-hover:text-copy-accent">
                 KPMLXR
               </span>
-              <span className="mt-1.5 text-[8px] font-semibold uppercase tracking-[0.35em] text-gold">
+              <span className="mt-1.5 text-[8px] font-semibold uppercase tracking-[0.35em] text-copy-accent">
                 Rentals · Johannesburg
               </span>
             </span>
@@ -101,7 +101,7 @@ export default function Navbar() {
             <Link
               to="/c2/contact"
               data-cursor
-              className="btn-sheen inline-block bg-gold px-7 py-3 text-[12px] font-semibold uppercase tracking-[0.15em] text-ink transition-all duration-300 hover:bg-gold-bright active:scale-[0.97]"
+              className="btn-sheen inline-block bg-gold px-7 py-3 text-[12px] font-semibold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-gold-bright hover:text-ink active:scale-[0.97]"
             >
               Reserve Now
             </Link>
@@ -109,7 +109,7 @@ export default function Navbar() {
 
           <button
             type="button"
-            className="text-ivory lg:hidden"
+            className="text-copy lg:hidden"
             aria-label={open ? 'Close menu' : 'Open menu'}
             onClick={() => setOpen((v) => !v)}
           >
@@ -126,7 +126,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[70] flex flex-col justify-center bg-[rgba(10,10,11,0.98)] px-8 backdrop-blur-xl lg:hidden"
+            className="fixed inset-0 z-[70] flex flex-col justify-center bg-[rgba(24,24,24,0.98)] px-8 backdrop-blur-xl lg:hidden"
           >
             <nav className="flex flex-col gap-7" aria-label="Mobile">
               {NAV_LINKS.map((link, i) => (
@@ -140,7 +140,7 @@ export default function Navbar() {
                     <a
                       href={link.to}
                       onClick={goServices}
-                      className="font-c1serif text-[2rem] text-ivory transition-colors hover:text-gold"
+                      className="font-c1serif text-[2rem] text-copy transition-colors hover:text-copy-accent"
                     >
                       {link.label}
                     </a>
@@ -149,8 +149,8 @@ export default function Navbar() {
                       to={link.to}
                       onClick={() => setOpen(false)}
                       className={cn(
-                        'font-c1serif text-[2rem] text-ivory transition-colors hover:text-gold',
-                        location.pathname === link.to && 'text-gold',
+                        'font-c1serif text-[2rem] text-copy transition-colors hover:text-copy-accent',
+                        location.pathname === link.to && 'text-copy-accent',
                       )}
                     >
                       {link.label}
@@ -166,7 +166,7 @@ export default function Navbar() {
                 <Link
                   to="/c2/contact"
                   onClick={() => setOpen(false)}
-                  className="mt-4 inline-block bg-gold px-9 py-4 text-[12px] font-semibold uppercase tracking-[0.15em] text-ink"
+                  className="mt-4 inline-block bg-gold px-9 py-4 text-[12px] font-semibold uppercase tracking-[0.15em] text-white"
                 >
                   Reserve Now
                 </Link>

@@ -87,7 +87,7 @@ export default function ConciergeChat() {
         data-cursor
         aria-label={open ? 'Close AI concierge' : 'Open AI concierge chat'}
         className={cn(
-          'fixed bottom-4 right-4 z-[96] flex h-14 items-center rounded-full bg-gold text-[#121110] shadow-[0_18px_44px_-14px_rgba(199,191,174,0.7)] transition-transform duration-300 hover:scale-[1.04] active:scale-95 md:bottom-6 md:right-6',
+          'fixed bottom-4 right-4 z-[96] flex h-14 items-center rounded-full bg-gold text-white shadow-[0_18px_44px_-14px_rgba(128,112,104,0.7)] transition-transform duration-300 hover:scale-[1.04] active:scale-95 md:bottom-6 md:right-6',
           open ? 'gap-2.5 px-5' : 'w-14 justify-center px-0',
         )}
       >
@@ -102,7 +102,7 @@ export default function ConciergeChat() {
             alt=""
             width={34}
             height={34}
-            className="h-[34px] w-[34px] object-contain"
+            className="h-[34px] w-[34px] object-contain brightness-0 invert"
           />
         )}
       </motion.button>
@@ -117,11 +117,11 @@ export default function ConciergeChat() {
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             role="dialog"
             aria-label="KPM AI concierge chat"
-            className="fixed bottom-[4.5rem] right-4 z-[96] flex h-[min(560px,72dvh)] w-[min(380px,calc(100vw-2rem))] flex-col overflow-hidden rounded-[24px] border border-white/12 bg-[rgba(14,14,17,0.86)] shadow-[0_32px_80px_-24px_rgba(0,0,0,0.75)] backdrop-blur-2xl md:bottom-24 md:right-6"
+            className="fixed bottom-[4.5rem] right-4 z-[96] flex h-[min(560px,72dvh)] w-[min(380px,calc(100vw-2rem))] flex-col overflow-hidden rounded-[24px] border border-white/12 bg-[rgba(55,51,49,0.86)] shadow-[0_32px_80px_-24px_rgba(0,0,0,0.75)] backdrop-blur-2xl md:bottom-24 md:right-6"
           >
             {/* header */}
             <div className="flex items-center gap-3 border-b border-white/10 px-5 py-4">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold text-[#121110]">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold text-white">
                 <Sparkles size={16} strokeWidth={2.2} />
               </span>
               <div className="flex-1 leading-tight">
@@ -143,7 +143,7 @@ export default function ConciergeChat() {
                     className={cn(
                       'max-w-[85%] rounded-2xl px-4 py-2.5 text-[13px] leading-[1.55]',
                       m.from === 'user'
-                        ? 'rounded-br-md bg-gold font-medium text-[#121110]'
+                        ? 'rounded-br-md bg-gold font-medium text-white'
                         : 'rounded-bl-md border border-white/10 bg-white/[0.06] text-[#F4F2EF]/90',
                     )}
                   >
@@ -173,7 +173,7 @@ export default function ConciergeChat() {
                   key={c}
                   type="button"
                   onClick={() => send(c)}
-                  className="rounded-full border border-gold/40 px-3 py-1.5 text-[10.5px] font-semibold uppercase tracking-[0.12em] text-gold transition-colors hover:bg-gold hover:text-[#121110]"
+                  className="rounded-full border border-gold/40 px-3 py-1.5 text-[10.5px] font-semibold uppercase tracking-[0.12em] text-sand transition-colors hover:bg-gold hover:text-white"
                 >
                   {c}
                 </button>
@@ -198,7 +198,7 @@ export default function ConciergeChat() {
               <button
                 type="submit"
                 aria-label="Send message"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-gold text-[#121110] transition-transform hover:scale-105 active:scale-95"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-gold text-white transition-transform hover:scale-105 active:scale-95"
               >
                 <Send size={15} strokeWidth={2.4} />
               </button>

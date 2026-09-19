@@ -83,7 +83,7 @@ export default function VehicleDetailPage() {
   const narrative = detail.narrative ?? genericNarrative(vehicle, detail)
 
   return (
-    <div className="bg-white">
+    <div className="bg-taupe theme-canvas">
       <Hero vehicle={vehicle} detail={detail} heroSrc={heroSrc} />
       <GalleryStrip gallery={gallery} activeIdx={activeIdx} onSelect={selectThumb} onExpand={setLightboxIdx} />
       <TechnicalSection
@@ -126,7 +126,7 @@ function Hero({
 
   return (
     <section
-      className="relative -mt-[76px] flex min-h-[92vh] items-end overflow-hidden bg-lxr-black"
+      className="relative -mt-[76px] flex min-h-[92vh] items-end overflow-hidden bg-lxr-black theme-dark"
       aria-label={`${vehicle.name} — hero`}
     >
       <div className="absolute inset-0" aria-hidden>
@@ -146,7 +146,7 @@ function Hero({
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(180deg, rgba(11,11,12,0.55) 0%, rgba(11,11,12,0.15) 45%, rgba(11,11,12,0.96) 100%)',
+              'linear-gradient(180deg, rgba(24,24,24,0.55) 0%, rgba(24,24,24,0.15) 45%, rgba(24,24,24,0.96) 100%)',
           }}
         />
       </div>
@@ -172,7 +172,7 @@ function Hero({
             transition={{ duration: 0.8, ease: EASE, delay: 0.3 }}
             className="pb-2 text-right"
           >
-            <span className="font-lxrtitle text-[2.6rem] font-semibold leading-none text-lxr-sand">
+            <span className="font-lxrtitle text-[2.6rem] font-semibold leading-none text-copy-accent">
               {vehicle.price}
             </span>
             <span className="ml-3 text-[12px] font-semibold uppercase tracking-[0.25em] text-white/50">
@@ -208,7 +208,7 @@ function GalleryStrip({
 }) {
   if (gallery.length === 1) {
     return (
-      <section className="bg-lxr-gray py-10" aria-label="Vehicle gallery">
+      <section className="bg-taupe theme-canvas py-10" aria-label="Vehicle gallery">
         <div className="mx-auto max-w-[1280px] px-6">
           <div className="group relative aspect-[16/9] overflow-hidden rounded-[6px] md:aspect-[21/8]">
             <img
@@ -225,7 +225,7 @@ function GalleryStrip({
   }
 
   return (
-    <section className="bg-lxr-gray py-10" aria-label="Vehicle gallery">
+    <section className="bg-taupe theme-canvas py-10" aria-label="Vehicle gallery">
       <div className="mx-auto grid max-w-[1280px] grid-cols-2 gap-4 px-6 md:grid-cols-4">
         {gallery.map((src, i) => {
           const active = i === activeIdx
@@ -299,7 +299,7 @@ function TechnicalSection({
   narrative: [string, string]
 }) {
   return (
-    <section className="bg-white py-24">
+    <section className="bg-taupe theme-canvas py-24">
       <div className="mx-auto grid max-w-[1280px] gap-12 px-6 lg:grid-cols-2 lg:gap-16">
         <div>
           <SectionHead title="Engineered" accent="Excellence." />
@@ -309,10 +309,10 @@ function TechnicalSection({
                 key={cell.label}
                 className="group rounded-[4px] border border-lxr-line p-5 transition-colors duration-500 hover:border-lxr-ink/40"
               >
-                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-lxr-mist">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-copy-muted">
                   {cell.label}
                 </p>
-                <p className="mt-2 font-lxrtitle text-[1.05rem] font-semibold text-lxr-ink transition-colors duration-500 group-hover:text-lxr-olive">
+                <p className="mt-2 font-lxrtitle text-[1.05rem] font-semibold text-copy transition-colors duration-500 group-hover:text-copy-accent">
                   {cell.value}
                 </p>
               </div>
@@ -321,14 +321,14 @@ function TechnicalSection({
         </div>
 
         <div className="relative">
-          <h3 className="font-lxrtitle text-[1.75rem] font-semibold leading-[1.25] text-lxr-ink">
+          <h3 className="font-lxrtitle text-[1.75rem] font-semibold leading-[1.25] text-copy">
             {narrativeTitle}
           </h3>
           <div className="mt-6 space-y-6">
             {narrative.map((paragraph) => (
               <p
                 key={paragraph.slice(0, 24)}
-                className="text-[15px] leading-[1.75] text-lxr-muted"
+                className="text-[15px] leading-[1.75] text-copy-muted"
               >
                 {paragraph}
               </p>
@@ -336,15 +336,15 @@ function TechnicalSection({
           </div>
 
           <div className="mt-10 lg:sticky lg:top-28">
-            <div className="rounded-[6px] border border-lxr-line bg-lxr-gray p-8">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-lxr-olive">
+            <div className="rounded-[6px] border border-lxr-line bg-lxr-gray theme-light p-8">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-copy-accent">
                 Direct Showroom Rate
               </p>
               <p className="mt-4">
-                <span className="font-lxrtitle text-[2.25rem] font-semibold leading-none text-lxr-ink">
+                <span className="font-lxrtitle text-[2.25rem] font-semibold leading-none text-copy">
                   {vehicle.price}
                 </span>
-                <span className="ml-3 text-[12px] font-semibold uppercase tracking-[0.25em] text-lxr-mist">
+                <span className="ml-3 text-[12px] font-semibold uppercase tracking-[0.25em] text-copy-muted">
                   /day
                 </span>
               </p>
@@ -367,7 +367,7 @@ function TechnicalSection({
 
 function EquipmentSection() {
   return (
-    <section className="bg-lxr-gray py-24">
+    <section className="bg-taupe theme-canvas py-24">
       <div className="mx-auto max-w-[1280px] px-6">
         <SectionHead
           title="Fitted Fleet"
@@ -378,10 +378,10 @@ function EquipmentSection() {
           {EQUIPMENT.map((item) => (
             <div
               key={item}
-              className="group flex items-center gap-3 rounded-[4px] border border-lxr-line bg-white px-5 py-4 transition-all duration-500 hover:-translate-y-0.5 hover:border-lxr-ink/30"
+              className="group flex items-center gap-3 rounded-[4px] border border-lxr-line bg-white theme-light px-5 py-4 transition-all duration-500 hover:-translate-y-0.5 hover:border-lxr-ink/30"
             >
-              <CircleCheck size={16} className="shrink-0 text-lxr-olive" aria-hidden />
-              <span className="text-[13px] text-lxr-ink">{item}</span>
+              <CircleCheck size={16} className="shrink-0 text-copy-accent" aria-hidden />
+              <span className="text-[13px] text-copy">{item}</span>
             </div>
           ))}
         </div>
@@ -394,7 +394,7 @@ function EquipmentSection() {
 
 function InclusionsSection() {
   return (
-    <section className="bg-lxr-black py-24 text-white">
+    <section className="bg-lxr-black theme-dark py-24 text-white">
       <div className="mx-auto max-w-[1280px] px-6">
         <SectionHead
           dark
@@ -406,9 +406,9 @@ function InclusionsSection() {
           {INCLUSIONS.map((card) => (
             <div
               key={card.title}
-              className="rounded-[6px] border border-lxr-linedark bg-lxr-panel p-7 transition-colors duration-500 hover:border-white/25"
+              className="rounded-[6px] border border-lxr-linedark bg-lxr-panel theme-dark p-7 transition-colors duration-500 hover:border-white/25"
             >
-              <card.icon className="h-6 w-6 text-lxr-sand" strokeWidth={1.6} />
+              <card.icon className="h-6 w-6 text-copy-accent" strokeWidth={1.6} />
               <h3 className="mt-5 font-lxrtitle text-[15px] font-semibold">{card.title}</h3>
               <p className="mt-2 text-[13px] leading-relaxed text-white/60">{card.body}</p>
             </div>
@@ -423,7 +423,7 @@ function InclusionsSection() {
 
 function SiblingsSection({ siblings }: { siblings: Vehicle[] }) {
   return (
-    <section className="bg-white py-24">
+    <section className="bg-taupe theme-canvas py-24">
       <div className="mx-auto max-w-[1280px] px-6">
         <SectionHead
           title="Other Premium"

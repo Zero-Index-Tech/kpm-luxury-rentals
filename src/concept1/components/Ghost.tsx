@@ -10,7 +10,7 @@ export default function Ghost({ text, className = '', dark = false }: GhostProps
     <div className={`pointer-events-none select-none overflow-hidden ${className}`} aria-hidden="true">
       <div
         className={`whitespace-nowrap font-lxrtitle text-[16vw] font-extrabold leading-[0.85] tracking-tight lg:text-[11rem] ${
-          dark ? 'text-white/[0.05]' : 'text-lxr-ghost'
+          dark ? 'text-white/[0.05]' : 'text-copy/10'
         }`}
       >
         {text}

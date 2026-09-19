@@ -48,12 +48,12 @@ function SectionTitle({
 }) {
   return (
     <div>
-      <h2 className="font-c1serif text-[clamp(2rem,4vw,3.2rem)] font-medium leading-[1.1] text-ivory">
+      <h2 className="font-c1serif text-[clamp(2rem,4vw,3.2rem)] font-medium leading-[1.1] text-copy">
         {title}
-        {accent && <em className="text-gold-bright"> {accent}</em>}
+        {accent && <em className="text-copy-accent"> {accent}</em>}
       </h2>
       {copy && (
-        <p className="mt-5 max-w-xl text-[14px] font-light leading-[1.75] text-ivory-secondary">
+        <p className="mt-5 max-w-xl text-[14px] font-light leading-[1.75] text-copy-muted">
           {copy}
         </p>
       )}
@@ -70,7 +70,7 @@ function ProductCard({ product, tall = false }: { product: MerchProduct; tall?: 
       viewport={{ once: true, margin: '-60px' }}
       className="group"
     >
-      <div className="overflow-hidden rounded-[2px] border border-subtle bg-surface">
+      <div className="overflow-hidden rounded-[2px] border border-subtle bg-surface theme-dark">
         <img
           src={product.image}
           alt={product.name}
@@ -82,10 +82,10 @@ function ProductCard({ product, tall = false }: { product: MerchProduct; tall?: 
       </div>
       <div className="mt-4 flex items-start justify-between gap-4">
         <div>
-          <h3 className="text-[15px] font-semibold text-ivory">{product.name}</h3>
-          <p className="mt-1 text-[12.5px] font-light text-ivory-muted">{product.tagline}</p>
+          <h3 className="text-[15px] font-semibold text-copy">{product.name}</h3>
+          <p className="mt-1 text-[12.5px] font-light text-copy-muted">{product.tagline}</p>
         </div>
-        <span className="shrink-0 font-c1serif text-[15px] text-gold-bright">{product.price}</span>
+        <span className="shrink-0 font-c1serif text-[15px] text-copy-accent">{product.price}</span>
       </div>
     </motion.div>
   )
@@ -93,7 +93,7 @@ function ProductCard({ product, tall = false }: { product: MerchProduct; tall?: 
 
 export default function Merch() {
   return (
-    <div className="bg-night text-ivory">
+    <div className="bg-taupe theme-canvas text-copy">
       {/* Header */}
       <section className="border-b border-subtle">
         <div className="container pb-16 pt-20 text-center lg:pt-24">
@@ -101,7 +101,7 @@ export default function Merch() {
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: EASE }}
-            className="font-c1serif text-6xl font-medium tracking-tight text-ivory sm:text-7xl lg:text-8xl"
+            className="font-c1serif text-6xl font-medium tracking-tight text-copy sm:text-7xl lg:text-8xl"
           >
             KPMLXR
           </motion.h1>
@@ -109,7 +109,7 @@ export default function Merch() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.25 }}
-            className="mt-4 text-[12px] font-semibold uppercase tracking-[0.5em] text-gold"
+            className="mt-4 text-[12px] font-semibold uppercase tracking-[0.5em] text-copy-accent"
           >
             Luxury in Motion.
           </motion.p>
@@ -117,7 +117,7 @@ export default function Merch() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4, ease: EASE }}
-            className="mx-auto mt-8 max-w-2xl text-[15px] font-light leading-[1.8] text-ivory-secondary"
+            className="mx-auto mt-8 max-w-2xl text-[15px] font-light leading-[1.8] text-copy-muted"
           >
             KPMLXR represents more than luxury car rentals — it's a lifestyle built on presence,
             precision and arrival. The brand merch collection carries that identity off the road:
@@ -140,12 +140,12 @@ export default function Merch() {
               className="text-center"
             >
               <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-hairline">
-                <p.icon className="h-6 w-6 text-gold" strokeWidth={1.6} />
+                <p.icon className="h-6 w-6 text-copy-accent" strokeWidth={1.6} />
               </div>
-              <h3 className="mt-5 text-sm font-semibold uppercase tracking-[0.3em] text-ivory">
+              <h3 className="mt-5 text-sm font-semibold uppercase tracking-[0.3em] text-copy">
                 {p.title}
               </h3>
-              <p className="mx-auto mt-3 max-w-xs text-[13px] font-light leading-relaxed text-ivory-secondary">
+              <p className="mx-auto mt-3 max-w-xs text-[13px] font-light leading-relaxed text-copy-muted">
                 {p.body}
               </p>
             </motion.div>
@@ -170,7 +170,7 @@ export default function Merch() {
       </section>
 
       {/* Branding details */}
-      <section className="bg-night-elevated">
+      <section className="bg-night-elevated theme-dark">
         <div className="container py-24">
           <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.3fr]">
             <div>
@@ -182,7 +182,7 @@ export default function Merch() {
               <div className="mt-9">
                 <Link
                   to="/c2/contact"
-                  className="group inline-flex items-center gap-2.5 border border-gold/40 px-7 py-3.5 text-[12px] font-semibold uppercase tracking-[0.18em] text-gold transition-all duration-300 hover:border-gold hover:bg-gold hover:text-ink"
+                  className="group inline-flex items-center gap-2.5 border border-gold/40 px-7 py-3.5 text-[12px] font-semibold uppercase tracking-[0.18em] text-copy-accent transition-all duration-300 hover:border-gold hover:bg-gold hover:text-white"
                 >
                   Enquire About Merch
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -207,7 +207,7 @@ export default function Merch() {
                       loading="lazy"
                     />
                   </div>
-                  <figcaption className="mt-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-ivory-muted">
+                  <figcaption className="mt-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-copy-muted">
                     {d.title}
                   </figcaption>
                 </motion.figure>
@@ -250,7 +250,7 @@ export default function Merch() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, margin: '-60px' }}
-                className="flex items-center gap-5 border border-subtle bg-surface p-6"
+                className="flex items-center gap-5 border border-subtle bg-surface theme-dark p-6"
               >
                 <span
                   className="h-14 w-14 shrink-0 rounded-full border border-white/15"
@@ -258,8 +258,8 @@ export default function Merch() {
                   aria-hidden
                 />
                 <div>
-                  <div className="text-[15px] font-semibold text-ivory">{c.name}</div>
-                  <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-ivory-muted">
+                  <div className="text-[15px] font-semibold text-copy">{c.name}</div>
+                  <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-copy-muted">
                     {c.swatch}
                   </div>
                 </div>
@@ -269,24 +269,24 @@ export default function Merch() {
 
           {/* CTA */}
           <div className="mt-24 text-center">
-            <h2 className="mx-auto max-w-2xl font-c1serif text-4xl font-medium leading-[1.1] text-ivory sm:text-5xl">
-              Wear the <em className="text-gold-bright">Arrival.</em>
+            <h2 className="mx-auto max-w-2xl font-c1serif text-4xl font-medium leading-[1.1] text-copy sm:text-5xl">
+              Wear the <em className="text-copy-accent">Arrival.</em>
             </h2>
-            <p className="mx-auto mt-5 max-w-lg text-[15px] font-light leading-relaxed text-ivory-secondary">
+            <p className="mx-auto mt-5 max-w-lg text-[15px] font-light leading-relaxed text-copy-muted">
               Merch enquiries, sizing and bulk corporate orders are handled directly by our
               concierge team.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <Link
                 to="/c2/contact"
-                className="group inline-flex items-center gap-2.5 bg-gold px-7 py-3.5 text-[12px] font-semibold uppercase tracking-[0.18em] text-ink transition-colors duration-300 hover:bg-gold-bright"
+                className="group inline-flex items-center gap-2.5 bg-gold px-7 py-3.5 text-[12px] font-semibold uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:bg-gold-bright hover:text-ink"
               >
                 Enquire Now
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
               <Link
                 to="/c2/fleet"
-                className="group inline-flex items-center gap-2.5 border border-gold/40 px-7 py-3.5 text-[12px] font-semibold uppercase tracking-[0.18em] text-gold transition-all duration-300 hover:border-gold hover:bg-gold hover:text-ink"
+                className="group inline-flex items-center gap-2.5 border border-gold/40 px-7 py-3.5 text-[12px] font-semibold uppercase tracking-[0.18em] text-copy-accent transition-all duration-300 hover:border-gold hover:bg-gold hover:text-white"
               >
                 Browse the Fleet
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

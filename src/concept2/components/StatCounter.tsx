@@ -57,10 +57,10 @@ export default function StatCounter({ value, suffix = '+', label, className }: S
 
   return (
     <div ref={ref} className={cn('group text-center', className)}>
-      <p className="stat-numeral font-c1serif text-[clamp(2.5rem,4vw,3.5rem)] leading-none text-gold transition-colors duration-500 group-hover:text-gold-bright">
+      <p className="stat-numeral font-c1serif text-[clamp(2.5rem,4vw,3.5rem)] leading-none text-copy-accent transition-colors duration-500 group-hover:text-copy-accent">
         <span className="stat-numeral-value">0{suffix}</span>
       </p>
-      <p className="stat-label mt-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-ivory-muted">
+      <p className="stat-label mt-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-copy-muted">
         {label}
       </p>
     </div>

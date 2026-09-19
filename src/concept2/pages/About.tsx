@@ -178,7 +178,7 @@ function Hero() {
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(180deg, rgba(10,10,11,0.25) 0%, rgba(10,10,11,0.55) 60%, #0A0A0B 100%)',
+              'linear-gradient(180deg, rgba(24,24,24,0.25) 0%, rgba(24,24,24,0.55) 60%, #181818 100%)',
           }}
         />
       </div>
@@ -193,9 +193,9 @@ function Hero() {
           delay={0.9}
           stagger={0.03}
           lines={['About KPM Luxury Rentals']}
-          className="mt-8 text-[clamp(2.6rem,5.6vw,4.75rem)] font-semibold leading-[1.05] tracking-[-0.01em] text-ivory"
+          className="mt-8 text-[clamp(2.6rem,5.6vw,4.75rem)] font-semibold leading-[1.05] tracking-[-0.01em] text-copy"
         />
-        <p className="about-hero-sub mt-8 max-w-xl text-base font-light leading-[1.75] text-ivory-secondary">
+        <p className="about-hero-sub mt-8 max-w-xl text-base font-light leading-[1.75] text-copy-muted">
           Pioneering bespoke automotive luxury experiences across South Africa since day one.
           Uncompromising curation meets white-glove service.
         </p>
@@ -226,7 +226,7 @@ function StatsBand() {
     { scope: ref },
   )
   return (
-    <section ref={ref} className="border-y border-hairline bg-night-elevated py-14">
+    <section ref={ref} className="border-y border-hairline bg-night-elevated theme-dark py-14">
       <div className="container grid grid-cols-2 lg:grid-cols-5">
         {STATS.map((s, i) => (
           <div
@@ -291,18 +291,18 @@ function Legacy() {
     { scope: ref },
   )
   return (
-    <section ref={ref} className="bg-night py-24 md:py-32">
+    <section ref={ref} className="bg-taupe theme-canvas py-24 md:py-32">
       <div className="container grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
         {/* copy */}
         <div>
           <Eyebrow>Our Legacy</Eyebrow>
           <KineticHeadline
             lines={['Luxury Lived. Memories Captured.']}
-            className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-ivory"
+            className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-copy"
           />
           <Reveal staggerChildren={0.18} y={24} start="top 78%" className="mt-10 space-y-6">
             {LEGACY_PARAGRAPHS.map((p, i) => (
-              <p key={i} className="text-[15px] font-light leading-[1.75] text-ivory-secondary">
+              <p key={i} className="text-[15px] font-light leading-[1.75] text-copy-muted">
                 {p}
               </p>
             ))}
@@ -313,7 +313,7 @@ function Legacy() {
         <div className="group relative">
           <span
             aria-hidden
-            className="legacy-frame absolute -right-4 -top-4 h-full w-full border border-hairline transition-colors duration-700 group-hover:border-[rgba(199,191,174,0.45)]"
+            className="legacy-frame absolute -right-4 -top-4 h-full w-full border border-hairline transition-colors duration-700 group-hover:border-[rgba(128,112,104,0.45)]"
           />
           <div className="legacy-clip relative overflow-hidden">
             <Parallax from={-6} to={6} className="relative">
@@ -355,16 +355,16 @@ function Pillars() {
     { scope: ref },
   )
   return (
-    <section ref={ref} className="bg-night-elevated py-24 md:py-32">
+    <section ref={ref} className="bg-night-elevated theme-dark py-24 md:py-32">
       <div className="container">
         <div className="mx-auto max-w-2xl text-center">
           <Eyebrow center>Our Foundations</Eyebrow>
           <KineticHeadline
             lines={['Our Core Value Pillars']}
-            className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-ivory"
+            className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-copy"
           />
           <Reveal y={24} className="mt-6">
-            <p className="text-[15px] font-light leading-[1.75] text-ivory-secondary">
+            <p className="text-[15px] font-light leading-[1.75] text-copy-muted">
               Crafting unmatched automotive journeys requires an absolute commitment to service
               fundamentals.
             </p>
@@ -412,16 +412,16 @@ function Sectors() {
     { scope: ref },
   )
   return (
-    <section ref={ref} className="bg-night py-24 md:py-32">
+    <section ref={ref} className="bg-taupe theme-canvas py-24 md:py-32">
       <div className="container">
         <div className="max-w-2xl">
           <Eyebrow>Our Clients</Eyebrow>
           <KineticHeadline
             lines={['Bespoke Mobility for Every Elite Sector']}
-            className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-ivory"
+            className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-copy"
           />
           <Reveal y={24} className="mt-6">
-            <p className="text-[15px] font-light leading-[1.75] text-ivory-secondary">
+            <p className="text-[15px] font-light leading-[1.75] text-copy-muted">
               We specialize in custom fleet architecture matched to Sandton's complex requirements.
             </p>
           </Reveal>
@@ -436,17 +436,17 @@ function Sectors() {
           {SECTORS.map((s) => (
             <div
               key={s.title}
-              className="group relative min-h-[150px] border border-subtle bg-surface p-8 transition-all duration-500 hover:-translate-y-1 hover:border-[rgba(199,191,174,0.35)]"
+              className="group relative min-h-[150px] border border-subtle bg-surface theme-dark p-8 transition-all duration-500 hover:-translate-y-1 hover:border-[rgba(128,112,104,0.35)]"
             >
               {/* gold left-edge draw on reveal */}
               <span
                 aria-hidden
                 className="sector-edge absolute left-0 top-0 h-full w-px origin-top scale-y-0 bg-gold"
               />
-              <h3 className="font-c1serif text-[1.5rem] leading-[1.25] text-ivory transition-colors duration-500 group-hover:text-gold-bright">
+              <h3 className="font-c1serif text-[1.5rem] leading-[1.25] text-copy transition-colors duration-500 group-hover:text-copy-accent">
                 {s.title}
               </h3>
-              <p className="mt-3 text-[13px] font-light leading-[1.75] text-ivory-secondary transition-colors duration-500 group-hover:text-ivory/80">
+              <p className="mt-3 text-[13px] font-light leading-[1.75] text-copy-muted transition-colors duration-500 group-hover:text-copy/80">
                 {s.body}
               </p>
             </div>
@@ -460,16 +460,16 @@ function Sectors() {
 /* ---------- Section 6 — Testimonials (about.md §6) ---------- */
 function Testimonials() {
   return (
-    <section className="bg-night-elevated py-24 md:py-32">
+    <section className="bg-night-elevated theme-dark py-24 md:py-32">
       <div className="container">
         <div className="mx-auto max-w-2xl text-center">
           <Eyebrow center>Verifiable Excellence</Eyebrow>
           <KineticHeadline
             lines={['The KPM Client Experience']}
-            className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-ivory"
+            className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-copy"
           />
           <Reveal y={24} className="mt-6">
-            <p className="text-[15px] font-light leading-[1.75] text-ivory-secondary">
+            <p className="text-[15px] font-light leading-[1.75] text-copy-muted">
               Perspectives from corporate planners, private collectors, and signature wedding
               organizers.
             </p>

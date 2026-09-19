@@ -49,7 +49,7 @@ export default function IconCard({
         to && 'cursor-pointer',
         glass
           ? 'glass-card-dark hover:border-[rgba(244,242,239,0.3)]'
-          : 'border border-taupe-soft bg-[#FBFAF7] hover:shadow-card-lift',
+          : 'border border-taupe-soft bg-[#FBFAF7] theme-light hover:shadow-card-lift',
         className,
       )}
     >
@@ -58,14 +58,14 @@ export default function IconCard({
           'icon-chip flex h-11 w-11 items-center justify-center rounded-full transition-colors duration-500',
           glass
             ? 'bg-[rgba(244,242,239,0.12)] group-hover:bg-ivory'
-            : 'bg-[rgba(139,124,115,0.12)] group-hover:bg-ink',
+            : 'bg-[rgba(128,112,104,0.12)] group-hover:bg-ink',
         )}
       >
         <Icon
           size={18}
           className={cn(
             'transition-colors duration-500',
-            glass ? 'text-ivory group-hover:text-ink' : 'text-charcoal group-hover:text-ivory',
+            glass ? 'text-ivory group-hover:text-ink' : 'text-copy group-hover:text-ivory',
           )}
           aria-hidden
         />
@@ -73,7 +73,7 @@ export default function IconCard({
       <h3
         className={cn(
           'mt-6 font-display text-[1.3rem] font-bold leading-[1.15] tracking-[-0.015em]',
-          glass ? 'text-ivory' : 'text-charcoal',
+          glass ? 'text-ivory' : 'text-copy',
         )}
       >
         {title}
@@ -81,7 +81,7 @@ export default function IconCard({
       <p
         className={cn(
           'mt-3 text-sm font-normal leading-[1.75]',
-          glass ? 'text-ivory-70' : 'text-taupe',
+          glass ? 'text-ivory-70' : 'text-copy-muted',
         )}
       >
         {body}

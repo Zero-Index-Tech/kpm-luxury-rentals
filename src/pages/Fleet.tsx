@@ -43,14 +43,14 @@ export default function Fleet() {
   return (
     <PageTransition>
       {/* Section 1 — Page hero (fleet.md §1) */}
-      <section className="relative overflow-hidden bg-ivory pb-16 pt-10 md:pt-14">
+      <section className="relative overflow-hidden bg-taupe theme-canvas pb-16 pt-10 md:pt-14">
         {/* decorative taupe wash so the glass badge card's blur reads on ivory */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              'radial-gradient(circle at 80% 20%, rgba(139,124,115,0.14), transparent 60%)',
+              'radial-gradient(circle at 80% 20%, rgba(128,112,104,0.14), transparent 60%)',
           }}
         />
         <div className="container relative flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
@@ -64,12 +64,12 @@ export default function Fleet() {
               delay={0.5}
               lineClasses={[
                 '',
-                'font-accent font-medium italic tracking-[-0.02em] text-umber',
+                'font-accent font-medium italic tracking-[-0.02em] text-copy-accent',
               ]}
-              className="mt-6 text-[clamp(3rem,7vw,6rem)] font-extrabold leading-[0.98] tracking-[-0.035em] text-charcoal"
+              className="mt-6 text-[clamp(3rem,7vw,6rem)] font-extrabold leading-[0.98] tracking-[-0.035em] text-copy"
             />
             <Reveal y={24} duration={1} delay={1.1}>
-              <p className="mt-6 max-w-xl text-[15px] leading-[1.75] text-taupe md:text-base">
+              <p className="mt-6 max-w-xl text-[15px] leading-[1.75] text-copy-muted md:text-base">
                 Explore peerless luxury lived and captured. Each vehicle is meticulously
                 inspected, detailed, and delivered in pristine showroom condition to Sandton
                 or your requested location across Gauteng.
@@ -88,10 +88,10 @@ export default function Fleet() {
               data-cursor
               className="glass-light group flex items-center gap-5 rounded-[24px] px-8 py-6 shadow-glass transition-colors duration-500 hover:bg-[rgba(244,242,239,0.75)]"
             >
-              <span className="font-display text-[2.5rem] font-extrabold leading-none tracking-[-0.03em] text-charcoal transition-colors duration-500 group-hover:text-umber">
+              <span className="font-display text-[2.5rem] font-extrabold leading-none tracking-[-0.03em] text-copy transition-colors duration-500 group-hover:text-copy-accent">
                 200+
               </span>
-              <span className="flex flex-col gap-1 text-[10px] font-bold uppercase tracking-[0.22em] text-taupe">
+              <span className="flex flex-col gap-1 text-[10px] font-bold uppercase tracking-[0.22em] text-copy-muted">
                 <span>Elite Vehicles</span>
                 <span>Available</span>
               </span>
@@ -101,7 +101,7 @@ export default function Fleet() {
       </section>
 
       {/* Section 2 — Filter pills + fleet grid (fleet.md §2) */}
-      <section className="bg-ivory pb-32">
+      <section className="bg-taupe theme-canvas pb-32">
         <div className="container">
           <Reveal y={-14} duration={0.6} delay={1.1}>
             <div
@@ -118,8 +118,8 @@ export default function Fleet() {
                   className={cn(
                     'shrink-0 rounded-full px-6 py-3 text-[11px] font-bold uppercase tracking-[0.14em] transition-colors duration-300',
                     active === filter
-                      ? 'bg-ink text-ivory'
-                      : 'border border-taupe-soft bg-[#FBFAF7] text-taupe hover:border-charcoal hover:text-charcoal',
+                      ? 'bg-ink theme-dark text-ivory'
+                      : 'border border-taupe-soft bg-[#FBFAF7] theme-light text-copy-muted hover:border-charcoal hover:text-copy',
                   )}
                 >
                   {filter}
@@ -163,13 +163,13 @@ export default function Fleet() {
           {/* Defensive empty state (fleet.md §2) */}
           {filtered.length === 0 && (
             <div className="mt-16 flex flex-col items-center text-center">
-              <p className="max-w-md text-[15px] leading-[1.75] text-taupe">
+              <p className="max-w-md text-[15px] leading-[1.75] text-copy-muted">
                 No vehicles in this category — speak to our concierge for bespoke sourcing.
               </p>
               <Link
                 to="/c3/contact"
                 data-cursor
-                className="mt-8 inline-block rounded-full border border-taupe-soft bg-[#FBFAF7] px-8 py-4 text-[12px] font-bold uppercase tracking-[0.14em] text-charcoal transition-colors duration-300 hover:border-charcoal hover:bg-ivory-deep"
+                className="mt-8 inline-block rounded-full border border-taupe-soft bg-[#FBFAF7] theme-light px-8 py-4 text-[12px] font-bold uppercase tracking-[0.14em] text-copy transition-colors duration-300 hover:border-charcoal hover:bg-ivory-deep"
               >
                 Speak With Concierge
               </Link>
@@ -179,7 +179,7 @@ export default function Fleet() {
       </section>
 
       {/* Section 3 — Brand marquee band (fleet.md §3) */}
-      <div className="bg-ivory pb-32">
+      <div className="bg-taupe theme-canvas pb-32">
         <BrandMarquee />
       </div>
     </PageTransition>

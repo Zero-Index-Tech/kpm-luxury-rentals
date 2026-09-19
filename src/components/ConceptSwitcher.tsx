@@ -34,7 +34,7 @@ export default function ConceptSwitcher() {
       aria-label="Switch design concept"
       className="fixed bottom-4 left-4 z-[95] md:bottom-6 md:left-6"
     >
-      <div className="flex items-center gap-1 rounded-full border border-white/10 bg-[rgba(16,15,14,0.78)] p-1 shadow-[0_16px_40px_-16px_rgba(0,0,0,0.65)] backdrop-blur-xl">
+      <div className="flex items-center gap-1 rounded-full border border-white/10 bg-[rgba(24,24,24,0.78)] p-1 shadow-[0_16px_40px_-16px_rgba(0,0,0,0.65)] backdrop-blur-xl">
         {CONCEPTS.map((c) => (
           <Link
             key={c.id}
@@ -44,7 +44,7 @@ export default function ConceptSwitcher() {
             className={cn(
               segment,
               current.id === c.id
-                ? 'bg-gold text-[#121110] shadow-[0_6px_18px_-6px_rgba(199,191,174,0.55)]'
+                ? 'bg-gold text-white shadow-[0_6px_18px_-6px_rgba(128,112,104,0.55)]'
                 : 'text-white/50 hover:text-white',
             )}
           >

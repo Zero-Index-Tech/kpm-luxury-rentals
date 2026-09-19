@@ -243,7 +243,7 @@ function Hero({
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(180deg, rgba(10,10,11,0.55) 0%, rgba(10,10,11,0.15) 45%, rgba(10,10,11,0.96) 100%)',
+              'linear-gradient(180deg, rgba(24,24,24,0.55) 0%, rgba(24,24,24,0.15) 45%, rgba(24,24,24,0.96) 100%)',
           }}
         />
       </div>
@@ -260,17 +260,17 @@ function Hero({
               delay={0.6}
               stagger={0.03}
               lines={[vehicle.name]}
-              className="mt-6 text-[clamp(2.6rem,5.6vw,4.75rem)] font-semibold leading-[1.05] tracking-[-0.01em] text-ivory"
+              className="mt-6 text-[clamp(2.6rem,5.6vw,4.75rem)] font-semibold leading-[1.05] tracking-[-0.01em] text-copy"
             />
-            <p className="hero-sub mt-5 text-[13px] font-medium uppercase tracking-[0.22em] text-ivory-secondary">
+            <p className="hero-sub mt-5 text-[13px] font-medium uppercase tracking-[0.22em] text-copy-muted">
               Category: {detail.heroCategory} · {detail.descriptor}
             </p>
           </div>
           <p className="hero-price pb-2 text-right">
-            <span className="font-c1serif text-[3rem] leading-none text-gold-bright">
+            <span className="font-c1serif text-[3rem] leading-none text-copy-accent">
               {vehicle.price}
             </span>
-            <span className="ml-3 text-[12px] font-semibold uppercase tracking-[0.25em] text-ivory-muted">
+            <span className="ml-3 text-[12px] font-semibold uppercase tracking-[0.25em] text-copy-muted">
               /day
             </span>
           </p>
@@ -328,7 +328,7 @@ function GalleryStrip({
   // single-image fleets render as one wide frame (vehicle.md appendix)
   if (gallery.length === 1) {
     return (
-      <section className="bg-night py-10" aria-label="Vehicle gallery">
+      <section className="bg-taupe theme-canvas py-10" aria-label="Vehicle gallery">
         <div className="container">
           <Reveal y={32} start="top 85%">
             <div className="group relative aspect-[16/9] overflow-hidden border border-subtle md:aspect-[21/8]">
@@ -347,7 +347,7 @@ function GalleryStrip({
   }
 
   return (
-    <section className="bg-night py-10" aria-label="Vehicle gallery">
+    <section className="bg-taupe theme-canvas py-10" aria-label="Vehicle gallery">
       <div className="container">
         <Reveal
           className="grid grid-cols-2 gap-4 md:grid-cols-4"
@@ -409,7 +409,7 @@ function ExpandButton({ onClick, label }: { onClick: () => void; label?: string 
           onClick()
         }
       }}
-      className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center border border-subtle bg-black/60 text-gold opacity-0 backdrop-blur-sm transition-all duration-300 hover:border-gold hover:bg-black/80 group-hover:opacity-100"
+      className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center border border-subtle bg-black/60 text-copy-accent opacity-0 backdrop-blur-sm transition-all duration-300 hover:border-gold hover:bg-black/80 group-hover:opacity-100"
     >
       <Expand size={14} aria-hidden />
     </span>
@@ -430,7 +430,7 @@ function TechnicalSection({
   narrative: [string, string]
 }) {
   return (
-    <section className="bg-night-elevated py-24 md:py-28">
+    <section className="bg-night-elevated theme-dark py-24 md:py-28">
       <div className="container grid gap-12 lg:grid-cols-2 lg:gap-16">
         {/* left — spec grid */}
         <div>
@@ -438,7 +438,7 @@ function TechnicalSection({
           <KineticHeadline
             as="h2"
             lines={['Engineered Excellence']}
-            className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-ivory"
+            className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-copy"
           />
           <Reveal
             className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2"
@@ -449,12 +449,12 @@ function TechnicalSection({
             {detail.specGrid.map((cell) => (
               <div
                 key={cell.label}
-                className="group border border-subtle p-5 transition-colors duration-500 hover:border-[rgba(199,191,174,0.4)]"
+                className="group border border-subtle p-5 transition-colors duration-500 hover:border-[rgba(128,112,104,0.4)]"
               >
-                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-ivory-muted">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-copy-muted">
                   {cell.label}
                 </p>
-                <p className="mt-2 text-[1.05rem] font-semibold text-ivory transition-colors duration-500 group-hover:text-gold-bright">
+                <p className="mt-2 text-[1.05rem] font-semibold text-copy transition-colors duration-500 group-hover:text-copy-accent">
                   {cell.value}
                 </p>
               </div>
@@ -467,13 +467,13 @@ function TechnicalSection({
           <KineticHeadline
             as="h3"
             lines={[narrativeTitle]}
-            className="text-[1.75rem] font-medium leading-[1.25] text-ivory"
+            className="text-[1.75rem] font-medium leading-[1.25] text-copy"
           />
           <Reveal className="mt-6 space-y-6" staggerChildren={0.15} y={24} start="top 82%">
             {narrative.map((paragraph) => (
               <p
                 key={paragraph.slice(0, 24)}
-                className="text-[15px] font-light leading-[1.75] text-ivory-secondary"
+                className="text-[15px] font-light leading-[1.75] text-copy-muted"
               >
                 {paragraph}
               </p>
@@ -487,15 +487,15 @@ function TechnicalSection({
             start="top 88%"
             className="mt-10 lg:sticky lg:top-32"
           >
-            <div className="border border-[rgba(199,191,174,0.3)] bg-surface p-8">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-gold">
+            <div className="border border-[rgba(128,112,104,0.3)] bg-surface theme-dark p-8">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-copy-accent">
                 Direct Showroom Rate
               </p>
               <p className="mt-4">
-                <span className="font-c1serif text-[2.25rem] leading-none text-gold-bright">
+                <span className="font-c1serif text-[2.25rem] leading-none text-copy-accent">
                   {vehicle.price}
                 </span>
-                <span className="ml-3 text-[12px] font-semibold uppercase tracking-[0.25em] text-ivory-muted">
+                <span className="ml-3 text-[12px] font-semibold uppercase tracking-[0.25em] text-copy-muted">
                   /day
                 </span>
               </p>
@@ -519,7 +519,7 @@ function TechnicalSection({
 
 function EquipmentSection() {
   return (
-    <section className="bg-night py-24 md:py-28">
+    <section className="bg-taupe theme-canvas py-24 md:py-28">
       <div className="container">
         <SectionHeader
           eyebrow="Premium Finishes"
@@ -535,14 +535,14 @@ function EquipmentSection() {
           {EQUIPMENT.map((item) => (
             <div
               key={item}
-              className="group flex items-center gap-3 border border-subtle bg-surface px-5 py-4 transition-all duration-500 hover:-translate-y-0.5 hover:border-[rgba(199,191,174,0.35)]"
+              className="group flex items-center gap-3 border border-subtle bg-surface theme-dark px-5 py-4 transition-all duration-500 hover:-translate-y-0.5 hover:border-[rgba(128,112,104,0.35)]"
             >
               <CircleCheck
                 size={16}
-                className="shrink-0 text-gold transition-all duration-500 group-hover:fill-[rgba(199,191,174,0.25)]"
+                className="shrink-0 text-copy-accent transition-all duration-500 group-hover:fill-[rgba(128,112,104,0.25)]"
                 aria-hidden
               />
-              <span className="text-[13px] font-normal text-ivory">{item}</span>
+              <span className="text-[13px] font-normal text-copy">{item}</span>
             </div>
           ))}
         </Reveal>
@@ -555,7 +555,7 @@ function EquipmentSection() {
 
 function InclusionsSection() {
   return (
-    <section className="bg-night-elevated py-24 md:py-28">
+    <section className="bg-night-elevated theme-dark py-24 md:py-28">
       <div className="container">
         <SectionHeader
           eyebrow="Rental Protection"
@@ -581,7 +581,7 @@ function InclusionsSection() {
 
 function SiblingsSection({ siblings }: { siblings: Vehicle[] }) {
   return (
-    <section className="bg-night py-24 md:py-28">
+    <section className="bg-taupe theme-canvas py-24 md:py-28">
       <div className="container">
         <SectionHeader
           eyebrow="Explore Sibling Prestige"
@@ -612,11 +612,11 @@ function SectionHeader({ eyebrow, title, sub }: { eyebrow: string; title: string
       <KineticHeadline
         as="h2"
         lines={[title]}
-        className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-ivory"
+        className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-copy"
       />
       {sub && (
         <Reveal y={24} start="top 88%">
-          <p className="mt-6 text-[15px] font-light leading-[1.75] text-ivory-secondary">{sub}</p>
+          <p className="mt-6 text-[15px] font-light leading-[1.75] text-copy-muted">{sub}</p>
         </Reveal>
       )}
     </div>
@@ -679,7 +679,7 @@ function Lightbox({
               onClick={() => step(-1)}
               data-cursor
               aria-label="Previous image"
-              className="absolute left-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(199,191,174,0.4)] text-gold transition-colors duration-300 hover:border-gold hover:bg-[rgba(199,191,174,0.1)] md:left-8"
+              className="absolute left-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(128,112,104,0.4)] text-copy-accent transition-colors duration-300 hover:border-gold hover:bg-[rgba(128,112,104,0.1)] md:left-8"
             >
               <ChevronLeft size={20} aria-hidden />
             </button>
@@ -688,11 +688,11 @@ function Lightbox({
               onClick={() => step(1)}
               data-cursor
               aria-label="Next image"
-              className="absolute right-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(199,191,174,0.4)] text-gold transition-colors duration-300 hover:border-gold hover:bg-[rgba(199,191,174,0.1)] md:right-8"
+              className="absolute right-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(128,112,104,0.4)] text-copy-accent transition-colors duration-300 hover:border-gold hover:bg-[rgba(128,112,104,0.1)] md:right-8"
             >
               <ChevronRight size={20} aria-hidden />
             </button>
-            <p className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[11px] font-semibold uppercase tracking-[0.35em] text-gold">
+            <p className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[11px] font-semibold uppercase tracking-[0.35em] text-copy-accent">
               {(index ?? 0) + 1} / {images.length}
             </p>
           </>

@@ -47,7 +47,7 @@ export default function CustomCursor() {
         className="pointer-events-none fixed left-0 top-0 z-[100] h-9 w-9 rounded-full border border-gold/40"
         animate={{
           scale: hovering ? 1.6 : 1,
-          backgroundColor: hovering ? 'rgba(199,191,174,0.10)' : 'rgba(199,191,174,0)',
+          backgroundColor: hovering ? 'rgba(128,112,104,0.10)' : 'rgba(128,112,104,0)',
         }}
         transition={{ type: 'spring', stiffness: 300, damping: 25 }}
         style={{ x: ringX, y: ringY, translateX: '-50%', translateY: '-50%' }}

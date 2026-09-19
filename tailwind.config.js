@@ -10,6 +10,12 @@ module.exports = {
     },
     extend: {
       colors: {
+        // Text follows the nearest canvas or card surface.
+        copy: {
+          DEFAULT: 'rgb(var(--copy-foreground, 55 51 49) / <alpha-value>)',
+          muted: 'rgb(var(--copy-muted, 128 112 104) / <alpha-value>)',
+          accent: 'rgb(var(--copy-accent, 128 112 104) / <alpha-value>)',
+        },
         // ── V2 "Premium Lifestyle" palette (design.md §2) ─────────────
         ivory: {
           DEFAULT: '#F4F4F2', // customer pale gray — base canvas, text on near-black
@@ -18,29 +24,30 @@ module.exports = {
           45: 'rgba(244,244,242,0.45)', // muted text on dark bands
         },
         taupe: {
-          DEFAULT: '#8A8572', // customer olive — secondary text on light, muted accents
-          soft: 'rgba(138,133,114,0.28)', // hairlines on ivory
+          DEFAULT: '#807068', // brand taupe — secondary text on light, muted accents
+          soft: 'rgba(128,112,104,0.28)', // hairlines on ivory
         },
-        charcoal: '#1A1A1B', // primary text on light (customer ink)
-        umber: '#6E6A59', // hover states, active pills (customer deep olive)
+        sand: '#C7BFAE', // warm sand highlights, readable accents on dark
+        charcoal: '#373331', // primary text on light
+        umber: '#373331', // hover states, active pills
         ink: {
-          DEFAULT: '#121110', // deep sections, primary button fill
-          deep: '#0B0A09', // footer background
+          DEFAULT: '#181818', // deep sections, primary button fill
+          deep: '#181818', // footer background
         },
         'hairline-dark': 'rgba(244,242,239,0.14)', // hairlines on dark
         error: '#B0553D', // warm clay inline form errors
 
         // ── Concept 1 "KPMLXR" palette (client Figma) ────────────────
         lxr: {
-          black: '#0B0B0C', // navbar, dark sections
-          panel: '#141416', // dark cards
-          ink: '#111112', // primary text on light
+          black: '#181818', // navbar, dark sections
+          panel: '#373331', // dark cards
+          ink: '#373331', // primary text on light
           gray: '#F4F4F2', // light section background
-          olive: '#8A8572', // olive-taupe accent band/cards
-          olivedeep: '#6E6A59',
+          olive: '#807068', // legacy alias for brand taupe accent bands/cards
+          olivedeep: '#373331',
           muted: '#6E6E6A', // secondary text on light
           mist: '#8C8C88', // muted text on dark
-          line: 'rgba(17,17,18,0.10)', // hairlines on light
+          line: 'rgba(55,51,49,0.10)', // hairlines on light
           linedark: 'rgba(255,255,255,0.10)', // hairlines on dark
           ghost: '#E7E7E3', // giant ghost section titles on light
           sand: '#C7BFAE', // sand colourway accent
@@ -48,23 +55,23 @@ module.exports = {
 
         // ── V1 legacy tokens — kept so un-restyled V1 pages still render ──
         night: {
-          DEFAULT: '#0A0A0B',
-          elevated: '#0E0E11',
-          deep: '#080809',
+          DEFAULT: '#181818',
+          elevated: '#373331',
+          deep: '#181818',
         },
         surface: {
-          DEFAULT: '#131316',
-          hover: '#1A1A1F',
+          DEFAULT: '#373331',
+          hover: '#373331',
         },
         gold: {
-          DEFAULT: '#C7BFAE', // customer sand
-          bright: '#DCD6C9', // lighter sand
-          dim: '#8A8572', // customer olive
+          DEFAULT: '#807068', // legacy alias for brand taupe
+          bright: '#C7BFAE', // warm sand hover/highlight
+          dim: '#807068', // muted taupe accent
         },
         'ivory-secondary': '#A3A29C',
         'ivory-muted': '#6E6E6A',
         subtle: 'rgba(255,255,255,0.07)',
-        hairline: 'rgba(199,191,174,0.22)',
+        hairline: 'rgba(128,112,104,0.22)',
         success: '#7BA05B',
 
         // shadcn css-var palette (kept for ui primitives)
@@ -117,9 +124,9 @@ module.exports = {
         lxrbody: ['"DM Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        glass: '0 24px 60px -24px rgba(18,17,16,0.35)',
-        'card-lift': '0 28px 60px -28px rgba(18,17,16,0.28)',
-        'nav-pill': '0 16px 40px -20px rgba(18,17,16,0.25)',
+        glass: '0 24px 60px -24px rgba(24,24,24,0.35)',
+        'card-lift': '0 28px 60px -28px rgba(24,24,24,0.28)',
+        'nav-pill': '0 16px 40px -20px rgba(24,24,24,0.25)',
       },
       borderRadius: {
         xl: "calc(var(--radius) + 4px)",

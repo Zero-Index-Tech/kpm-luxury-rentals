@@ -78,7 +78,7 @@ export default function HeroSection() {
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(90deg, rgba(10,10,11,0.95) 0%, rgba(10,10,11,0.55) 55%, rgba(10,10,11,0.75) 100%)',
+              'linear-gradient(90deg, rgba(24,24,24,0.95) 0%, rgba(24,24,24,0.55) 55%, rgba(24,24,24,0.75) 100%)',
           }}
         />
         <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-night to-transparent" />
@@ -97,10 +97,10 @@ export default function HeroSection() {
             delay={0.5}
             stagger={0.03}
             lines={['Luxury Lived.', 'Memories Captured.']}
-            lineClasses={['', 'italic text-gold-bright']}
-            className="mt-8 text-[clamp(2.6rem,5.8vw,5rem)] font-semibold leading-[1.05] tracking-[-0.01em] text-ivory"
+            lineClasses={['', 'italic text-copy-accent']}
+            className="mt-8 text-[clamp(2.6rem,5.8vw,5rem)] font-semibold leading-[1.05] tracking-[-0.01em] text-copy"
           />
-          <p className="hero-sub mt-8 max-w-xl text-base font-light leading-[1.75] text-ivory-secondary">
+          <p className="hero-sub mt-8 max-w-xl text-base font-light leading-[1.75] text-copy-muted">
             South Africa's premier luxury vehicle rental experience. Experience the pinnacle of
             performance, comfort, and white-glove service in Gauteng.
           </p>
@@ -119,7 +119,7 @@ export default function HeroSection() {
 
       {/* scroll cue — bottom right */}
       <div className="hero-cue absolute bottom-10 right-6 flex flex-col items-center gap-3 md:right-10">
-        <span className="text-[9px] font-semibold uppercase tracking-[0.35em] text-gold">
+        <span className="text-[9px] font-semibold uppercase tracking-[0.35em] text-copy-accent">
           Scroll
         </span>
         <span className="relative block h-10 w-px bg-gold/30">

@@ -80,10 +80,10 @@ export default function Navbar() {
               className="h-[34px] w-[34px] object-contain"
             />
             <span className="flex flex-col leading-none">
-              <span className="font-display text-[15px] font-bold tracking-[-0.01em] text-charcoal">
+              <span className="font-display text-[15px] font-bold tracking-[-0.01em] text-copy">
                 KPMLXR
               </span>
-              <span className="mt-1 text-[7.5px] font-bold uppercase tracking-[0.32em] text-taupe">
+              <span className="mt-1 text-[7.5px] font-bold uppercase tracking-[0.32em] text-copy-muted">
                 Rentals · Johannesburg
               </span>
             </span>
@@ -126,7 +126,7 @@ export default function Navbar() {
             <Link
               to="/c3/contact"
               data-cursor
-              className="inline-block rounded-full bg-ink px-6 py-3 text-[12px] font-bold uppercase tracking-[0.14em] text-ivory transition-all duration-300 hover:bg-umber active:scale-[0.97]"
+              className="inline-block rounded-full bg-ink theme-dark px-6 py-3 text-[12px] font-bold uppercase tracking-[0.14em] text-ivory transition-all duration-300 hover:bg-umber active:scale-[0.97]"
             >
               Reserve Now
             </Link>
@@ -135,7 +135,7 @@ export default function Navbar() {
           {/* Mobile hamburger */}
           <button
             type="button"
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-ivory transition-colors hover:bg-umber lg:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-ink theme-dark text-ivory transition-colors hover:bg-umber lg:hidden"
             aria-label={open ? 'Close menu' : 'Open menu'}
             onClick={() => setOpen((v) => !v)}
           >
@@ -152,7 +152,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[70] flex flex-col bg-[rgba(11,10,9,0.72)] px-8 pb-10 pt-8 backdrop-blur-2xl lg:hidden"
+            className="fixed inset-0 z-[70] flex flex-col bg-[rgba(24,24,24,0.72)] px-8 pb-10 pt-8 backdrop-blur-2xl lg:hidden"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -169,7 +169,7 @@ export default function Navbar() {
               </div>
               <button
                 type="button"
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-ivory text-ink"
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-ivory theme-light text-ink"
                 aria-label="Close menu"
                 onClick={() => setOpen(false)}
               >
@@ -215,7 +215,7 @@ export default function Navbar() {
                 <Link
                   to="/c3/contact"
                   onClick={() => setOpen(false)}
-                  className="mt-4 inline-block rounded-full bg-ivory px-9 py-4 text-[12px] font-bold uppercase tracking-[0.14em] text-ink"
+                  className="mt-4 inline-block rounded-full bg-ivory theme-light px-9 py-4 text-[12px] font-bold uppercase tracking-[0.14em] text-ink"
                 >
                   Reserve Now
                 </Link>

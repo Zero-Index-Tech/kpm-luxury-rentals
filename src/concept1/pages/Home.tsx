@@ -34,29 +34,29 @@ const SERVICES = [
     icon: Car,
     title: 'Short-Term Rentals',
     body: "Drive premium for a weekend escape, business trip, or a personal statement across Johannesburg's finest quarters.",
-    tone: 'bg-white text-lxr-ink',
-    iconTone: 'text-lxr-olive',
+    tone: 'bg-white theme-light text-copy',
+    iconTone: 'text-copy-accent',
   },
   {
     icon: Briefcase,
     title: 'Corporate Leases',
     body: 'Tailored long-term corporate mobility solutions designed for executives, diplomats, and international embassies in Gauteng.',
-    tone: 'bg-lxr-olive text-white',
+    tone: 'bg-lxr-sand theme-light text-copy',
     iconTone: 'text-white',
   },
   {
     icon: Heart,
     title: 'Wedding & Events',
     body: 'Arrive in peerless sophistication. Curated fleet options and chauffeur assistance specifically coordinated for your signature day.',
-    tone: 'bg-lxr-black text-white',
-    iconTone: 'text-lxr-sand',
+    tone: 'bg-lxr-black theme-dark text-white',
+    iconTone: 'text-copy-accent',
   },
   {
     icon: Plane,
     title: 'Airport Transfers',
     body: 'Reliable white-glove chauffeur transfers servicing OR Tambo International and Lanseria Private Airport seamlessly.',
-    tone: 'bg-lxr-gray text-lxr-ink',
-    iconTone: 'text-lxr-olive',
+    tone: 'bg-lxr-gray theme-light text-copy',
+    iconTone: 'text-copy-accent',
   },
 ]
 
@@ -139,51 +139,53 @@ export default function Home() {
   return (
     <div>
       {/* ---------- Hero ---------- */}
-      <section className="bg-lxr-gray">
-        <div className="mx-auto grid max-w-[1280px] gap-10 px-6 pb-16 pt-14 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:pt-20">
-          <motion.div initial="hidden" animate="show" variants={rise}>
-            <p className="font-lxrtitle text-lg font-semibold text-lxr-ink sm:text-xl">
+      <section className="relative isolate min-h-[calc(100svh-110px)] overflow-hidden bg-lxr-black theme-dark text-white">
+        <motion.img
+          src="/lxr-hero-new.jpg"
+          alt="Porsche 911 in a modern concrete architectural space"
+          initial={{ opacity: 0, scale: 1.03 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.1, ease: EASE }}
+          className="absolute inset-0 -z-20 h-full w-full object-cover object-[42%_center] sm:object-center"
+        />
+        <div className="absolute inset-0 -z-10 bg-black/45" />
+
+        <div className="mx-auto flex min-h-[calc(100svh-110px)] max-w-[1280px] items-center px-6 py-14 sm:py-16 lg:py-20">
+          <motion.div initial="hidden" animate="show" variants={rise} className="max-w-xl">
+            <p className="font-lxrtitle text-lg font-semibold text-white/85 sm:text-xl">
               Welcome to KPMLXR
             </p>
-            <h1 className="mt-3 font-lxrtitle text-5xl font-semibold leading-[1.02] tracking-tight text-lxr-ink sm:text-6xl lg:text-7xl">
-              Luxury in <em className="font-lxrbody font-medium italic text-lxr-olive">Motion.</em>
+            <h1 className="mt-3 font-lxrtitle text-5xl font-semibold leading-[1.02] tracking-tight text-white sm:text-6xl lg:text-7xl">
+              Luxury in <em className="font-lxrbody font-medium italic text-copy-accent">Motion.</em>
             </h1>
-            <p className="mt-6 max-w-md text-[15px] leading-relaxed text-lxr-muted">
+            <p className="mt-6 max-w-md text-[15px] leading-relaxed text-white/75">
               Johannesburg's premier luxury car rental house. A hand-picked flagship fleet,
               white-glove concierge service, and delivery to your door — every journey, elevated.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <LxrButton to="/c1/fleet">Explore Our Fleet</LxrButton>
-              <LxrButton to="/c1/contact" variant="outline">
+              <LxrButton to="/c1/fleet" variant="light">Explore Our Fleet</LxrButton>
+              <LxrButton to="/c1/contact" variant="outlineLight">
                 Get a Quote
               </LxrButton>
             </div>
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, ease: EASE, delay: 0.15 }}
-            className="relative"
-          >
-            <div className="overflow-hidden rounded-[6px]">
-              <img
-                src="/lxr-hero-new.jpg"
-                alt="Porsche 911 in a modern concrete architectural space"
-                className="aspect-[16/11] w-full object-cover"
-              />
-            </div>
-            <div className="absolute -bottom-5 left-6 rounded-[4px] bg-lxr-black px-5 py-4 text-white shadow-xl">
-              <div className="font-lxrtitle text-sm font-semibold">200+ Premium Vehicles</div>
-              <div className="mt-0.5 text-[11px] uppercase tracking-[0.2em] text-white/50">
-                Sandton · Johannesburg
-              </div>
-            </div>
-          </motion.div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: EASE, delay: 0.55 }}
+          className="absolute bottom-6 right-6 hidden rounded-[4px] bg-lxr-black/85 px-5 py-4 text-white shadow-xl backdrop-blur-sm sm:block lg:bottom-8 lg:right-10"
+        >
+          <div className="font-lxrtitle text-sm font-semibold">200+ Premium Vehicles</div>
+          <div className="mt-0.5 text-[11px] uppercase tracking-[0.2em] text-white/50">
+            Sandton · Johannesburg
+          </div>
+        </motion.div>
       </section>
 
       {/* ---------- Services ---------- */}
-      <section id="services" className="scroll-mt-24 bg-white">
+      <section id="services" className="scroll-mt-24 bg-taupe theme-canvas">
         <Ghost text="Services" />
         <div className="mx-auto max-w-[1280px] px-6 pb-24">
           <SectionHead
@@ -214,7 +216,7 @@ export default function Home() {
       </section>
 
       {/* ---------- How it works ---------- */}
-      <section className="bg-lxr-gray">
+      <section className="bg-taupe theme-canvas">
         <Ghost text="How it works" />
         <div className="mx-auto max-w-[1280px] px-6 pb-24">
           <div className="flex flex-wrap items-end justify-between gap-6">
@@ -232,15 +234,15 @@ export default function Home() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, margin: '-60px' }}
-                className="bg-white p-9"
+                className="bg-white theme-light p-9"
               >
                 <div className="font-lxrtitle text-4xl font-semibold text-[#D9D9D4]">
                   {s.n}
                 </div>
-                <h3 className="mt-5 font-lxrtitle text-lg font-semibold text-lxr-ink">
+                <h3 className="mt-5 font-lxrtitle text-lg font-semibold text-copy">
                   {s.title}
                 </h3>
-                <p className="mt-2.5 text-[13.5px] leading-relaxed text-lxr-muted">{s.body}</p>
+                <p className="mt-2.5 text-[13.5px] leading-relaxed text-copy-muted">{s.body}</p>
               </motion.div>
             ))}
           </div>
@@ -248,7 +250,7 @@ export default function Home() {
       </section>
 
       {/* ---------- Fleet preview ---------- */}
-      <section className="bg-white">
+      <section className="bg-taupe theme-canvas">
         <Ghost text="The fleet" />
         <div className="mx-auto max-w-[1280px] px-6 pb-24">
           <div className="flex flex-wrap items-end justify-between gap-6">
@@ -259,7 +261,7 @@ export default function Home() {
             />
             <Link
               to="/c1/fleet"
-              className="group mb-2 inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.18em] text-lxr-ink"
+              className="group mb-2 inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.18em] text-copy"
             >
               View Full Fleet
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -297,7 +299,7 @@ export default function Home() {
       </section>
 
       {/* ---------- White-glove split ---------- */}
-      <section className="bg-white">
+      <section className="bg-taupe theme-canvas">
         <div className="mx-auto grid max-w-[1280px] items-center gap-14 px-6 py-24 lg:grid-cols-2">
           <div className="overflow-hidden rounded-[6px]">
             <img
@@ -316,12 +318,12 @@ export default function Home() {
             <ul className="mt-9 space-y-6">
               {CHECKLIST.map((c) => (
                 <li key={c.title} className="flex gap-4">
-                  <CircleCheck className="mt-0.5 h-5 w-5 shrink-0 text-lxr-olive" />
+                  <CircleCheck className="mt-0.5 h-5 w-5 shrink-0 text-copy-accent" />
                   <div>
-                    <h4 className="font-lxrtitle text-[15px] font-semibold text-lxr-ink">
+                    <h4 className="font-lxrtitle text-[15px] font-semibold text-copy">
                       {c.title}
                     </h4>
-                    <p className="mt-1 text-[13.5px] leading-relaxed text-lxr-muted">{c.body}</p>
+                    <p className="mt-1 text-[13.5px] leading-relaxed text-copy-muted">{c.body}</p>
                   </div>
                 </li>
               ))}
@@ -331,14 +333,14 @@ export default function Home() {
       </section>
 
       {/* ---------- Dark mission / stats band ---------- */}
-      <section className="bg-lxr-black text-white">
+      <section className="bg-lxr-black theme-dark text-white">
         <div className="mx-auto max-w-[1280px] px-6 py-24">
           <div className="grid gap-14 lg:grid-cols-[1.2fr_1fr] lg:items-end">
             <div>
               <h2 className="font-lxrtitle text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl">
                 Built on Prestige.
                 <br />
-                <em className="font-lxrbody font-medium italic text-lxr-sand">
+                <em className="font-lxrbody font-medium italic text-copy-accent">
                   Driven by Service.
                 </em>
               </h2>
@@ -350,7 +352,7 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-2 gap-px overflow-hidden rounded-[6px] border border-lxr-linedark bg-lxr-linedark">
               {STATS.map((s) => (
-                <div key={s.label} className="bg-lxr-black p-8">
+                <div key={s.label} className="bg-lxr-black theme-dark p-8">
                   <div className="font-lxrtitle text-4xl font-semibold text-white">{s.value}</div>
                   <div className="mt-2 text-[11px] uppercase tracking-[0.18em] text-white/45">
                     {s.label}
@@ -363,7 +365,7 @@ export default function Home() {
       </section>
 
       {/* ---------- Testimonials ---------- */}
-      <section className="bg-lxr-gray">
+      <section className="bg-taupe theme-canvas">
         <div className="mx-auto max-w-[1280px] px-6 py-24">
           <SectionHead title="Client" accent="Words." />
           <div className="mt-12 grid gap-5 md:grid-cols-3">
@@ -375,9 +377,9 @@ export default function Home() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, margin: '-60px' }}
-                className="flex flex-col justify-between rounded-[6px] border border-lxr-line bg-white p-8"
+                className="flex flex-col justify-between rounded-[6px] border border-lxr-line bg-white theme-light p-8"
               >
-                <blockquote className="text-[14px] leading-relaxed text-lxr-ink/80">
+                <blockquote className="text-[14px] leading-relaxed text-copy/80">
                   “{t.quote}”
                 </blockquote>
                 <figcaption className="mt-7 flex items-center gap-3.5">
@@ -388,10 +390,10 @@ export default function Home() {
                     loading="lazy"
                   />
                   <div>
-                    <div className="font-lxrtitle text-sm font-semibold text-lxr-ink">
+                    <div className="font-lxrtitle text-sm font-semibold text-copy">
                       {t.name}
                     </div>
-                    <div className="text-[11px] uppercase tracking-[0.16em] text-lxr-mist">
+                    <div className="text-[11px] uppercase tracking-[0.16em] text-copy-muted">
                       {t.role}
                     </div>
                   </div>
@@ -403,15 +405,15 @@ export default function Home() {
       </section>
 
       {/* ---------- Lifestyle split ---------- */}
-      <section className="bg-white">
+      <section className="bg-taupe theme-canvas">
         <div className="mx-auto grid max-w-[1280px] items-center gap-14 px-6 py-24 lg:grid-cols-2">
           <div className="order-2 lg:order-1">
-            <h2 className="font-lxrtitle text-4xl font-semibold leading-[1.05] tracking-tight text-lxr-ink sm:text-5xl">
+            <h2 className="font-lxrtitle text-4xl font-semibold leading-[1.05] tracking-tight text-copy sm:text-5xl">
               More Than a Rental.
               <br />
-              <em className="font-lxrbody font-medium italic text-lxr-olive">A Statement.</em>
+              <em className="font-lxrbody font-medium italic text-copy-accent">A Statement.</em>
             </h2>
-            <p className="mt-6 max-w-lg text-[15px] leading-relaxed text-lxr-muted">
+            <p className="mt-6 max-w-lg text-[15px] leading-relaxed text-copy-muted">
               Whether it's an AMG for the weekend, a Ghost for your wedding day, or a discreet
               chauffeured arrival at Lanseria — the vehicle you arrive in says everything. KPMLXR
               makes sure it says the right thing.
@@ -435,11 +437,11 @@ export default function Home() {
       </section>
 
       {/* ---------- CTA ---------- */}
-      <section className="bg-lxr-black text-white">
+      <section className="bg-lxr-black theme-dark text-white">
         <div className="mx-auto max-w-[1280px] px-6 py-24 text-center">
           <h2 className="mx-auto max-w-3xl font-lxrtitle text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl">
             Reserve Your{' '}
-            <em className="font-lxrbody font-medium italic text-lxr-sand">Luxury Experience</em>
+            <em className="font-lxrbody font-medium italic text-copy-accent">Luxury Experience</em>
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-white/60">
             Connect directly with our Sandton-based concierge team to configure your custom
