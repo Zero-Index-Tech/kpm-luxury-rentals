@@ -427,9 +427,9 @@ export default function Home() {
           </div>
           <div className="order-1 overflow-hidden rounded-[6px] lg:order-2">
             <img
-              src="/lxr-lifestyle.jpg"
-              alt="KPMLXR lifestyle — evening arrival"
-              className="aspect-[4/5] w-full object-cover lg:aspect-[5/6]"
+              src="/merch/Merch banner.png"
+              alt="KPMLXR sand tracksuit and washed black graphic tee beside a luxury car"
+              className="aspect-[4/5] w-full object-cover object-top lg:aspect-[5/6]"
               loading="lazy"
             />
           </div>

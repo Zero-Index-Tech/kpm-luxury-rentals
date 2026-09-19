@@ -102,6 +102,7 @@ export default function Home() {
       <Services />
       <WhyKpm />
       <Testimonials />
+      <MerchSection />
       <CTABand
         title="Reserve Your Luxury Experience"
         copy="Connect directly with our Sandton-based concierge team to configure your custom itinerary, coordinate private airport tarmac arrivals, or secure multi-month corporate embassy leases."
@@ -375,6 +376,42 @@ function Testimonials() {
             <TestimonialCard key={t.name} {...t} />
           ))}
         </Reveal>
+      </div>
+    </section>
+  )
+}
+
+function MerchSection() {
+  return (
+    <section className="bg-taupe theme-canvas">
+      <div className="container grid items-center gap-10 py-24 md:py-32 lg:grid-cols-2 lg:gap-16">
+        <div className="order-2 lg:order-1">
+          <Eyebrow>KPMLXR The Wardrobe</Eyebrow>
+          <KineticHeadline
+            lines={['More Than a Rental.', 'A Statement.']}
+            className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-copy"
+          />
+          <Reveal y={24} className="mt-6">
+            <p className="max-w-lg text-[15px] font-light leading-[1.75] text-copy-muted">
+              Carry the feeling beyond the driver&apos;s seat. Explore the first KPMLXR collection,
+              made for the road and the life around it.
+            </p>
+          </Reveal>
+          <Reveal y={24} delay={0.15} className="mt-9 flex flex-wrap gap-3">
+            <GoldButton to="/c2/merch">Shop Brand Merch</GoldButton>
+            <GoldButton to="/c2/about" variant="outline">
+              Our Story
+            </GoldButton>
+          </Reveal>
+        </div>
+        <div className="order-1 overflow-hidden lg:order-2">
+          <img
+            src="/merch/Merch banner.png"
+            alt="KPMLXR sand tracksuit and washed black graphic tee beside a luxury car"
+            className="aspect-[4/5] w-full object-cover object-top lg:aspect-[5/6]"
+            loading="lazy"
+          />
+        </div>
       </div>
     </section>
   )

@@ -5,7 +5,7 @@ import GoldButton from '@/concept2/components/GoldButton'
 import KineticHeadline from '@/concept2/components/anim/KineticHeadline'
 
 /**
- * Home hero (home.md §1): full-viewport, hero-home.jpg at ~35% under layered
+ * Home hero (home.md §1): full-viewport, hero-landscape-concept2.jpg under layered
  * overlays, left-aligned content. Load sequence: bg scale 1.12 → 1 (2.4s
  * power2.out) + fade, eyebrow, char-split H1, sub, buttons, scroll cue.
  * Scrub: text yPercent 0 → 18 + fade, bg yPercent 0 → 12 over first 100vh.
@@ -72,7 +72,11 @@ export default function HeroSection() {
       {/* background + overlays */}
       <div className="absolute inset-0" aria-hidden>
         <div className="hero-bg absolute inset-[-6%]">
-          <img src="/hero-i8.jpg" alt="" className="h-full w-full object-cover opacity-[0.9]" />
+          <img
+            src="/hero-landscape-concept2.jpg"
+            alt=""
+            className="h-full w-full object-cover opacity-[0.9]"
+          />
         </div>
         <div
           className="absolute inset-0"
