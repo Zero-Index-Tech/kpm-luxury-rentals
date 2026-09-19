@@ -73,14 +73,14 @@ const CHANNELS = [
   {
     icon: Phone,
     label: 'Call Us',
-    value: '+27 (0) 11 943 8274',
-    href: 'tel:+27119438274',
+    value: '+27 81 409 3805',
+    href: 'tel:+27814093805',
   },
   {
     icon: MessageCircle,
     label: 'WhatsApp',
-    value: '+27 (0) 82 990 1482',
-    href: 'https://wa.me/27829901482',
+    value: '+27 81 409 3805',
+    href: 'https://wa.me/27814093805',
   },
   {
     icon: Mail,

@@ -26,7 +26,10 @@ export function destroyLenis() {
 
 /** Smooth-scroll to a hash target (e.g. '#services') via Lenis. */
 export function scrollToHash(hash: string) {
-  const el = document.querySelector(hash)
+  // Auth callbacks can contain token fragments, not valid CSS selectors.
+  let id: string
+  try { id = decodeURIComponent(hash.slice(1)) } catch { return }
+  const el = document.getElementById(id)
   if (!el) return
   getLenis().scrollTo(el as HTMLElement, { duration: 1.2 })
 }

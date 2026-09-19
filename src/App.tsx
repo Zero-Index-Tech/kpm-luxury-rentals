@@ -30,6 +30,9 @@ import MerchC3 from '@/pages/Merch'
 
 import ConceptSwitcher from '@/components/ConceptSwitcher'
 import ConciergeChat from '@/components/ConciergeChat'
+import ShopBag from '@/store/Bag'
+import ShopAccount from '@/store/Account'
+import ShopCheckout from '@/store/Checkout'
 
 /**
  * Unified concept showcase: one site, three complete design concepts.
@@ -51,6 +54,9 @@ export default function App() {
             <Route path="fleet/:slug" element={<VehicleDetailC1 />} />
             <Route path="about" element={<AboutC1 />} />
             <Route path="merch" element={<MerchC1 />} />
+            <Route path="merch/cart" element={<ShopBag />} />
+            <Route path="merch/account" element={<ShopAccount />} />
+            <Route path="merch/checkout" element={<ShopCheckout />} />
             <Route path="contact" element={<ContactC1 />} />
           </Route>
 
@@ -60,6 +66,9 @@ export default function App() {
             <Route path="fleet/:slug" element={<VehicleDetailC2 />} />
             <Route path="about" element={<AboutC2 />} />
             <Route path="merch" element={<MerchC2 />} />
+            <Route path="merch/cart" element={<ShopBag />} />
+            <Route path="merch/account" element={<ShopAccount />} />
+            <Route path="merch/checkout" element={<ShopCheckout />} />
             <Route path="contact" element={<ContactC2 />} />
           </Route>
 
@@ -69,6 +78,9 @@ export default function App() {
             <Route path="fleet/:slug" element={<VehicleDetailC3 />} />
             <Route path="about" element={<AboutC3 />} />
             <Route path="merch" element={<MerchC3 />} />
+            <Route path="merch/cart" element={<ShopBag />} />
+            <Route path="merch/account" element={<ShopAccount />} />
+            <Route path="merch/checkout" element={<ShopCheckout />} />
             <Route path="contact" element={<ContactC3 />} />
           </Route>
 

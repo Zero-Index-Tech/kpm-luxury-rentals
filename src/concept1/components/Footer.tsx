@@ -1,3 +1,4 @@
+import YocoNotice from '@/store/YocoNotice'
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { CONTACT, FOOTER_SERVICES, VEHICLES } from '@/lib/site';
@@ -116,6 +117,7 @@ export default function Footer() {
           <span>Luxury in Motion. Sandton, Johannesburg</span>
         </div>
       </div>
+      <div className="shop-footer-payment"><YocoNotice compact /></div>
     </footer>
   );
 }

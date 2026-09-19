@@ -1,3 +1,4 @@
+import YocoNotice from '@/store/YocoNotice'
 import { Link } from 'react-router-dom'
 import { Mail, MapPin, Phone, Share2 } from 'lucide-react'
 import Reveal from '@/components/anim/Reveal'
@@ -134,6 +135,7 @@ export default function Footer() {
           </nav>
         </div>
       </div>
+      <div className="shop-footer-payment"><YocoNotice compact /></div>
     </footer>
   )
 }
