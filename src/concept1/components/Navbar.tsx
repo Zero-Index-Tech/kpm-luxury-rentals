@@ -58,7 +58,7 @@ export default function Navbar() {
                 Kpmluxerentals
               </span>
               <span className="mt-1 text-[7.5px] font-medium uppercase tracking-[0.42em] text-white/45">
-                And it’s Luxury Lived. Memories Captured.
+                Luxury Lived. Memories Captured
               </span>
             </span>
           </Link>

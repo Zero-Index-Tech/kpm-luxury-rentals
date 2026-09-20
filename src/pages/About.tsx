@@ -339,7 +339,7 @@ function Legacy() {
         <div>
           <Eyebrow>Our Legacy</Eyebrow>
           <KineticHeadline
-            lines={['And it’s Luxury Lived. Memories Captured.']}
+            lines={['Luxury Lived. Memories Captured']}
             accentWords={['Captured']}
             accentClassName="font-accent font-normal italic text-copy-accent"
             className="mt-6 text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold leading-[1.02] tracking-[-0.03em] text-copy"

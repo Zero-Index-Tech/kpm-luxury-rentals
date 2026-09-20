@@ -29,7 +29,7 @@ export default function Footer() {
               </p>
             </div>
             <p className="mt-5 text-[9px] font-bold uppercase tracking-[0.3em] text-copy-muted">
-              And it’s Luxury Lived. Memories Captured.
+              Luxury Lived. Memories Captured
             </p>
             <p className="mt-6 max-w-xs text-[13px] font-normal leading-[1.8] text-ivory-45">
               Providing pristine elite vehicular fleet packages, diplomatic security-cleared

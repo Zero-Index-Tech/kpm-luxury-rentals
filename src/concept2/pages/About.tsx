@@ -297,7 +297,7 @@ function Legacy() {
         <div>
           <Eyebrow>Our Legacy</Eyebrow>
           <KineticHeadline
-            lines={['And it’s Luxury Lived. Memories Captured.']}
+            lines={['Luxury Lived. Memories Captured']}
             className="mt-6 text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[1.1] text-copy"
           />
           <Reveal staggerChildren={0.18} y={24} start="top 78%" className="mt-10 space-y-6">

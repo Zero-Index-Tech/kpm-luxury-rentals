@@ -23,7 +23,7 @@ export default function Footer() {
               <span className="leading-tight">
                 <span className="block font-lxrtitle text-lg font-semibold tracking-wide">Kpmluxerentals</span>
                 <span className="block text-[7.5px] font-medium uppercase tracking-[0.42em] text-white/45">
-                  And it’s Luxury Lived. Memories Captured.
+                  Luxury Lived. Memories Captured
                 </span>
               </span>
             </Link>
@@ -114,7 +114,7 @@ export default function Footer() {
       <div className="border-t border-lxr-linedark">
         <div className="mx-auto flex max-w-[1280px] flex-col items-center justify-between gap-3 px-6 py-6 text-[11px] uppercase tracking-[0.22em] text-white/35 sm:flex-row">
           <span>© {new Date().getFullYear()} KPM Luxury Rentals</span>
-          <span>And it’s Luxury Lived. Memories Captured. Sandton, Johannesburg</span>
+          <span>Luxury Lived. Memories Captured. Sandton, Johannesburg</span>
         </div>
       </div>
       <div className="shop-footer-payment"><YocoNotice compact /></div>
