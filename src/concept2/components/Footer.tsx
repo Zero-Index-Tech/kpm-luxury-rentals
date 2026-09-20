@@ -22,7 +22,7 @@ export default function Footer() {
             />
             <p className="font-c1serif text-[22px] text-copy">Kpmluxerentals</p>
             <p className="mt-1.5 text-[9px] font-semibold uppercase tracking-[0.35em] text-copy-accent">
-              Luxury Lived. Memories Captured.
+              And it’s Luxury Lived. Memories Captured.
             </p>
             <p className="mt-6 max-w-xs text-[13px] font-light leading-[1.8] text-copy-muted">
               Providing pristine elite vehicular fleet packages, diplomatic security-cleared

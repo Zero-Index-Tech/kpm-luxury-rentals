@@ -102,7 +102,7 @@ export default function HeroSection() {
             split="chars"
             delay={0.6}
             stagger={0.028}
-            lines={['Luxury Lived.', 'Memories Captured.']}
+            lines={['And it’s Luxury Lived.', 'Memories Captured.']}
             lineClasses={['', 'font-accent font-medium italic text-copy-accent']}
             className="mt-7 text-[clamp(3.5rem,9vw,8rem)] font-extrabold leading-[0.98] tracking-[-0.035em] text-copy"
           />
