@@ -19,9 +19,9 @@ export default function Footer() {
         <div className="grid gap-14 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
             <Link to="/c1" className="inline-flex items-center gap-3">
-              <img src="/logo-white.png" alt="KPMLXR" className="h-10 w-auto" />
+              <img src="/logo-white.png" alt="Kpmluxerentals" className="h-10 w-auto" />
               <span className="leading-tight">
-                <span className="block font-lxrtitle text-lg font-semibold tracking-wide">KPMLXR</span>
+                <span className="block font-lxrtitle text-lg font-semibold tracking-wide">Kpmluxerentals</span>
                 <span className="block text-[7.5px] font-medium uppercase tracking-[0.42em] text-white/45">
                   Luxury in Motion.
                 </span>

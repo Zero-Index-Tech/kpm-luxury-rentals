@@ -63,15 +63,15 @@ export default function Navbar() {
         )}
       >
         <div className="container flex h-full items-center justify-between">
-          <Link to="/c2" className="group flex items-center gap-3.5 leading-none" aria-label="KPM Luxury Rentals home">
+          <Link to="/c2" className="group flex items-center gap-3.5 leading-none" aria-label="Kpmluxerentals home">
             <img
               src="/logo-white.png"
-              alt="KPM Luxury Rentals logo"
+              alt="Kpmluxerentals logo"
               className="h-9 w-9 object-contain transition-opacity duration-300 group-hover:opacity-80"
             />
             <span className="flex flex-col leading-none">
               <span className="font-c1serif text-[22px] tracking-wide text-copy transition-colors group-hover:text-copy-accent">
-                KPMLXR
+                Kpmluxerentals
               </span>
               <span className="mt-1.5 text-[8px] font-semibold uppercase tracking-[0.35em] text-copy-accent">
                 Rentals · Johannesburg

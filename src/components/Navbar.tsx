@@ -81,7 +81,7 @@ export default function Navbar() {
             />
             <span className="flex flex-col leading-none">
               <span className="font-display text-[15px] font-bold tracking-[-0.01em] text-copy">
-                KPMLXR
+                Kpmluxerentals
               </span>
               <span className="mt-1 text-[7.5px] font-bold uppercase tracking-[0.32em] text-copy-muted">
                 Rentals · Johannesburg
@@ -164,7 +164,7 @@ export default function Navbar() {
                   className="h-[34px] w-[34px] object-contain"
                 />
                 <span className="font-display text-[15px] font-bold tracking-[-0.01em] text-ivory">
-                  KPMLXR
+                  Kpmluxerentals
                 </span>
               </div>
               <button

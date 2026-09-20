@@ -47,15 +47,15 @@ export default function Navbar() {
         )}
       >
         <div className="mx-auto flex h-full max-w-[1440px] items-center justify-between px-5 md:px-10">
-          <Link to="/c1" className="group flex items-center gap-3" aria-label="KPMLXR home">
+          <Link to="/c1" className="group flex items-center gap-3" aria-label="Kpmluxerentals home">
             <img
               src="/logo-white.png"
-              alt="KPMLXR logo"
+              alt="Kpmluxerentals logo"
               className="h-9 w-9 object-contain transition-opacity duration-300 group-hover:opacity-75"
             />
             <span className="flex flex-col leading-none">
               <span className="font-lxrtitle text-[17px] font-semibold tracking-[0.06em] text-white">
-                KPMLXR
+                Kpmluxerentals
               </span>
               <span className="mt-1 text-[7.5px] font-medium uppercase tracking-[0.42em] text-white/45">
                 Luxury in Motion.

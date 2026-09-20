@@ -25,10 +25,7 @@ export default function Footer() {
                 className="h-11 w-11 object-contain"
               />
               <p className="font-display text-[17px] font-bold tracking-[-0.01em] text-ivory">
-                KPMLXR
-                <span className="block text-[13px] font-semibold tracking-[0.06em] text-ivory-70">
-                  RENTALS
-                </span>
+                Kpmluxerentals
               </p>
             </div>
             <p className="mt-5 text-[9px] font-bold uppercase tracking-[0.3em] text-copy-muted">

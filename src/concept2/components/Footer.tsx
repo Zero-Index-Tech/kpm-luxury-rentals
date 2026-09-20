@@ -20,7 +20,7 @@ export default function Footer() {
               alt="KPM Luxury Rentals logo"
               className="mb-5 h-11 w-11 object-contain"
             />
-            <p className="font-c1serif text-[22px] text-copy">KPMLXR</p>
+            <p className="font-c1serif text-[22px] text-copy">Kpmluxerentals</p>
             <p className="mt-1.5 text-[9px] font-semibold uppercase tracking-[0.35em] text-copy-accent">
               Luxury Lived. Memories Captured.
             </p>

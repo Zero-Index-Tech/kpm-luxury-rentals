@@ -63,12 +63,12 @@ const SHOWROOM_ROWS = [
 ]
 
 const CHANNELS = [
-  { icon: Phone, label: 'Call Us', value: '+27 81 409 3805', href: 'tel:+27814093805' },
+  { icon: Phone, label: 'Call Us', value: CONTACT.phone, href: CONTACT.phoneHref },
   {
     icon: MessageCircle,
     label: 'WhatsApp',
-    value: '+27 81 409 3805',
-    href: 'https://wa.me/27814093805',
+    value: CONTACT.phone,
+    href: 'https://wa.me/27691405915',
   },
   { icon: Mail, label: 'Email Us', value: 'concierge@kpmluxe.co.za', href: 'mailto:concierge@kpmluxe.co.za' },
   { icon: MapPin, label: 'Visit Us', value: 'Sandton, JHB', href: '#showroom' },

@@ -153,7 +153,7 @@ export default function Home() {
         <div className="mx-auto flex min-h-[calc(100svh-110px)] max-w-[1280px] items-center px-6 py-14 sm:py-16 lg:py-20">
           <motion.div initial="hidden" animate="show" variants={rise} className="max-w-xl">
             <p className="font-lxrtitle text-lg font-semibold text-white/85 sm:text-xl">
-              Welcome to KPMLXR
+              Welcome to Kpmluxerentals
             </p>
             <h1 className="mt-3 font-lxrtitle text-5xl font-semibold leading-[1.02] tracking-tight text-white sm:text-6xl lg:text-7xl">
               Luxury in <em className="font-lxrbody font-medium italic text-copy-accent">Motion.</em>
