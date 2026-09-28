@@ -70,7 +70,7 @@ const CHANNELS = [
     value: CONTACT.phone,
     href: 'https://wa.me/27691405915',
   },
-  { icon: Mail, label: 'Email Us', value: 'concierge@kpmluxe.co.za', href: 'mailto:concierge@kpmluxe.co.za' },
+  { icon: Mail, label: 'Email Us', value: 'info@kpmluxerentals.co.za', href: 'mailto:info@kpmluxerentals.co.za' },
   { icon: MapPin, label: 'Visit Us', value: 'Sandton, JHB', href: '#showroom' },
 ]
 

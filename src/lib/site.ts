@@ -11,9 +11,9 @@ export const NAV_LINKS: { label: string; to: string; hash?: string }[] = [
 ]
 
 export const CONTACT = {
-  phone: '0691405915',
-  phoneHref: 'tel:0691405915',
-  email: 'concierge@kpmluxe.co.za',
+  phone: '+27 81 409 3805',
+  phoneHref: 'tel:+27814093805',
+  email: 'info@kpmluxerentals.co.za',
   tiktok: '@kpmlxurerentals',
   address: ['82 Rivonia Road,', 'Sandton,', 'Johannesburg, 2196', 'South Africa'],
 } as const

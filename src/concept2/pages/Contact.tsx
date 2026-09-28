@@ -65,7 +65,7 @@ const RENTAL_HINTS: Record<string, string> = {
 
 const SHOWROOM_ROWS = [
   { icon: Phone, text: CONTACT.phone, href: CONTACT.phoneHref },
-  { icon: Mail, text: 'enquiries@kpmluxury.co.za', href: 'mailto:enquiries@kpmluxury.co.za' },
+  { icon: Mail, text: 'info@kpmluxerentals.co.za', href: 'mailto:info@kpmluxerentals.co.za' },
   { icon: Clock, text: 'Mon–Sun: 8:00 AM – 8:00 PM', href: undefined },
 ]
 
@@ -85,8 +85,8 @@ const CHANNELS = [
   {
     icon: Mail,
     label: 'Email Us',
-    value: 'concierge@kpmluxe.co.za',
-    href: 'mailto:concierge@kpmluxe.co.za',
+    value: 'info@kpmluxerentals.co.za',
+    href: 'mailto:info@kpmluxerentals.co.za',
   },
   {
     icon: MapPin,

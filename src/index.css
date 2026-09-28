@@ -170,6 +170,44 @@
   }
 
   /* Warm CSS grade for V1 photography sitting on ivory (design.md §9) */
+  .vehicle-enquiry-field {
+    @apply relative flex h-9 min-w-0 items-stretch rounded-[5px] border border-white/15 bg-white/[0.07];
+  }
+
+  .vehicle-enquiry-field > span:first-child {
+    @apply pointer-events-none absolute left-2.5 top-1 z-10 flex items-center gap-1 text-[7px] font-bold uppercase tracking-[0.12em] text-sand;
+  }
+
+  .vehicle-enquiry-field select,
+  .vehicle-enquiry-field > input:not([type='checkbox']) {
+    @apply h-full w-full min-w-0 bg-transparent px-2.5 pb-0 pt-3 text-[11px] text-ivory outline-none transition-colors focus:ring-1 focus:ring-inset focus:ring-sand;
+    color-scheme: dark;
+  }
+
+  .vehicle-enquiry-field select option {
+    @apply bg-ink text-ivory;
+  }
+
+  .vehicle-enquiry-field input:disabled {
+    @apply cursor-not-allowed text-ivory-70;
+  }
+
+  .vehicle-enquiry-input--same-location {
+    @apply pl-[138px];
+  }
+
+  .vehicle-enquiry-same {
+    @apply absolute bottom-1 left-2.5 z-10 flex items-center gap-1 text-[9px] text-ivory-70;
+  }
+
+  .vehicle-enquiry-same input {
+    @apply h-3 w-3 accent-sand;
+  }
+
+  .vehicle-enquiry-submit {
+    @apply flex h-9 items-center justify-center gap-2 rounded-[5px] bg-sand px-5 text-[10px] font-bold uppercase tracking-[0.12em] text-ink transition-colors hover:bg-ivory;
+  }
+
   .img-warm {
     filter: sepia(0.12) saturate(0.9);
   }

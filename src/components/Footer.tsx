@@ -116,7 +116,16 @@ export default function Footer() {
       <div className="border-t border-hairline-dark">
         <div className="container flex flex-col items-center justify-between gap-4 py-6 md:flex-row">
           <p className="text-[11px] text-ivory-45">
-            © 2024 KPM Luxury Rentals. All rights reserved.
+            © 2024 KPM Luxury Rentals. A website built by{' '}
+            <a
+              href="https://zeroindex.co.za/"
+              target="_blank"
+              rel="noreferrer"
+              className="underline underline-offset-2 transition-colors hover:text-ivory"
+            >
+              Zero Index
+            </a>
+            .
           </p>
           <nav className="flex gap-8" aria-label="Legal">
             {['Rental Terms', 'Privacy Policy', 'Sitemap'].map((item) => (

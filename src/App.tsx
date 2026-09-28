@@ -28,7 +28,6 @@ import AboutC3 from '@/pages/About'
 import ContactC3 from '@/pages/Contact'
 import MerchC3 from '@/pages/Merch'
 
-import ConceptSwitcher from '@/components/ConceptSwitcher'
 import ConciergeChat from '@/components/ConciergeChat'
 import ShopBag from '@/store/Bag'
 import ShopAccount from '@/store/Account'
@@ -46,7 +45,7 @@ export default function App() {
     <>
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Navigate to="/c1" replace />} />
+          <Route path="/" element={<Navigate to="/c3" replace />} />
 
           <Route path="/c1" element={<LayoutC1 />}>
             <Route index element={<HomeC1 />} />
@@ -84,12 +83,11 @@ export default function App() {
             <Route path="contact" element={<ContactC3 />} />
           </Route>
 
-          <Route path="*" element={<Navigate to="/c1" replace />} />
+          <Route path="*" element={<Navigate to="/c3" replace />} />
         </Routes>
       </AnimatePresence>
 
       {/* client-facing concept toggle + AI concierge (landing pages) */}
-      <ConceptSwitcher />
       <ConciergeChat />
     </>
   )

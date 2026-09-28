@@ -1,7 +1,8 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
+import type { FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useGSAP } from '@gsap/react'
-import { ArrowUpRight, Briefcase, Car, Check, Heart, Plane } from 'lucide-react'
+import { ArrowUpRight, Briefcase, CalendarDays, Car, Check, Heart, MapPin, Plane } from 'lucide-react'
 import { gsap, prefersReducedMotion } from '@/lib/gsap'
 import PageTransition from '@/components/PageTransition'
 import Eyebrow from '@/components/Eyebrow'
@@ -15,8 +16,7 @@ import KineticHeadline from '@/components/anim/KineticHeadline'
 import Reveal from '@/components/anim/Reveal'
 import Parallax from '@/components/anim/Parallax'
 import HeroSection from '@/pages/home/HeroSection'
-import { VEHICLES } from '@/lib/site'
-import { cn } from '@/lib/utils'
+import { CONTACT, FLEET_VEHICLES, VEHICLES } from '@/lib/site'
 
 const STATS = [
   { value: 3, label: 'Years of Excellence' },
@@ -125,60 +125,95 @@ export default function Home() {
 /* ---------- Section 2 — Paired CTA bars (rydex DNA) ---------- */
 function CtaBars() {
   const ref = useRef<HTMLElement>(null)
+  const [vehicleSlug, setVehicleSlug] = useState('')
+  const [collectionLocation, setCollectionLocation] = useState('')
+  const [collectionDate, setCollectionDate] = useState('')
+  const [returnDate, setReturnDate] = useState('')
+  const [returnLocation, setReturnLocation] = useState('')
+  const [sameLocation, setSameLocation] = useState(true)
+  const [error, setError] = useState('')
+
+  const selectedVehicle = FLEET_VEHICLES.find((vehicle) => vehicle.slug === vehicleSlug)
+  const today = new Date().toISOString().slice(0, 10)
+
+  const submitEnquiry = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (!selectedVehicle || !collectionLocation.trim() || !collectionDate || !returnDate) {
+      setError('Select a vehicle, collection location, collection date and return date.')
+      return
+    }
+    if (returnDate < collectionDate) {
+      setError('Your return date needs to be after your collection date.')
+      return
+    }
+    const dropOff = sameLocation ? collectionLocation.trim() : returnLocation.trim()
+    if (!dropOff) {
+      setError('Please provide a drop-off location.')
+      return
+    }
+    setError('')
+    const message = [
+      'Hello KPMLXR, I would like to enquire about a vehicle rental.',
+      '',
+      `Vehicle: ${selectedVehicle.name}`,
+      `Category: ${selectedVehicle.category}`,
+      `Listed daily rate: ${selectedVehicle.price}`,
+      `Collection: ${collectionLocation.trim()}`,
+      `Collection date: ${collectionDate}`,
+      `Drop-off: ${dropOff}`,
+      `Return date: ${returnDate}`,
+      '',
+      'Please confirm availability and the final quote.',
+    ].join('\n')
+    window.open(`https://wa.me/${CONTACT.phone.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer')
+  }
+
   useGSAP(
     () => {
       const el = ref.current
       if (!el || prefersReducedMotion()) return
       gsap.fromTo(
-        el.querySelectorAll('.cta-bar'),
+        el.querySelector('.vehicle-enquiry-strip'),
         { y: 24, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.7,
-          ease: 'power3.out',
-          stagger: 0.08,
-          scrollTrigger: { trigger: el, start: 'top 96%', once: true },
-        },
+        { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 96%', once: true } },
       )
     },
     { scope: ref },
   )
 
   return (
-    <section ref={ref} aria-label="Quick actions">
-      <div className="grid md:grid-cols-2 md:divide-x md:divide-hairline-dark">
-        <CtaBar to="/c3/fleet" label="Explore the Showroom" dark />
-        <CtaBar to="/c3/contact" label="Get in Touch" />
-      </div>
+    <section ref={ref} className="bg-ink py-2 theme-dark" aria-label="Vehicle enquiry">
+      <form onSubmit={submitEnquiry} className="vehicle-enquiry-strip container">
+        <div className="grid gap-3 lg:grid-cols-[1.3fr_1.2fr_1fr_1fr_1.2fr_auto]">
+          <label className="vehicle-enquiry-field">
+            <span><Car size={14} aria-hidden /> Vehicle</span>
+            <select aria-label="Vehicle" value={vehicleSlug} onChange={(event) => { setVehicleSlug(event.target.value); setError('') }} required>
+              <option value=""> </option>
+              {FLEET_VEHICLES.map((vehicle) => <option key={vehicle.slug} value={vehicle.slug}>{vehicle.name} · {vehicle.price}/day</option>)}
+            </select>
+          </label>
+          <label className="vehicle-enquiry-field">
+            <span><MapPin size={14} aria-hidden /> Collection address</span>
+            <input aria-label="Collection address" value={collectionLocation} onChange={(event) => { setCollectionLocation(event.target.value); setError('') }} placeholder="Enter collection address" maxLength={120} required />
+          </label>
+          <label className="vehicle-enquiry-field">
+            <span><CalendarDays size={14} aria-hidden /> Collection date</span>
+            <input aria-label="Collection date" type="date" min={today} value={collectionDate} onChange={(event) => { setCollectionDate(event.target.value); setError('') }} required />
+          </label>
+          <label className="vehicle-enquiry-field">
+            <span><CalendarDays size={14} aria-hidden /> Return date</span>
+            <input aria-label="Return date" type="date" min={collectionDate || today} value={returnDate} onChange={(event) => { setReturnDate(event.target.value); setError('') }} required />
+          </label>
+          <label className="vehicle-enquiry-field">
+            <span><MapPin size={14} aria-hidden /> Drop-off location</span>
+            <input aria-label="Drop-off location" className={sameLocation ? 'vehicle-enquiry-input--same-location' : undefined} value={sameLocation ? collectionLocation : returnLocation} onChange={(event) => { setReturnLocation(event.target.value); setSameLocation(false); setError('') }} maxLength={120} disabled={sameLocation} required={!sameLocation} />
+            <span className="vehicle-enquiry-same"><input aria-label="Use collection address as drop-off address" type="checkbox" checked={sameLocation} onChange={(event) => { setSameLocation(event.target.checked); setError('') }} />{sameLocation && ' Same as collection address'}</span>
+          </label>
+          <button type="submit" className="vehicle-enquiry-submit">Send WhatsApp <ArrowUpRight size={17} aria-hidden /></button>
+        </div>
+        {error && <p className="mt-3 text-xs text-sand" role="alert">{error}</p>}
+      </form>
     </section>
-  )
-}
-
-function CtaBar({ to, label, dark }: { to: string; label: string; dark?: boolean }) {
-  return (
-    <Link
-      to={to}
-      data-cursor
-      className={cn(
-        'cta-bar group flex min-h-[76px] items-center justify-between px-8 py-5 md:px-12',
-        dark ? 'bg-ink theme-dark text-ivory' : 'glass-light text-copy',
-      )}
-    >
-      <span className="text-[13px] font-bold uppercase tracking-[0.14em] transition-[letter-spacing] duration-300 group-hover:tracking-[0.18em]">
-        {label}
-      </span>
-      <span
-        className={cn(
-          'flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-300',
-          dark
-            ? 'border-[rgba(244,242,239,0.3)] group-hover:bg-ivory group-hover:text-ink'
-            : 'border-taupe-soft group-hover:bg-ink group-hover:text-ivory',
-        )}
-      >
-        <ArrowUpRight size={18} aria-hidden />
-      </span>
-    </Link>
   )
 }
 
