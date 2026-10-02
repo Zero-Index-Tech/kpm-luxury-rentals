@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import type { ChangeEvent, FormEvent, ReactNode } from 'react'
 import {
   Activity, Archive, ArrowDown, ArrowUp, CalendarDays, CarFront, Check, ChevronDown,
-  CircleDollarSign, Clock3, Download, LayoutDashboard, LogOut, Menu, Plus, Search,
+  CircleDollarSign, Download, LayoutDashboard, LogOut, Menu, Plus, Search,
   Settings2, Trash2, UserRound, Users, Wrench, X,
 } from 'lucide-react'
 import {
@@ -217,7 +217,7 @@ function Overview({ rentals, vehicles, upcoming, availableCount, activeCount, un
     <section className="admin-metrics-grid">
       <Metric label="Total vehicles" value={vehicles.length} detail="Active fleet" icon={CarFront} tone="sage" />
       <Metric label="Available now" value={availableCount} detail={`${vehicles.length ? Math.round(availableCount / vehicles.length * 100) : 0}% of active fleet`} icon={Check} tone="blue" />
-      <Metric label="Active rentals" value={activeCount} detail="Currently on hire" icon={KeyIcon} tone="amber" />
+      <Metric label="Active rentals" value={activeCount} detail="Currently on hire" icon={CircleDollarSign} tone="amber" />
       <Metric label="Upcoming rentals" value={upcoming.length} detail="Confirmed and scheduled" icon={CalendarDays} tone="rose" />
       <Metric label="Needs assignment" value={unassignedCount} detail="Bookings without a vehicle" icon={UserRound} tone="slate" />
     </section>
@@ -234,8 +234,6 @@ function Overview({ rentals, vehicles, upcoming, availableCount, activeCount, un
     <section className="admin-lower-note"><div className="admin-note-icon"><Settings2 size={17} /></div><div><strong>Private browser workspace</strong><p>{rentals.length} bookings saved locally. Fleet and rental data stay in this browser and do not sync to other devices.</p></div></section>
   </>
 }
-
-function KeyIcon({ size = 18 }: { size?: number }) { return <CircleDollarSign size={size} /> }
 
 function formatDate(value: string) {
   if (!value) return 'Not set'
