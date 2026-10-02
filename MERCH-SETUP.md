@@ -1,12 +1,12 @@
 # KPMLXR merch store
 
-The store is available under `/c1/merch`, `/c2/merch` and `/c3/merch`. All concepts share the same eight products and browser bag. Product images and the Yoco logo come from `public/merch`. Prices are the preview prices already present in the project; confirm prices, sizing, stock, shipping and returns before taking payments.
+The store is available under `/merch`, `/c1/merch` and `/c2/merch`. All concepts share the same eight products and browser bag. Product images and the Yoco logo come from `public/merch`. Prices are the preview prices already present in the project; confirm prices, sizing, stock, shipping and returns before taking payments.
 
 ## Enable registration and saved checkout
 
 1. Create or select a Supabase project. Run `supabase/migrations/202609190001_merch_store.sql` in its SQL Editor, or link the CLI project and run `supabase db push`.
 2. Copy `.env.example` to `.env.local`. Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` from the project's API settings. Never put a service-role key in a `VITE_` variable. Add the same public variables to your hosting environment.
-3. Enable email authentication and configure production SMTP in Supabase. Set the deployed website as the Site URL. Allow these redirect URLs for each deployed origin and the local development origin: `/c1/merch/account`, `/c2/merch/account`, `/c3/merch/account`, including the `?next=checkout` variants. For development, the Vite port is 3000.
+3. Enable email authentication and configure production SMTP in Supabase. Set the deployed website as the Site URL. Allow these redirect URLs for each deployed origin and the local development origin: `/merch/account`, `/c1/merch/account`, `/c2/merch/account`, including the `?next=checkout` variants. For development, the Vite port is 3000.
 4. Use the email magic-link template containing `{{ .ConfirmationURL }}`. Registration/sign-in emails are sent by Supabase. New users must follow the email link before saving a checkout. Existing users can use the Sign in tab. No password is collected by this site.
 5. Restart the dev server, or rebuild and deploy. Verify registration, delivery of a real email, the return link, saving a checkout, signing out, and restoring the bag after signing in on a different browser.
 

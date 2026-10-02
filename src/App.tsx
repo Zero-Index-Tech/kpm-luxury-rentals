@@ -32,11 +32,12 @@ import ConciergeChat from '@/components/ConciergeChat'
 import ShopBag from '@/store/Bag'
 import ShopAccount from '@/store/Account'
 import ShopCheckout from '@/store/Checkout'
+import Admin from '@/pages/Admin'
 
 /**
  * Unified concept showcase: one site, three complete design concepts.
- * `/` redirects to Concept 1 (KPMLXR); the fixed ConceptSwitcher pill lets
- * the client flip between `/c1/*`, `/c2/*` and `/c3/*` — all concepts share
+ * Concept 3 (Premium Lifestyle) is the default at `/`; the fixed ConceptSwitcher pill lets
+ * the client flip between `/c1/*`, `/c2/*` and `/` — all concepts share
  * an identical route structure, so switching preserves the page being viewed.
  */
 export default function App() {
@@ -45,7 +46,7 @@ export default function App() {
     <>
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Navigate to="/c3" replace />} />
+          <Route path="/admin" element={<Admin />} />
 
           <Route path="/c1" element={<LayoutC1 />}>
             <Route index element={<HomeC1 />} />
@@ -71,7 +72,7 @@ export default function App() {
             <Route path="contact" element={<ContactC2 />} />
           </Route>
 
-          <Route path="/c3" element={<LayoutC3 />}>
+          <Route path="/" element={<LayoutC3 />}>
             <Route index element={<HomeC3 />} />
             <Route path="fleet" element={<FleetC3 />} />
             <Route path="fleet/:slug" element={<VehicleDetailC3 />} />
@@ -83,7 +84,7 @@ export default function App() {
             <Route path="contact" element={<ContactC3 />} />
           </Route>
 
-          <Route path="*" element={<Navigate to="/c3" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>
 

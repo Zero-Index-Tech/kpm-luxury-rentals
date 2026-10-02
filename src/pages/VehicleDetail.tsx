@@ -537,8 +537,8 @@ function TechnicalSection({
               <div className="my-6 h-px bg-taupe-soft" />
               {/* force GoldButton's magnetic wrapper + link to full width */}
               <div className="flex flex-col gap-3 [&_a]:w-full [&>span]:w-full">
-                <GoldButton to={`/c3/contact?vehicle=${vehicle.slug}`}>Reserve This Vehicle</GoldButton>
-                <GoldButton to="/c3/contact" variant="glass">
+                <GoldButton to={`/contact?vehicle=${vehicle.slug}`}>Reserve This Vehicle</GoldButton>
+                <GoldButton to="/contact" variant="glass">
                   Speak With Concierge
                 </GoldButton>
               </div>

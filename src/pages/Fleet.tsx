@@ -167,7 +167,7 @@ export default function Fleet() {
                 No vehicles in this category — speak to our concierge for bespoke sourcing.
               </p>
               <Link
-                to="/c3/contact"
+                to="/contact"
                 data-cursor
                 className="mt-8 inline-block rounded-full border border-taupe-soft bg-[#FBFAF7] theme-light px-8 py-4 text-[12px] font-bold uppercase tracking-[0.14em] text-copy transition-colors duration-300 hover:border-charcoal hover:bg-ivory-deep"
               >

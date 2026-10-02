@@ -1,0 +1,212 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: KPM Luxury Rentals - Admin backend (Cognito auth, API Gateway, Lambda, DynamoDB)
+
+Parameters:
+  Environment:
+    Type: String
+    Default: dev
+    AllowedValues: [dev, prod]
+
+Resources:
+  # ---------- Auth ----------
+  AdminUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: !Sub kpm-admin-${Environment}
+      UsernameAttributes: [email]
+      AutoVerifiedAttributes: [email]
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 12
+          RequireUppercase: true
+          RequireLowercase: true
+          RequireNumbers: true
+          RequireSymbols: false
+      AccountRecoverySetting:
+        RecoveryMechanisms:
+          - Name: verified_email
+            Priority: 1
+
+  AdminUserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId: !Ref AdminUserPool
+      ClientName: kpm-admin-web
+      GenerateSecret: false
+      ExplicitAuthFlows:
+        - ALLOW_USER_PASSWORD_AUTH
+        - ALLOW_REFRESH_TOKEN_AUTH
+      PreventUserExistenceErrors: ENABLED
+
+  # ---------- Data ----------
+  VehiclesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub kpm-vehicles-${Environment}
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+
+  RentalsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub kpm-rentals-${Environment}
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+
+  # ---------- Lambda ----------
+  AdminApiRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub kpm-admin-api-role-${Environment}
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: dynamodb-access
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                  - dynamodb:DeleteItem
+                  - dynamodb:Scan
+                Resource:
+                  - !GetAtt VehiclesTable.Arn
+                  - !GetAtt RentalsTable.Arn
+
+  AdminApiFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub kpm-admin-api-${Environment}
+      Runtime: nodejs20.x
+      Handler: index.handler
+      Code:
+        S3Bucket: kpm-rentals-bucket
+        S3Key: admin-api.zip
+      Role: !GetAtt AdminApiRole.Arn
+      Timeout: 10
+      MemorySize: 256
+      Environment:
+        Variables:
+          VEHICLES_TABLE: !Ref VehiclesTable
+          RENTALS_TABLE: !Ref RentalsTable
+
+  # ---------- API Gateway ----------
+  AdminApi:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: !Sub kpm-admin-api-${Environment}
+      ProtocolType: HTTP
+      CorsConfiguration:
+        AllowOrigins: ['*']
+        AllowMethods: [GET, POST, PUT, DELETE, OPTIONS]
+        AllowHeaders: [Content-Type, Authorization]
+        MaxAge: 300
+
+  AdminApiAuthorizer:
+    Type: AWS::ApiGatewayV2::Authorizer
+    Properties:
+      ApiId: !Ref AdminApi
+      Name: cognito-jwt
+      AuthorizerType: JWT
+      IdentitySource:
+        - $request.header.Authorization
+      JwtConfiguration:
+        Audience:
+          - !Ref AdminUserPoolClient
+        Issuer: !Sub https://cognito-idp.${AWS::Region}.amazonaws.com/${AdminUserPool}
+
+  AdminApiIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref AdminApi
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt AdminApiFunction.Arn
+      PayloadFormatVersion: '2.0'
+
+  VehiclesRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref AdminApi
+      RouteKey: ANY /vehicles
+      Target: !Sub integrations/${AdminApiIntegration}
+      AuthorizationType: JWT
+      AuthorizerId: !Ref AdminApiAuthorizer
+
+  VehicleByIdRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref AdminApi
+      RouteKey: ANY /vehicles/{id}
+      Target: !Sub integrations/${AdminApiIntegration}
+      AuthorizationType: JWT
+      AuthorizerId: !Ref AdminApiAuthorizer
+
+  RentalsRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref AdminApi
+      RouteKey: ANY /rentals
+      Target: !Sub integrations/${AdminApiIntegration}
+      AuthorizationType: JWT
+      AuthorizerId: !Ref AdminApiAuthorizer
+
+  RentalByIdRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref AdminApi
+      RouteKey: ANY /rentals/{id}
+      Target: !Sub integrations/${AdminApiIntegration}
+      AuthorizationType: JWT
+      AuthorizerId: !Ref AdminApiAuthorizer
+
+  AdminApiStage:
+    Type: AWS::ApiGatewayV2::Stage
+    Properties:
+      ApiId: !Ref AdminApi
+      StageName: $default
+      AutoDeploy: true
+
+  AdminApiLambdaPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref AdminApiFunction
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${AdminApi}/*
+
+Outputs:
+  ApiUrl:
+    Description: Base URL of the admin API
+    Value: !Sub https://${AdminApi}.execute-api.${AWS::Region}.amazonaws.com
+  UserPoolId:
+    Description: Cognito user pool ID for admin sign-in
+    Value: !Ref AdminUserPool
+  UserPoolClientId:
+    Description: Cognito app client ID for the admin web app
+    Value: !Ref AdminUserPoolClient
+  CognitoIssuer:
+    Description: JWT issuer URL used by the API authorizer
+    Value: !Sub https://cognito-idp.${AWS::Region}.amazonaws.com/${AdminUserPool}
+  VehiclesTableName:
+    Value: !Ref VehiclesTable
+  RentalsTableName:
+    Value: !Ref RentalsTable

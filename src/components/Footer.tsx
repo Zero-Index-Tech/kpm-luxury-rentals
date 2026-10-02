@@ -47,7 +47,7 @@ export default function Footer() {
               {FOOTER_FLEET.map((item) => (
                 <li key={item}>
                   <Link
-                    to="/c3/fleet"
+                    to="/fleet"
                     className="text-[13px] font-medium text-ivory-70 transition-colors duration-300 hover:text-ivory"
                   >
                     {item}
@@ -66,7 +66,7 @@ export default function Footer() {
               {FOOTER_SERVICES.map((item) => (
                 <li key={item}>
                   <Link
-                    to="/c3/#services"
+                    to="/#services"
                     className="text-[13px] font-medium text-ivory-70 transition-colors duration-300 hover:text-ivory"
                   >
                     {item}

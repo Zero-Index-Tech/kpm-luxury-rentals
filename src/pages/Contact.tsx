@@ -359,7 +359,7 @@ function EnquiryForm() {
                 Our private client concierge will contact you shortly to curate your reservation.
               </p>
               <div className="mt-10">
-                <GoldButton to="/c3" variant="glass">
+                <GoldButton to="/" variant="glass">
                   Return Home
                 </GoldButton>
               </div>

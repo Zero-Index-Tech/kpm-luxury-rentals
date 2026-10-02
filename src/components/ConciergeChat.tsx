@@ -49,7 +49,7 @@ function conciergeReply(q: string): string {
  */
 export default function ConciergeChat() {
   const { pathname } = useLocation()
-  const isLanding = pathname === '/' || pathname === '/c1' || pathname === '/c2' || pathname === '/c3'
+  const isLanding = pathname === '/' || pathname === '/c1' || pathname === '/c2'
 
   const [open, setOpen] = useState(false)
   const [msgs, setMsgs] = useState<Msg[]>([GREETING])

@@ -40,10 +40,10 @@ export default function Navbar() {
   const goServices = (e: React.MouseEvent) => {
     e.preventDefault()
     setOpen(false)
-    if (location.pathname === '/c3') {
+    if (location.pathname === '/') {
       scrollToHash('#services')
     } else {
-      navigate('/c3/#services')
+      navigate('/#services')
     }
   }
 
@@ -68,7 +68,7 @@ export default function Navbar() {
         >
           {/* Brand — black dot-matrix mark + stacked wordmark */}
           <Link
-            to="/c3"
+            to="/"
             className="group flex items-center gap-3"
             aria-label="KPM Luxury Rentals home"
           >
@@ -124,7 +124,7 @@ export default function Navbar() {
 
           <div className="hidden lg:block">
             <Link
-              to="/c3/contact"
+              to="/contact"
               data-cursor
               className="inline-block rounded-full bg-ink theme-dark px-6 py-3 text-[12px] font-bold uppercase tracking-[0.14em] text-ivory transition-all duration-300 hover:bg-umber active:scale-[0.97]"
             >
@@ -213,7 +213,7 @@ export default function Navbar() {
                 transition={{ delay: 0.1 + NAV_LINKS.length * 0.07, duration: 0.5 }}
               >
                 <Link
-                  to="/c3/contact"
+                  to="/contact"
                   onClick={() => setOpen(false)}
                   className="mt-4 inline-block rounded-full bg-ivory theme-light px-9 py-4 text-[12px] font-bold uppercase tracking-[0.14em] text-ink"
                 >

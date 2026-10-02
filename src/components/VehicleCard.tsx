@@ -17,7 +17,7 @@ export default function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
 
   return (
     <Link
-      to={`/c3/fleet/${vehicle.slug}`}
+      to={`/fleet/${vehicle.slug}`}
       data-cursor
       className="group block overflow-hidden rounded-[24px] border border-taupe-soft bg-[#FBFAF7] theme-light transition-all duration-500 hover:-translate-y-1.5 hover:shadow-card-lift"
     >

@@ -116,12 +116,12 @@ export default function HeroSection() {
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <span className="hero-btn">
-              <GoldButton to="/c3/fleet" arrow>
+              <GoldButton to="/fleet" arrow>
                 Explore Our Fleet
               </GoldButton>
             </span>
             <span className="hero-btn">
-              <GoldButton to="/c3/contact" variant="glass">
+              <GoldButton to="/contact" variant="glass">
                 Get a Quote
               </GoldButton>
             </span>

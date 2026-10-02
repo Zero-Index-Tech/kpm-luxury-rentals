@@ -279,7 +279,7 @@ function Collection() {
             </Reveal>
           </div>
           <Reveal y={16} duration={0.8} delay={0.25} className="shrink-0">
-            <ArrowRowLink to="/c3/fleet" label="View Full Fleet" />
+            <ArrowRowLink to="/fleet" label="View Full Fleet" />
           </Reveal>
         </div>
 
@@ -378,7 +378,7 @@ function Services() {
                 icon={s.icon}
                 title={s.title}
                 body={s.body}
-                to="/c3/contact"
+                to="/contact"
                 state={{ rentalType: s.rentalType }}
               />
             </div>
@@ -528,10 +528,10 @@ function MerchSection() {
             </p>
           </Reveal>
           <Reveal y={16} duration={0.8} delay={0.25} className="mt-9 flex flex-wrap gap-3">
-            <GoldButton to="/c3/merch" arrow>
+            <GoldButton to="/merch" arrow>
               Shop Brand Merch
             </GoldButton>
-            <GoldButton to="/c3/about" variant="glass" arrow>
+            <GoldButton to="/about" variant="glass" arrow>
               Our Story
             </GoldButton>
           </Reveal>

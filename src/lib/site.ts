@@ -3,11 +3,11 @@
 export const NAV_HEIGHT = 100
 
 export const NAV_LINKS: { label: string; to: string; hash?: string }[] = [
-  { label: 'Fleet', to: '/c3/fleet' },
-  { label: 'Services', to: '/c3/#services', hash: '#services' },
-  { label: 'About', to: '/c3/about' },
-  { label: 'Merch', to: '/c3/merch' },
-  { label: 'Contact', to: '/c3/contact' },
+  { label: 'Fleet', to: '/fleet' },
+  { label: 'Services', to: '/#services', hash: '#services' },
+  { label: 'About', to: '/about' },
+  { label: 'Merch', to: '/merch' },
+  { label: 'Contact', to: '/contact' },
 ]
 
 export const CONTACT = {

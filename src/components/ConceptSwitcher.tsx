@@ -5,23 +5,26 @@ import { cn } from '@/lib/utils'
 const CONCEPTS = [
   { id: 1, label: 'Concept 1', prefix: '/c1' },
   { id: 2, label: 'Concept 2', prefix: '/c2' },
-  { id: 3, label: 'Concept 3', prefix: '/c3' },
+  { id: 3, label: 'Concept 3', prefix: '' },
 ] as const
 
 /**
  * Fixed segmented pill (bottom-left) that lets the client flip between the
  * three design concepts. All concepts share an identical route structure
  * (/fleet, /fleet/:slug, /about, /contact), so switching preserves the page
- * being viewed — e.g. /c1/fleet ↔ /c3/fleet. Styled after the client's reference mockup: dark glass pill, champagne-gold
+ * being viewed — e.g. /c1/fleet ↔ /fleet. Styled after the client's reference mockup: dark glass pill, champagne-gold
  * active segment with dark text, muted ivory inactive segments.
  */
 export default function ConceptSwitcher() {
   const { pathname } = useLocation()
 
-  const current = CONCEPTS.find((c) => pathname.startsWith(c.prefix)) ?? CONCEPTS[0]
+  const current = CONCEPTS.find((c) => c.prefix && pathname.startsWith(c.prefix)) ?? CONCEPTS[2]
 
   // equivalent path in another concept (strip current prefix, re-apply target)
-  const pathFor = (prefix: string) => prefix + pathname.replace(/^\/c[123]/, '')
+  const pathFor = (prefix: string) => {
+    const route = pathname.replace(/^\/c[12]/, '')
+    return prefix ? `${prefix}${route || ''}` : route || '/'
+  }
 
   const segment =
     'rounded-full px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.16em] transition-all duration-300 md:px-4 md:py-2.5 md:text-[11px]'
