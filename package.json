@@ -11,6 +11,7 @@
     "test:merch": "node --test tests/merch-*.test.mjs"
   },
   "dependencies": {
+    "@aws-sdk/client-cognito-identity-provider": "^3.1145.0",
     "@gsap/react": "^2.1.2",
     "@hookform/resolvers": "^5.2.2",
     "@radix-ui/react-accordion": "^1.2.12",

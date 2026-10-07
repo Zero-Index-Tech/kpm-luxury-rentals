@@ -95,3 +95,58 @@ export function persistAdminData(data: AdminData) {
 export function formatRand(amount: number) {
   return new Intl.NumberFormat('en-ZA', { style: 'currency', currency: 'ZAR', maximumFractionDigits: 0 }).format(amount)
 }
+
+// ---------- AWS API backend ----------
+
+const API_URL = import.meta.env.VITE_ADMIN_API_URL as string | undefined
+
+export function isAdminApiConfigured() {
+  return Boolean(API_URL)
+}
+
+async function apiRequest(path: string, token: string, init?: RequestInit) {
+  const response = await fetch(`${API_URL}${path}`, {
+    ...init,
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+  })
+  if (!response.ok) throw new Error(`Admin API ${init?.method ?? 'GET'} ${path} failed: ${response.status}`)
+  if (response.status === 204) return null
+  return response.json()
+}
+
+export async function fetchAdminData(token: string): Promise<AdminData> {
+  const [vehicles, rentals] = await Promise.all([
+    apiRequest('/vehicles', token) as Promise<AdminVehicle[]>,
+    apiRequest('/rentals', token) as Promise<Rental[]>,
+  ])
+  if (vehicles.length === 0) {
+    const seeded = seededVehicles()
+    await Promise.all(seeded.map((vehicle) => apiRequest(`/vehicles/${vehicle.id}`, token, { method: 'PUT', body: JSON.stringify(vehicle) })))
+    return { vehicles: seeded, rentals }
+  }
+  return { vehicles, rentals }
+}
+
+export async function syncAdminData(prev: AdminData, next: AdminData, token: string) {
+  const writes: Promise<unknown>[] = []
+  for (const resource of ['vehicles', 'rentals'] as const) {
+    const before = new Map(prev[resource].map((item) => [item.id, item]))
+    const after = new Map(next[resource].map((item) => [item.id, item]))
+    for (const [id, item] of after) {
+      if (JSON.stringify(before.get(id)) !== JSON.stringify(item)) {
+        writes.push(apiRequest(`/${resource}/${id}`, token, { method: 'PUT', body: JSON.stringify(item) }))
+      }
+    }
+    for (const id of before.keys()) {
+      if (!after.has(id)) writes.push(apiRequest(`/${resource}/${id}`, token, { method: 'DELETE' }))
+    }
+  }
+  await Promise.all(writes)
+}
+
+export async function inviteStaffMember(email: string, token: string) {
+  return apiRequest('/staff/invitations', token, {
+    method: 'POST',
+    body: JSON.stringify({ email: email.trim().toLowerCase() }),
+  })
+}

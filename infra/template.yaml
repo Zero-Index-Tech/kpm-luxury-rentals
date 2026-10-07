@@ -13,6 +13,8 @@ Resources:
     Type: AWS::Cognito::UserPool
     Properties:
       UserPoolName: !Sub kpm-admin-${Environment}
+      AdminCreateUserConfig:
+        AllowAdminCreateUserOnly: true
       UsernameAttributes: [email]
       AutoVerifiedAttributes: [email]
       Policies:
@@ -26,6 +28,13 @@ Resources:
         RecoveryMechanisms:
           - Name: verified_email
             Priority: 1
+
+  AdminsGroup:
+    Type: AWS::Cognito::UserPoolGroup
+    Properties:
+      GroupName: Admins
+      Description: Administrators allowed to invite staff members
+      UserPoolId: !Ref AdminUserPool
 
   AdminUserPoolClient:
     Type: AWS::Cognito::UserPoolClient
@@ -91,6 +100,13 @@ Resources:
                 Resource:
                   - !GetAtt VehiclesTable.Arn
                   - !GetAtt RentalsTable.Arn
+        - PolicyName: cognito-staff-invitations
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: cognito-idp:AdminCreateUser
+                Resource: !GetAtt AdminUserPool.Arn
 
   AdminApiFunction:
     Type: AWS::Lambda::Function
@@ -108,6 +124,7 @@ Resources:
         Variables:
           VEHICLES_TABLE: !Ref VehiclesTable
           RENTALS_TABLE: !Ref RentalsTable
+          USER_POOL_ID: !Ref AdminUserPool
 
   # ---------- API Gateway ----------
   AdminApi:
@@ -174,6 +191,15 @@ Resources:
     Properties:
       ApiId: !Ref AdminApi
       RouteKey: ANY /rentals/{id}
+      Target: !Sub integrations/${AdminApiIntegration}
+      AuthorizationType: JWT
+      AuthorizerId: !Ref AdminApiAuthorizer
+
+  StaffInvitationsRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref AdminApi
+      RouteKey: POST /staff/invitations
       Target: !Sub integrations/${AdminApiIntegration}
       AuthorizationType: JWT
       AuthorizerId: !Ref AdminApiAuthorizer

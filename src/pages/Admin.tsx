@@ -9,17 +9,19 @@ import {
   Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from 'recharts'
 import {
-  ADMIN_SESSION_KEY, createRental, createVehicle, formatRand, loadAdminData, persistAdminData,
+  createRental, createVehicle, fetchAdminData, formatRand, isAdminApiConfigured, loadAdminData,
+  inviteStaffMember, persistAdminData, syncAdminData,
 } from '@/lib/admin'
+import { completeAdminPasswordChange, getAdminToken, isAdminAuthConfigured, signInAdmin, signOutAdmin } from '@/lib/adminAuth'
 import type { AdminData, AdminVehicle, PaymentStatus, Rental, RentalStatus, VehicleStatus } from '@/lib/admin'
 import './admin.css'
 
-type Section = 'Overview' | 'Rentals' | 'Fleet' | 'Analytics'
+type Section = 'Overview' | 'Rentals' | 'Fleet' | 'Analytics' | 'Team'
 type RentalFilter = 'All rentals' | RentalStatus
 
 const NAV_ITEMS: { label: Section; icon: typeof LayoutDashboard }[] = [
   { label: 'Overview', icon: LayoutDashboard }, { label: 'Rentals', icon: CalendarDays },
-  { label: 'Fleet', icon: CarFront }, { label: 'Analytics', icon: Activity },
+  { label: 'Fleet', icon: CarFront }, { label: 'Analytics', icon: Activity }, { label: 'Team', icon: Users },
 ]
 const RENTAL_STATUSES: RentalStatus[] = ['Upcoming', 'Active', 'Completed', 'Cancelled']
 const PAYMENT_STATUSES: PaymentStatus[] = ['Pending', 'Deposit paid', 'Paid', 'Refunded']
@@ -68,10 +70,10 @@ async function readImage(file?: File) {
 }
 
 export default function Admin() {
-  const configuredEmail = import.meta.env.VITE_ADMIN_EMAIL as string | undefined
-  const configuredPassword = import.meta.env.VITE_ADMIN_PASSWORD as string | undefined
-  const [authenticated, setAuthenticated] = useState(() => sessionStorage.getItem(ADMIN_SESSION_KEY) === 'signed-in')
+  const [checkingSession, setCheckingSession] = useState(true)
+  const [authenticated, setAuthenticated] = useState(false)
   const [data, setData] = useState<AdminData>(loadAdminData)
+  const [loadingData, setLoadingData] = useState(false)
   const [section, setSection] = useState<Section>('Overview')
   const [mobileMenu, setMobileMenu] = useState(false)
   const [storageError, setStorageError] = useState('')
@@ -81,7 +83,23 @@ export default function Admin() {
   const [toast, setToast] = useState('')
 
   useEffect(() => {
-    try { persistAdminData(data); setStorageError('') }
+    void getAdminToken().then((token) => { setAuthenticated(Boolean(token)); setCheckingSession(false) })
+  }, [])
+
+  useEffect(() => {
+    if (!authenticated || !isAdminApiConfigured()) return
+    let cancelled = false
+    setLoadingData(true)
+    void getAdminToken()
+      .then((token) => { if (!token) throw new Error('Not signed in'); return fetchAdminData(token) })
+      .then((remote) => { if (!cancelled) setData(remote) })
+      .catch(() => { if (!cancelled) setStorageError('Could not load cloud data. Showing this device’s copy instead.') })
+      .finally(() => { if (!cancelled) setLoadingData(false) })
+    return () => { cancelled = true }
+  }, [authenticated])
+
+  useEffect(() => {
+    try { persistAdminData(data) }
     catch { setStorageError('Browser storage is full. Try smaller vehicle images or remove unused data.') }
   }, [data])
 
@@ -92,12 +110,13 @@ export default function Admin() {
   }, [toast])
 
   function signOut() {
-    sessionStorage.removeItem(ADMIN_SESSION_KEY)
+    signOutAdmin()
     setAuthenticated(false)
   }
 
+  if (checkingSession) return null
   if (!authenticated) {
-    return <Login configured={Boolean(configuredEmail && configuredPassword)} onSuccess={() => setAuthenticated(true)} />
+    return <Login configured={isAdminAuthConfigured()} onSuccess={() => setAuthenticated(true)} />
   }
 
   const activeVehicles = data.vehicles.filter((vehicle) => !vehicle.archived)
@@ -110,8 +129,14 @@ export default function Admin() {
   const vehicleById = new Map(data.vehicles.map((vehicle) => [vehicle.id, vehicle]))
 
   function updateData(next: AdminData, message?: string) {
+    const prev = data
     setData(next)
     if (message) setToast(message)
+    if (isAdminApiConfigured()) {
+      void getAdminToken()
+        .then((token) => { if (!token) throw new Error('Session expired'); return syncAdminData(prev, next, token) })
+        .catch(() => setStorageError('Change is saved on this device, but syncing to the cloud failed.'))
+    }
   }
 
   function saveRental(rental: Rental) {
@@ -135,7 +160,7 @@ export default function Admin() {
   }
 
   const pageHeading: Record<Section, string> = {
-    Overview: 'Good day, Admin', Rentals: 'Rental bookings', Fleet: 'Fleet management', Analytics: 'Fleet analytics',
+    Overview: 'Good day, Admin', Rentals: 'Rental bookings', Fleet: 'Fleet management', Analytics: 'Fleet analytics', Team: 'Staff access',
   }
 
   return (
@@ -146,14 +171,14 @@ export default function Admin() {
         <nav className="admin-nav" aria-label="Admin sections">
           {NAV_ITEMS.map(({ label, icon: Icon }) => <button key={label} className={section === label ? 'is-active' : ''} onClick={() => { setSection(label); setMobileMenu(false) }}><Icon size={17} />{label}</button>)}
         </nav>
-        <div className="admin-sidebar-foot"><span className="admin-online-dot" /> Local browser workspace</div>
+        <div className="admin-sidebar-foot"><span className="admin-online-dot" /> {isAdminApiConfigured() ? 'Cloud workspace' : 'Local browser workspace'}</div>
       </aside>
 
       <main className="admin-main">
         <header className="admin-topbar">
           <button className="admin-icon-button admin-menu-toggle" aria-label="Open navigation" onClick={() => setMobileMenu((open) => !open)}><Menu size={20} /></button>
           <div className="admin-breadcrumb">KPM <span>/</span> {section}</div>
-          <div className="admin-top-actions"><span className="admin-local-badge"><span className="admin-online-dot" /> LOCAL DATA</span><button className="admin-user-button" onClick={signOut}><span className="admin-avatar">A</span><span className="admin-user-label">Admin</span><LogOut size={15} /></button></div>
+          <div className="admin-top-actions"><span className="admin-local-badge"><span className="admin-online-dot" /> {loadingData ? 'SYNCING…' : isAdminApiConfigured() ? 'CLOUD SYNC' : 'LOCAL DATA'}</span><button className="admin-user-button" onClick={signOut}><span className="admin-avatar">A</span><span className="admin-user-label">Admin</span><LogOut size={15} /></button></div>
         </header>
 
         <div className="admin-content">
@@ -167,6 +192,7 @@ export default function Admin() {
           {section === 'Rentals' && <RentalsSection rentals={rentals} vehicles={activeVehicles} onCreate={() => { setEditingRental(null); setDialog('rental') }} onEdit={(rental) => { setEditingRental(rental); setDialog('rental') }} onUpdate={(updated) => updateData({ ...data, rentals: rentals.map((item) => item.id === updated.id ? updated : item) }, 'Booking status updated')} onDelete={(id) => { if (window.confirm('Delete this booking? This cannot be undone.')) updateData({ ...data, rentals: rentals.filter((item) => item.id !== id) }, 'Booking deleted') }} onExport={() => downloadRentals(rentals, data.vehicles)} />}
           {section === 'Fleet' && <FleetSection vehicles={data.vehicles} onCreate={() => { setEditingVehicle(null); setDialog('vehicle') }} onEdit={(vehicle) => { setEditingVehicle(vehicle); setDialog('vehicle') }} onStatus={(vehicle, status) => updateData({ ...data, vehicles: data.vehicles.map((item) => item.id === vehicle.id ? { ...item, status } : item) }, 'Vehicle availability updated')} onArchive={removeVehicle} onRestore={restoreVehicle} />}
           {section === 'Analytics' && <Analytics rentals={rentals} vehicles={activeVehicles} />}
+          {section === 'Team' && <StaffSection />}
         </div>
       </main>
 
@@ -181,27 +207,78 @@ export default function Admin() {
 function Login({ configured, onSuccess }: { configured: boolean; onSuccess: () => void }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+  const [requiresNewPassword, setRequiresNewPassword] = useState(false)
   const [error, setError] = useState('')
+  const [busy, setBusy] = useState(false)
 
-  function submit(event: FormEvent<HTMLFormElement>) {
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    if (!configured) return
-    if (email.trim().toLowerCase() !== import.meta.env.VITE_ADMIN_EMAIL?.trim().toLowerCase() || password !== import.meta.env.VITE_ADMIN_PASSWORD) {
-      setError('Those credentials do not match.')
-      return
+    if (!configured || busy) return
+    setBusy(true)
+    setError('')
+    try {
+      if (requiresNewPassword) {
+        await completeAdminPasswordChange(newPassword)
+        onSuccess()
+      } else if (await signInAdmin(email, password)) {
+        setRequiresNewPassword(true)
+      } else {
+        onSuccess()
+      }
+    } catch {
+      setError(requiresNewPassword ? 'Could not update the password. Check the password requirements and try again.' : 'Those credentials do not match.')
+    } finally {
+      setBusy(false)
     }
-    sessionStorage.setItem(ADMIN_SESSION_KEY, 'signed-in')
-    onSuccess()
   }
 
   return <main className="admin-login-screen"><div className="admin-login-visual"><div className="admin-login-wordmark">KPM<span> / OPERATIONS</span></div><div className="admin-login-photo" /><div className="admin-login-caption"><span>FLEET CONTROL</span><p>Every detail,<br />in its place.</p></div></div>
-    <div className="admin-login-panel"><div className="admin-login-form-wrap"><span className="admin-login-kicker">KPM LUXURY RENTALS</span><h1>Admin sign in</h1><p className="admin-subtitle">Sign in to manage bookings and fleet operations.</p>
-      {!configured && <div className="admin-alert admin-alert--stack">Admin credentials are not configured. Add <code>VITE_ADMIN_EMAIL</code> and <code>VITE_ADMIN_PASSWORD</code> to your local environment, then restart the dev server.</div>}
-      <form onSubmit={submit} className="admin-login-form"><label>Email address<input type="email" autoComplete="username" value={email} onChange={(event) => setEmail(event.target.value)} required /></label><label>Password<input type="password" autoComplete="current-password" value={password} onChange={(event) => setPassword(event.target.value)} required /></label>
-        {error && <p className="admin-form-error" role="alert">{error}</p>}<button disabled={!configured} className="admin-primary-button admin-login-submit">Sign in <ArrowUp size={16} /></button>
-      </form><p className="admin-login-notice">Browser-only workspace · Changes are saved on this device.</p>
-    </div><p className="admin-security-note">Client-side sign-in is not secure authentication.<br />Do not use for sensitive production access.</p></div>
+    <div className="admin-login-panel"><div className="admin-login-form-wrap"><span className="admin-login-kicker">KPM LUXURY RENTALS</span><h1>{requiresNewPassword ? 'Set your password' : 'Admin sign in'}</h1><p className="admin-subtitle">{requiresNewPassword ? 'Choose a permanent password to finish setting up your account.' : 'Sign in to manage bookings and fleet operations.'}</p>
+      {!configured && <div className="admin-alert admin-alert--stack">Admin sign-in is not configured. Add <code>VITE_COGNITO_CLIENT_ID</code> to your local environment, then restart the dev server.</div>}
+      <form onSubmit={submit} className="admin-login-form">{!requiresNewPassword && <><label>Email address<input type="email" autoComplete="username" value={email} onChange={(event) => setEmail(event.target.value)} required /></label><label>Temporary password<input type="password" autoComplete="current-password" value={password} onChange={(event) => setPassword(event.target.value)} required /></label></>}
+        {requiresNewPassword && <label>New password<input type="password" autoComplete="new-password" minLength={12} value={newPassword} onChange={(event) => setNewPassword(event.target.value)} required /><small>At least 12 characters, with uppercase, lowercase and a number.</small></label>}
+        {error && <p className="admin-form-error" role="alert">{error}</p>}<button disabled={!configured || busy} className="admin-primary-button admin-login-submit">{busy ? 'Please wait…' : requiresNewPassword ? 'Set password' : 'Sign in'} <ArrowUp size={16} /></button>
+      </form><p className="admin-login-notice">Cloud workspace · Changes sync to AWS.</p>
+    </div><p className="admin-security-note">Protected by AWS Cognito.<br />Bookings and fleet data are stored in your AWS account.</p></div>
   </main>
+}
+
+function StaffSection() {
+  const [email, setEmail] = useState('')
+  const [error, setError] = useState('')
+  const [notice, setNotice] = useState('')
+  const [busy, setBusy] = useState(false)
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    if (!isAdminApiConfigured() || busy) return
+    setBusy(true)
+    setError('')
+    setNotice('')
+    try {
+      const token = await getAdminToken()
+      if (!token) throw new Error('Session expired')
+      await inviteStaffMember(email, token)
+      setNotice(`Invitation sent to ${email.trim()}.`)
+      setEmail('')
+    } catch {
+      setError('Could not send the invitation. Confirm your account belongs to the Cognito Admins group.')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  return <section className="admin-panel admin-team-panel">
+    <div className="admin-panel-heading"><div><h2>Invite a staff member</h2><p>Cognito emails a temporary password. Staff set a permanent password on first sign-in.</p></div></div>
+    {!isAdminApiConfigured() && <div className="admin-alert admin-alert--stack">Staff invitations require the AWS admin API to be configured.</div>}
+    <form className="admin-login-form admin-team-form" onSubmit={submit}>
+      <label>Email address<input type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} required /></label>
+      {error && <p className="admin-form-error" role="alert">{error}</p>}
+      {notice && <div className="admin-alert" role="status">{notice}</div>}
+      <button className="admin-primary-button" type="submit" disabled={!isAdminApiConfigured() || busy}><Users size={16} />{busy ? 'Sending…' : 'Send invitation'}</button>
+    </form>
+  </section>
 }
 
 function Metric({ label, value, detail, icon: Icon, tone }: { label: string; value: string | number; detail: string; icon: typeof CarFront; tone: string }) {
