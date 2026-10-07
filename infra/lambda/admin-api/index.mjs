@@ -16,6 +16,11 @@ const TABLES = {
   rentals: process.env.RENTALS_TABLE,
 }
 const USER_POOL_ID = process.env.USER_POOL_ID
+const DEFAULT_FEATURED_VEHICLES = new Set([
+  'mercedes-amg-gt',
+  'range-rover-sport',
+  'rolls-royce-ghost',
+])
 
 function json(statusCode, body) {
   return {
@@ -39,6 +44,16 @@ export async function handler(event) {
         },
         body: '',
       }
+    }
+    if (path === '/public/vehicles') {
+      if (method !== 'GET') return json(405, { error: `Method not allowed: ${method}` })
+      const { Items = [] } = await doc.send(new ScanCommand({ TableName: TABLES.vehicles }))
+      const featured = Items.filter((vehicle) =>
+        !vehicle.archived && (vehicle.featured ?? DEFAULT_FEATURED_VEHICLES.has(vehicle.id)),
+      ).slice(0, 3)
+      return json(200, featured.map(({ id, name, category, seats, rate, status, exteriorImage }) => ({
+        id, name, category, seats, rate, status, exteriorImage,
+      })))
     }
     if (path === '/staff/invitations') {
       if (method !== 'POST') return json(405, { error: `Method not allowed: ${method}` })

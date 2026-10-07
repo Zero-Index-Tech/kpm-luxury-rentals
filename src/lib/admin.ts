@@ -1,4 +1,5 @@
-import { FLEET_VEHICLES } from '@/lib/site'
+import { FLEET_VEHICLES, VEHICLES } from '@/lib/site'
+import type { Vehicle } from '@/lib/site'
 
 export const ADMIN_STORAGE_KEY = 'kpm-admin-data-v1'
 export const ADMIN_SESSION_KEY = 'kpm-admin-session-v1'
@@ -17,6 +18,7 @@ export interface AdminVehicle {
   exteriorImage: string
   interiorImage: string
   galleryImages?: string[]
+  featured?: boolean
   archived: boolean
 }
 
@@ -42,6 +44,17 @@ export interface AdminData {
   rentals: Rental[]
 }
 
+interface HomepageVehicleRecord extends Pick<AdminVehicle, 'id' | 'name' | 'category' | 'seats' | 'rate' | 'status' | 'exteriorImage'> {}
+
+const DEFAULT_FEATURED_IDS = new Set(VEHICLES.map((vehicle) => vehicle.slug))
+
+function normalizeVehicles(vehicles: AdminVehicle[]) {
+  return vehicles.map((vehicle) => ({
+    ...vehicle,
+    featured: vehicle.featured ?? DEFAULT_FEATURED_IDS.has(vehicle.id),
+  }))
+}
+
 function makeId() {
   return globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`
 }
@@ -57,7 +70,7 @@ export function createRental(): Rental {
 export function createVehicle(): AdminVehicle {
   return {
     id: makeId(), name: '', category: 'SUVs', seats: 5, rate: 0,
-    status: 'Available', exteriorImage: '', interiorImage: '', galleryImages: [], archived: false,
+    status: 'Available', exteriorImage: '', interiorImage: '', galleryImages: [], featured: false, archived: false,
   }
 }
 
@@ -72,6 +85,7 @@ function seededVehicles(): AdminVehicle[] {
     exteriorImage: vehicle.image,
     interiorImage: '',
     galleryImages: [],
+    featured: DEFAULT_FEATURED_IDS.has(vehicle.slug),
     archived: false,
   }))
 }
@@ -82,7 +96,7 @@ export function loadAdminData(): AdminData {
     if (!stored) return { vehicles: seededVehicles(), rentals: [] }
     const parsed = JSON.parse(stored) as Partial<AdminData>
     return {
-      vehicles: Array.isArray(parsed.vehicles) ? parsed.vehicles : seededVehicles(),
+      vehicles: Array.isArray(parsed.vehicles) ? normalizeVehicles(parsed.vehicles) : seededVehicles(),
       rentals: Array.isArray(parsed.rentals) ? parsed.rentals : [],
     }
   } catch {
@@ -106,12 +120,49 @@ export function isAdminApiConfigured() {
   return Boolean(API_URL)
 }
 
+export async function fetchHomepageVehicles(): Promise<Vehicle[]> {
+  if (!API_URL) return VEHICLES
+  try {
+    const response = await fetch(`${API_URL}/public/vehicles`, { cache: 'no-store' })
+    if (!response.ok) return VEHICLES
+    const records = await response.json() as HomepageVehicleRecord[]
+    if (!records.length) return VEHICLES
+    return records.slice(0, 3).map((record) => {
+      const fallback = FLEET_VEHICLES.find((vehicle) => vehicle.slug === record.id)
+      return {
+        slug: record.id,
+        name: record.name,
+        category: record.category,
+        price: formatRand(record.rate),
+        image: record.exteriorImage || fallback?.image || '',
+        specs: fallback?.specs ?? [
+          { value: `${record.seats} Seats`, label: 'Capacity' },
+          { value: record.category, label: 'Class' },
+          { value: record.status, label: 'Status' },
+        ],
+      }
+    })
+  } catch {
+    return VEHICLES
+  }
+}
+
 async function apiRequest(path: string, token: string, init?: RequestInit) {
   const response = await fetch(`${API_URL}${path}`, {
     ...init,
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
   })
-  if (!response.ok) throw new Error(`Admin API ${init?.method ?? 'GET'} ${path} failed: ${response.status}`)
+  if (!response.ok) {
+    const body = await response.text()
+    let detail = body
+    try {
+      const parsed = JSON.parse(body) as { error?: string; detail?: string }
+      detail = parsed.detail ?? parsed.error ?? body
+    } catch {
+      // Use the raw response when the API doesn't return JSON.
+    }
+    throw new Error(`Admin API ${init?.method ?? 'GET'} ${path} failed (${response.status})${detail ? `: ${detail}` : ''}`)
+  }
   if (response.status === 204) return null
   return response.json()
 }
@@ -126,7 +177,7 @@ export async function fetchAdminData(token: string): Promise<AdminData> {
     await Promise.all(seeded.map((vehicle) => apiRequest(`/vehicles/${vehicle.id}`, token, { method: 'PUT', body: JSON.stringify(vehicle) })))
     return { vehicles: seeded, rentals }
   }
-  return { vehicles, rentals }
+  return { vehicles: normalizeVehicles(vehicles), rentals }
 }
 
 export async function syncAdminData(prev: AdminData, next: AdminData, token: string) {

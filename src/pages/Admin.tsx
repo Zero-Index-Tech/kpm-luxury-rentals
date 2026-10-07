@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import type { ChangeEvent, FormEvent, ReactNode } from 'react'
 import {
   Activity, Archive, ArrowDown, ArrowUp, CalendarDays, CarFront, Check, ChevronDown,
-  CircleDollarSign, Download, LayoutDashboard, LogOut, Menu, Plus, Search,
+  CircleDollarSign, Download, LayoutDashboard, LogOut, Menu, Plus, Search, Star,
   Settings2, Trash2, UserRound, Users, Wrench, X,
 } from 'lucide-react'
 import {
@@ -28,6 +28,7 @@ const PAYMENT_STATUSES: PaymentStatus[] = ['Pending', 'Deposit paid', 'Paid', 'R
 const VEHICLE_STATUSES: VehicleStatus[] = ['Available', 'Unavailable', 'Maintenance']
 const CATEGORIES = ['SUVs', 'Sedans', 'Sports Cars', 'Convertibles', 'Chauffeur', 'Other']
 const CHART_COLORS = ['#607d73', '#d89d54', '#64738c', '#b56b55', '#9a8e70', '#5f8790']
+const MAX_IMAGE_DATA_URL_LENGTH = 64_000
 
 function todayKey() { return new Date().toISOString().slice(0, 10) }
 function statusClass(value: string) { return `admin-status admin-status--${value.toLowerCase().replaceAll(' ', '-')}` }
@@ -56,13 +57,26 @@ async function readImage(file?: File) {
     const image = new Image()
     const source = URL.createObjectURL(file)
     image.onload = () => {
-      const scale = Math.min(1, 1600 / Math.max(image.width, image.height))
-      const canvas = document.createElement('canvas')
-      canvas.width = Math.round(image.width * scale)
-      canvas.height = Math.round(image.height * scale)
-      canvas.getContext('2d')?.drawImage(image, 0, 0, canvas.width, canvas.height)
+      const initialScale = Math.min(1, 1600 / Math.max(image.width, image.height))
+      for (let attempt = 0; attempt < 7; attempt += 1) {
+        const scale = initialScale * 0.82 ** attempt
+        const canvas = document.createElement('canvas')
+        canvas.width = Math.max(1, Math.round(image.width * scale))
+        canvas.height = Math.max(1, Math.round(image.height * scale))
+        const context = canvas.getContext('2d')
+        if (!context) break
+        context.drawImage(image, 0, 0, canvas.width, canvas.height)
+        for (const quality of [0.78, 0.68, 0.58, 0.48, 0.38]) {
+          const compressed = canvas.toDataURL('image/jpeg', quality)
+          if (compressed.length <= MAX_IMAGE_DATA_URL_LENGTH) {
+            URL.revokeObjectURL(source)
+            resolve(compressed)
+            return
+          }
+        }
+      }
       URL.revokeObjectURL(source)
-      resolve(canvas.toDataURL('image/jpeg', 0.78))
+      reject(new Error('Image is too large after compression. Use a smaller image and try again.'))
     }
     image.onerror = () => { URL.revokeObjectURL(source); reject(new Error('Image could not be read.')) }
     image.src = source
@@ -135,7 +149,10 @@ export default function Admin() {
     if (isAdminApiConfigured()) {
       void getAdminToken()
         .then((token) => { if (!token) throw new Error('Session expired'); return syncAdminData(prev, next, token) })
-        .catch(() => setStorageError('Change is saved on this device, but syncing to the cloud failed.'))
+        .catch((error: unknown) => {
+          const detail = error instanceof Error ? ` ${error.message}` : ''
+          setStorageError(`Change is saved on this device, but syncing to the cloud failed.${detail}`)
+        })
     }
   }
 
@@ -152,11 +169,27 @@ export default function Admin() {
   }
 
   function removeVehicle(vehicle: AdminVehicle) {
-    updateData({ ...data, vehicles: data.vehicles.map((item) => item.id === vehicle.id ? { ...item, archived: true } : item) }, `${vehicle.name} moved to archive`)
+    updateData({ ...data, vehicles: data.vehicles.map((item) => item.id === vehicle.id ? { ...item, archived: true, featured: false } : item) }, `${vehicle.name} moved to archive`)
   }
 
   function restoreVehicle(vehicle: AdminVehicle) {
     updateData({ ...data, vehicles: data.vehicles.map((item) => item.id === vehicle.id ? { ...item, archived: false } : item) }, `${vehicle.name} restored`)
+  }
+
+  function setVehicleFeatured(vehicle: AdminVehicle, featured: boolean) {
+    const selectedCount = activeVehicles.filter((item) => item.featured).length
+    if (featured && selectedCount >= 3) {
+      setToast('The homepage can feature up to three vehicles.')
+      return
+    }
+    if (!featured && selectedCount <= 1) {
+      setToast('Keep at least one vehicle featured on the homepage.')
+      return
+    }
+    updateData({
+      ...data,
+      vehicles: data.vehicles.map((item) => item.id === vehicle.id ? { ...item, featured } : item),
+    }, featured ? `${vehicle.name} added to homepage` : `${vehicle.name} removed from homepage`)
   }
 
   const pageHeading: Record<Section, string> = {
@@ -190,7 +223,7 @@ export default function Admin() {
 
           {section === 'Overview' && <Overview rentals={rentals} vehicles={activeVehicles} upcoming={upcomingRentals} availableCount={availableCount} activeCount={activeRentals.length} unassignedCount={needsAssignment} vehicleById={vehicleById} onOpenRentals={() => setSection('Rentals')} onCreate={() => { setEditingRental(null); setDialog('rental') }} />}
           {section === 'Rentals' && <RentalsSection rentals={rentals} vehicles={activeVehicles} onCreate={() => { setEditingRental(null); setDialog('rental') }} onEdit={(rental) => { setEditingRental(rental); setDialog('rental') }} onUpdate={(updated) => updateData({ ...data, rentals: rentals.map((item) => item.id === updated.id ? updated : item) }, 'Booking status updated')} onDelete={(id) => { if (window.confirm('Delete this booking? This cannot be undone.')) updateData({ ...data, rentals: rentals.filter((item) => item.id !== id) }, 'Booking deleted') }} onExport={() => downloadRentals(rentals, data.vehicles)} />}
-          {section === 'Fleet' && <FleetSection vehicles={data.vehicles} onCreate={() => { setEditingVehicle(null); setDialog('vehicle') }} onEdit={(vehicle) => { setEditingVehicle(vehicle); setDialog('vehicle') }} onStatus={(vehicle, status) => updateData({ ...data, vehicles: data.vehicles.map((item) => item.id === vehicle.id ? { ...item, status } : item) }, 'Vehicle availability updated')} onArchive={removeVehicle} onRestore={restoreVehicle} />}
+          {section === 'Fleet' && <FleetSection vehicles={data.vehicles} onCreate={() => { setEditingVehicle(null); setDialog('vehicle') }} onEdit={(vehicle) => { setEditingVehicle(vehicle); setDialog('vehicle') }} onStatus={(vehicle, status) => updateData({ ...data, vehicles: data.vehicles.map((item) => item.id === vehicle.id ? { ...item, status } : item) }, 'Vehicle availability updated')} onFeatured={setVehicleFeatured} onArchive={removeVehicle} onRestore={restoreVehicle} />}
           {section === 'Analytics' && <Analytics rentals={rentals} vehicles={activeVehicles} />}
           {section === 'Team' && <StaffSection />}
         </div>
@@ -341,16 +374,18 @@ function RentalsSection({ rentals, vehicles, onCreate, onEdit, onUpdate, onDelet
   </section>
 }
 
-function FleetSection({ vehicles, onCreate, onEdit, onStatus, onArchive, onRestore }: {
+function FleetSection({ vehicles, onCreate, onEdit, onStatus, onFeatured, onArchive, onRestore }: {
   vehicles: AdminVehicle[]; onCreate: () => void; onEdit: (vehicle: AdminVehicle) => void;
-  onStatus: (vehicle: AdminVehicle, status: VehicleStatus) => void; onArchive: (vehicle: AdminVehicle) => void; onRestore: (vehicle: AdminVehicle) => void
+  onStatus: (vehicle: AdminVehicle, status: VehicleStatus) => void; onFeatured: (vehicle: AdminVehicle, featured: boolean) => void;
+  onArchive: (vehicle: AdminVehicle) => void; onRestore: (vehicle: AdminVehicle) => void
 }) {
   const [search, setSearch] = useState('')
   const [showArchived, setShowArchived] = useState(false)
   const visible = vehicles.filter((vehicle) => vehicle.archived === showArchived && `${vehicle.name} ${vehicle.category}`.toLowerCase().includes(search.toLowerCase()))
+  const featuredCount = vehicles.filter((vehicle) => !vehicle.archived && vehicle.featured).length
   return <section className="admin-panel admin-list-panel"><div className="admin-list-toolbar"><div className="admin-search"><Search size={16} /><input aria-label="Search fleet" placeholder="Search vehicle or category" value={search} onChange={(event) => setSearch(event.target.value)} /></div><div className="admin-list-actions"><button className={`admin-secondary-button ${showArchived ? 'is-selected' : ''}`} onClick={() => setShowArchived((value) => !value)}><Archive size={15} />{showArchived ? 'View active fleet' : 'Archive'}</button>{!showArchived && <button className="admin-primary-button" onClick={onCreate}><Plus size={15} /> Add vehicle</button>}</div></div>
-    {visible.length ? <div className="admin-fleet-grid">{visible.map((vehicle) => <article className={`admin-vehicle-card ${vehicle.archived ? 'is-archived' : ''}`} key={vehicle.id}><div className="admin-vehicle-image" style={vehicle.exteriorImage ? { backgroundImage: `linear-gradient(0deg,rgba(20,25,25,.24),transparent 65%),url("${vehicle.exteriorImage}")` } : undefined}>{!vehicle.exteriorImage && <CarFront size={32} />}<span className={statusClass(vehicle.archived ? 'Archived' : vehicle.status)}>{vehicle.archived ? 'Archived' : vehicle.status}</span></div><div className="admin-vehicle-info"><div><h3>{vehicle.name}</h3><p>{vehicle.category} <span>·</span> {vehicle.seats} seats</p></div><strong>{formatRand(vehicle.rate)}<small> / day</small></strong></div><div className="admin-vehicle-actions">{vehicle.archived ? <button className="admin-secondary-button" onClick={() => onRestore(vehicle)}><ArrowUp size={15} /> Restore</button> : <><label className="admin-select-wrap admin-vehicle-status"><span className="sr-only">Set {vehicle.name} availability</span><select value={vehicle.status} onChange={(event) => onStatus(vehicle, event.target.value as VehicleStatus)}>{VEHICLE_STATUSES.map((status) => <option key={status}>{status}</option>)}</select><ChevronDown size={14} /></label><button className="admin-icon-button" title="Edit vehicle" onClick={() => onEdit(vehicle)}><Settings2 size={16} /></button><button className="admin-icon-button admin-danger-icon" title="Archive vehicle" onClick={() => onArchive(vehicle)}><Archive size={16} /></button></>}</div></article>)}</div> : <EmptyState icon={showArchived ? Archive : CarFront} title={showArchived ? 'Archive is empty' : 'No vehicles found'} body={showArchived ? 'Removed vehicles remain archived with their rental history.' : 'Add a vehicle to begin tracking your fleet.'} action={!showArchived ? 'Add vehicle' : undefined} onClick={onCreate} />}
-    <div className="admin-table-footer">{visible.length} {showArchived ? 'archived' : 'active'} vehicles <span>Archived vehicles remain linked to rental history</span></div>
+    {visible.length ? <div className="admin-fleet-grid">{visible.map((vehicle) => <article className={`admin-vehicle-card ${vehicle.archived ? 'is-archived' : ''}`} key={vehicle.id}><div className="admin-vehicle-image" style={vehicle.exteriorImage ? { backgroundImage: `linear-gradient(0deg,rgba(20,25,25,.24),transparent 65%),url("${vehicle.exteriorImage}")` } : undefined}>{!vehicle.exteriorImage && <CarFront size={32} />}<span className={statusClass(vehicle.archived ? 'Archived' : vehicle.status)}>{vehicle.archived ? 'Archived' : vehicle.status}</span></div><div className="admin-vehicle-info"><div><h3>{vehicle.name}</h3><p>{vehicle.category} <span>·</span> {vehicle.seats} seats</p></div><strong>{formatRand(vehicle.rate)}<small> / day</small></strong></div><div className="admin-vehicle-actions">{vehicle.archived ? <button className="admin-secondary-button" onClick={() => onRestore(vehicle)}><ArrowUp size={15} /> Restore</button> : <><label className="admin-select-wrap admin-vehicle-status"><span className="sr-only">Set {vehicle.name} availability</span><select value={vehicle.status} onChange={(event) => onStatus(vehicle, event.target.value as VehicleStatus)}>{VEHICLE_STATUSES.map((status) => <option key={status}>{status}</option>)}</select><ChevronDown size={14} /></label><button className="admin-icon-button" title={vehicle.featured ? 'Remove from homepage' : 'Feature on homepage'} aria-label={vehicle.featured ? 'Remove from homepage' : 'Feature on homepage'} aria-pressed={Boolean(vehicle.featured)} onClick={() => onFeatured(vehicle, !vehicle.featured)}><Star size={16} fill={vehicle.featured ? 'currentColor' : 'none'} /></button><button className="admin-icon-button" title="Edit vehicle" onClick={() => onEdit(vehicle)}><Settings2 size={16} /></button><button className="admin-icon-button admin-danger-icon" title="Archive vehicle" onClick={() => onArchive(vehicle)}><Archive size={16} /></button></>}</div></article>)}</div> : <EmptyState icon={showArchived ? Archive : CarFront} title={showArchived ? 'Archive is empty' : 'No vehicles found'} body={showArchived ? 'Removed vehicles remain archived with their rental history.' : 'Add a vehicle to begin tracking your fleet.'} action={!showArchived ? 'Add vehicle' : undefined} onClick={onCreate} />}
+    <div className="admin-table-footer">{visible.length} {showArchived ? 'archived' : 'active'} vehicles <span>{featuredCount}/3 selected for homepage</span></div>
   </section>
 }
 
@@ -416,14 +451,18 @@ function VehicleDialog({ initial, onClose, onSave }: { initial: AdminVehicle; on
         set(key, image)
       }
       setError('')
-    } catch {
-      setError('That image could not be processed. Try a JPG, PNG or WebP image.')
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'That image could not be processed. Try a JPG, PNG or WebP image.')
     }
   }
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (!form.exteriorImage) {
       setError('Add an exterior image before saving this vehicle.')
+      return
+    }
+    if (new TextEncoder().encode(JSON.stringify(form)).length > 360 * 1024) {
+      setError('This vehicle’s images exceed the cloud storage limit. Replace larger images before saving.')
       return
     }
     onSave(form)

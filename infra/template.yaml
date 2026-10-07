@@ -199,6 +199,14 @@ Resources:
       Target: !Sub integrations/${AdminApiIntegration}
       AuthorizationType: NONE
 
+  PublicVehiclesRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref AdminApi
+      RouteKey: GET /public/vehicles
+      Target: !Sub integrations/${AdminApiIntegration}
+      AuthorizationType: NONE
+
   VehiclesRoute:
     Type: AWS::ApiGatewayV2::Route
     Properties:

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useGSAP } from '@gsap/react'
@@ -17,6 +17,7 @@ import Reveal from '@/components/anim/Reveal'
 import Parallax from '@/components/anim/Parallax'
 import HeroSection from '@/pages/home/HeroSection'
 import { CONTACT, FLEET_VEHICLES, VEHICLES } from '@/lib/site'
+import { fetchHomepageVehicles } from '@/lib/admin'
 
 const STATS = [
   { value: 3, label: 'Years of Excellence' },
@@ -259,6 +260,16 @@ function StatsBand() {
 
 /* ---------- Section 4 — The Showroom Collection ---------- */
 function Collection() {
+  const [featuredVehicles, setFeaturedVehicles] = useState(VEHICLES)
+
+  useEffect(() => {
+    let mounted = true
+    void fetchHomepageVehicles().then((vehicles) => {
+      if (mounted) setFeaturedVehicles(vehicles)
+    })
+    return () => { mounted = false }
+  }, [])
+
   return (
     <section className="bg-taupe theme-canvas pb-32 pt-8">
       <div className="container">
@@ -284,7 +295,7 @@ function Collection() {
         </div>
 
         <Reveal staggerChildren={0.14} y={56} start="top 80%" className="mt-14 grid gap-6 md:grid-cols-3">
-          {VEHICLES.map((vehicle) => (
+          {featuredVehicles.map((vehicle) => (
             <VehicleCard key={vehicle.slug} vehicle={vehicle} />
           ))}
         </Reveal>
