@@ -29,6 +29,17 @@ export async function handler(event) {
   try {
     const method = event.requestContext?.http?.method ?? event.httpMethod
     const path = (event.rawPath ?? event.path ?? '').replace(/\/+$/, '')
+    if (method === 'OPTIONS') {
+      return {
+        statusCode: 204,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type,Authorization',
+        },
+        body: '',
+      }
+    }
     if (path === '/staff/invitations') {
       if (method !== 'POST') return json(405, { error: `Method not allowed: ${method}` })
       const groupsClaim = event.requestContext?.authorizer?.jwt?.claims?.['cognito:groups']

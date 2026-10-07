@@ -4,7 +4,7 @@
 set -euo pipefail
 
 STACK_NAME="${STACK_NAME:-kpm-admin}"
-REGION="${REGION:-af-south-1}"
+REGION="${REGION:-us-east-1}"
 ENVIRONMENT="${ENVIRONMENT:-dev}"
 TEMPLATE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 

@@ -159,6 +159,46 @@ Resources:
       IntegrationUri: !GetAtt AdminApiFunction.Arn
       PayloadFormatVersion: '2.0'
 
+  VehiclesPreflightRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref AdminApi
+      RouteKey: 'OPTIONS /vehicles'
+      Target: !Sub integrations/${AdminApiIntegration}
+      AuthorizationType: NONE
+
+  VehicleByIdPreflightRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref AdminApi
+      RouteKey: 'OPTIONS /vehicles/{id}'
+      Target: !Sub integrations/${AdminApiIntegration}
+      AuthorizationType: NONE
+
+  RentalsPreflightRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref AdminApi
+      RouteKey: 'OPTIONS /rentals'
+      Target: !Sub integrations/${AdminApiIntegration}
+      AuthorizationType: NONE
+
+  RentalByIdPreflightRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref AdminApi
+      RouteKey: 'OPTIONS /rentals/{id}'
+      Target: !Sub integrations/${AdminApiIntegration}
+      AuthorizationType: NONE
+
+  StaffInvitationsPreflightRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref AdminApi
+      RouteKey: 'OPTIONS /staff/invitations'
+      Target: !Sub integrations/${AdminApiIntegration}
+      AuthorizationType: NONE
+
   VehiclesRoute:
     Type: AWS::ApiGatewayV2::Route
     Properties:

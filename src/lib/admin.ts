@@ -16,6 +16,7 @@ export interface AdminVehicle {
   status: VehicleStatus
   exteriorImage: string
   interiorImage: string
+  galleryImages?: string[]
   archived: boolean
 }
 
@@ -56,7 +57,7 @@ export function createRental(): Rental {
 export function createVehicle(): AdminVehicle {
   return {
     id: makeId(), name: '', category: 'SUVs', seats: 5, rate: 0,
-    status: 'Available', exteriorImage: '', interiorImage: '', archived: false,
+    status: 'Available', exteriorImage: '', interiorImage: '', galleryImages: [], archived: false,
   }
 }
 
@@ -70,6 +71,7 @@ function seededVehicles(): AdminVehicle[] {
     status: 'Available',
     exteriorImage: vehicle.image,
     interiorImage: '',
+    galleryImages: [],
     archived: false,
   }))
 }

@@ -398,16 +398,42 @@ function VehicleDialog({ initial, onClose, onSave }: { initial: AdminVehicle; on
   const [error, setError] = useState('')
   const editing = Boolean(initial.name)
   function set<K extends keyof AdminVehicle>(key: K, value: AdminVehicle[K]) { setForm((current) => ({ ...current, [key]: value })) }
-  async function upload(event: ChangeEvent<HTMLInputElement>, key: 'exteriorImage' | 'interiorImage') {
-    try { const image = await readImage(event.target.files?.[0]); if (image) set(key, image); setError('') }
-    catch { setError('That image could not be processed. Try a JPG, PNG or WebP image.') }
+  async function upload(event: ChangeEvent<HTMLInputElement>, key: 'exteriorImage' | 'interiorImage' | 'galleryImages', index?: number) {
+    const input = event.target
+    const file = input.files?.[0]
+    input.value = ''
+    if (!file) return
+    try {
+      const image = await readImage(file)
+      if (key === 'galleryImages') {
+        if (index === undefined) return
+        setForm((current) => {
+          const galleryImages = [...(current.galleryImages ?? [])]
+          galleryImages[index] = image
+          return { ...current, galleryImages }
+        })
+      } else {
+        set(key, image)
+      }
+      setError('')
+    } catch {
+      setError('That image could not be processed. Try a JPG, PNG or WebP image.')
+    }
   }
-  function submit(event: FormEvent<HTMLFormElement>) { event.preventDefault(); onSave(form) }
+  function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    if (!form.exteriorImage) {
+      setError('Add an exterior image before saving this vehicle.')
+      return
+    }
+    onSave(form)
+  }
   return <Modal title={editing ? 'Edit vehicle' : 'Add vehicle'} onClose={onClose}><form onSubmit={submit}><div className="admin-form-grid">
     <Field label="Vehicle name" wide><input required value={form.name} onChange={(event) => set('name', event.target.value)} placeholder="e.g. Range Rover Sport" /></Field>
     <Field label="Category"><select value={form.category} onChange={(event) => set('category', event.target.value)}>{CATEGORIES.map((value) => <option key={value}>{value}</option>)}</select></Field><Field label="Seats"><input required type="number" min="1" max="99" value={form.seats} onChange={(event) => set('seats', Number(event.target.value))} /></Field>
     <Field label="Daily rate (ZAR)"><input required type="number" min="0" step="100" value={form.rate} onChange={(event) => set('rate', Number(event.target.value))} /></Field><Field label="Availability"><select value={form.status} onChange={(event) => set('status', event.target.value as VehicleStatus)}>{VEHICLE_STATUSES.map((value) => <option key={value}>{value}</option>)}</select></Field>
-    <ImageField label="Exterior image" value={form.exteriorImage} onChange={(event) => upload(event, 'exteriorImage')} /><ImageField label="Interior image" value={form.interiorImage} onChange={(event) => upload(event, 'interiorImage')} />
+    <ImageField label="Exterior image (required)" value={form.exteriorImage} onChange={(event) => upload(event, 'exteriorImage')} /><ImageField label="Interior image (optional)" value={form.interiorImage} onChange={(event) => upload(event, 'interiorImage')} />
+    {[0, 1, 2].map((index) => <ImageField key={index} label={`Additional image ${index + 1} (optional)`} value={form.galleryImages?.[index] ?? ''} onChange={(event) => upload(event, 'galleryImages', index)} />)}
   </div>{error && <p className="admin-form-error">{error}</p>}<ModalActions onClose={onClose} submitLabel={editing ? 'Save vehicle' : 'Add vehicle'} /></form></Modal>
 }
 
