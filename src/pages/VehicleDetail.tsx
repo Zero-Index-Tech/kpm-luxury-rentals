@@ -20,7 +20,9 @@ import IconCard from '@/components/IconCard'
 import KineticHeadline from '@/components/anim/KineticHeadline'
 import Reveal from '@/components/anim/Reveal'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
-import { getSiblingVehicles, getVehicleDetail, resolveVehicle } from '@/lib/site'
+import { fetchPublicVehicle, toPublicVehicleCard } from '@/lib/admin'
+import type { AdminVehicle } from '@/lib/admin'
+import { getSiblingVehicles, getVehicleDetail, resolveVehicle, VEHICLE_DETAILS } from '@/lib/site'
 import type { Vehicle, VehicleDetail } from '@/lib/site'
 import { cn } from '@/lib/utils'
 
@@ -72,13 +74,51 @@ function genericNarrative(vehicle: Vehicle, detail: VehicleDetail): [string, str
 
 export default function VehicleDetailPage() {
   const { slug } = useParams()
-  const vehicle = resolveVehicle(slug)
-  const detail = getVehicleDetail(vehicle.slug)
+  const [publicVehicle, setPublicVehicle] = useState<AdminVehicle | null>(null)
+
+  useEffect(() => {
+    let mounted = true
+    setPublicVehicle(null)
+    if (!slug) return () => { mounted = false }
+    void fetchPublicVehicle(slug).then((record) => {
+      if (mounted) setPublicVehicle(record)
+    })
+    return () => { mounted = false }
+  }, [slug])
+
+  const staticVehicle = resolveVehicle(slug)
+  const vehicle = publicVehicle ? toPublicVehicleCard(publicVehicle) : staticVehicle
+  const knownDetail = VEHICLE_DETAILS[vehicle.slug]
+  const baseDetail = knownDetail ?? getVehicleDetail(vehicle.slug)
+  const detail: VehicleDetail = publicVehicle ? {
+    ...baseDetail,
+    slug: vehicle.slug,
+    heroImage: publicVehicle.exteriorImage || vehicle.image,
+    heroCategory: knownDetail?.heroCategory ?? publicVehicle.category,
+    descriptor: knownDetail?.descriptor ?? 'Available for hire',
+    gallery: [publicVehicle.exteriorImage, publicVehicle.interiorImage, ...(publicVehicle.galleryImages ?? [])].filter(Boolean),
+    specGrid: knownDetail?.specGrid ?? [
+      { label: 'Transmission', value: 'Contact concierge' },
+      { label: 'Fuel Type', value: 'Contact concierge' },
+      { label: 'Seats', value: `${publicVehicle.seats} seats` },
+      { label: 'Doors', value: 'Contact concierge' },
+      { label: 'Engine', value: 'Contact concierge' },
+      { label: 'Power', value: 'Contact concierge' },
+      { label: '0-100 KM/H', value: 'Contact concierge' },
+      { label: 'Top Speed', value: 'Contact concierge' },
+    ],
+    card: vehicle,
+  } : baseDetail
   const gallery = detail.gallery
 
   const [activeIdx, setActiveIdx] = useState(0)
   const [heroSrc, setHeroSrc] = useState(detail.heroImage)
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null)
+
+  useEffect(() => {
+    setActiveIdx(0)
+    setHeroSrc(detail.heroImage)
+  }, [detail.heroImage])
 
   const selectThumb = useCallback(
     (i: number) => {

@@ -44,7 +44,9 @@ export interface AdminData {
   rentals: Rental[]
 }
 
-interface HomepageVehicleRecord extends Pick<AdminVehicle, 'id' | 'name' | 'category' | 'seats' | 'rate' | 'status' | 'exteriorImage'> {}
+type PublicVehicleRecord = Pick<AdminVehicle,
+  'id' | 'name' | 'category' | 'seats' | 'rate' | 'status' | 'exteriorImage' | 'featured'
+>
 
 const DEFAULT_FEATURED_IDS = new Set(VEHICLES.map((vehicle) => vehicle.slug))
 
@@ -120,30 +122,52 @@ export function isAdminApiConfigured() {
   return Boolean(API_URL)
 }
 
-export async function fetchHomepageVehicles(): Promise<Vehicle[]> {
-  if (!API_URL) return VEHICLES
+async function fetchPublicVehicleRecords(): Promise<PublicVehicleRecord[] | null> {
+  if (!API_URL) return null
   try {
-    const response = await fetch(`${API_URL}/public/vehicles`, { cache: 'no-store' })
-    if (!response.ok) return VEHICLES
-    const records = await response.json() as HomepageVehicleRecord[]
-    if (!records.length) return VEHICLES
-    return records.slice(0, 3).map((record) => {
-      const fallback = FLEET_VEHICLES.find((vehicle) => vehicle.slug === record.id)
-      return {
-        slug: record.id,
-        name: record.name,
-        category: record.category,
-        price: formatRand(record.rate),
-        image: record.exteriorImage || fallback?.image || '',
-        specs: fallback?.specs ?? [
-          { value: `${record.seats} Seats`, label: 'Capacity' },
-          { value: record.category, label: 'Class' },
-          { value: record.status, label: 'Status' },
-        ],
-      }
-    })
+    const response = await fetch(`${API_URL}/public/vehicles`)
+    if (!response.ok) return null
+    return await response.json() as PublicVehicleRecord[]
   } catch {
-    return VEHICLES
+    return null
+  }
+}
+
+export function toPublicVehicleCard(record: PublicVehicleRecord): Vehicle {
+  const fallback = FLEET_VEHICLES.find((vehicle) => vehicle.slug === record.id)
+  return {
+    slug: record.id,
+    name: record.name,
+    category: record.category,
+    price: formatRand(record.rate),
+    image: record.exteriorImage || fallback?.image || '',
+    specs: fallback?.specs ?? [
+      { value: `${record.seats} Seats`, label: 'Capacity' },
+      { value: record.category, label: 'Class' },
+      { value: record.status, label: 'Status' },
+    ],
+  }
+}
+
+export async function fetchPublicFleetVehicles(): Promise<Vehicle[]> {
+  const records = await fetchPublicVehicleRecords()
+  return records?.length ? records.map(toPublicVehicleCard) : FLEET_VEHICLES
+}
+
+export async function fetchHomepageVehicles(): Promise<Vehicle[]> {
+  const records = await fetchPublicVehicleRecords()
+  const featured = records?.filter((record) => record.featured)
+  return featured?.length ? featured.slice(0, 3).map(toPublicVehicleCard) : VEHICLES
+}
+
+export async function fetchPublicVehicle(id: string): Promise<AdminVehicle | null> {
+  if (!API_URL) return null
+  try {
+    const response = await fetch(`${API_URL}/public/vehicles/${encodeURIComponent(id)}`)
+    if (!response.ok) return null
+    return await response.json() as AdminVehicle
+  } catch {
+    return null
   }
 }
 

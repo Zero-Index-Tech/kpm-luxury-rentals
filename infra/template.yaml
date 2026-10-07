@@ -199,11 +199,35 @@ Resources:
       Target: !Sub integrations/${AdminApiIntegration}
       AuthorizationType: NONE
 
+  PublicVehiclesPreflightRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref AdminApi
+      RouteKey: 'OPTIONS /public/vehicles'
+      Target: !Sub integrations/${AdminApiIntegration}
+      AuthorizationType: NONE
+
+  PublicVehicleByIdPreflightRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref AdminApi
+      RouteKey: 'OPTIONS /public/vehicles/{id}'
+      Target: !Sub integrations/${AdminApiIntegration}
+      AuthorizationType: NONE
+
   PublicVehiclesRoute:
     Type: AWS::ApiGatewayV2::Route
     Properties:
       ApiId: !Ref AdminApi
       RouteKey: GET /public/vehicles
+      Target: !Sub integrations/${AdminApiIntegration}
+      AuthorizationType: NONE
+
+  PublicVehicleByIdRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref AdminApi
+      RouteKey: GET /public/vehicles/{id}
       Target: !Sub integrations/${AdminApiIntegration}
       AuthorizationType: NONE
 

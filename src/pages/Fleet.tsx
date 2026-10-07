@@ -8,8 +8,8 @@ import BrandMarquee from '@/components/BrandMarquee'
 import KineticHeadline from '@/components/anim/KineticHeadline'
 import Reveal from '@/components/anim/Reveal'
 import { ScrollTrigger } from '@/lib/gsap'
-import { FLEET_FILTERS, FLEET_VEHICLES } from '@/lib/site'
-import type { FleetFilter } from '@/lib/site'
+import { FLEET_VEHICLES } from '@/lib/site'
+import { fetchPublicFleetVehicles } from '@/lib/admin'
 import { cn } from '@/lib/utils'
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as [number, number, number, number]
@@ -21,7 +21,8 @@ const EASE_OUT = [0.16, 1, 0.3, 1] as [number, number, number, number]
  * stat-strip grid, and the BrandMarquee band.
  */
 export default function Fleet() {
-  const [active, setActive] = useState<FleetFilter>('All Vehicles')
+  const [active, setActive] = useState('All Vehicles')
+  const [fleet, setFleet] = useState(FLEET_VEHICLES)
   /** Distinguishes the initial load stagger (0.08s, rise 40px, after tabs)
    *  from filter-transition entrances (0.06s, rise 24px). */
   const loaded = useRef(false)
@@ -29,10 +30,20 @@ export default function Fleet() {
     loaded.current = true
   }, [])
 
+  useEffect(() => {
+    let mounted = true
+    void fetchPublicFleetVehicles().then((vehicles) => {
+      if (mounted) setFleet(vehicles)
+    })
+    return () => { mounted = false }
+  }, [])
+
+  const filters = ['All Vehicles', ...new Set(fleet.map((vehicle) => vehicle.category))]
+
   const filtered =
     active === 'All Vehicles'
-      ? FLEET_VEHICLES
-      : FLEET_VEHICLES.filter((v) => v.category === active)
+      ? fleet
+      : fleet.filter((vehicle) => vehicle.category === active)
 
   // Re-measure GSAP scroll triggers (card parallax) once the grid re-flows.
   useEffect(() => {
@@ -109,7 +120,7 @@ export default function Fleet() {
               aria-label="Filter fleet by category"
               className="flex gap-2 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
-              {FLEET_FILTERS.map((filter) => (
+              {filters.map((filter) => (
                 <button
                   key={filter}
                   role="tab"

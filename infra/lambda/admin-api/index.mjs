@@ -48,12 +48,19 @@ export async function handler(event) {
     if (path === '/public/vehicles') {
       if (method !== 'GET') return json(405, { error: `Method not allowed: ${method}` })
       const { Items = [] } = await doc.send(new ScanCommand({ TableName: TABLES.vehicles }))
-      const featured = Items.filter((vehicle) =>
-        !vehicle.archived && (vehicle.featured ?? DEFAULT_FEATURED_VEHICLES.has(vehicle.id)),
-      ).slice(0, 3)
-      return json(200, featured.map(({ id, name, category, seats, rate, status, exteriorImage }) => ({
+      const vehicles = Items.filter((vehicle) => !vehicle.archived)
+      return json(200, vehicles.map(({ id, name, category, seats, rate, status, exteriorImage, featured }) => ({
         id, name, category, seats, rate, status, exteriorImage,
+        featured: featured ?? DEFAULT_FEATURED_VEHICLES.has(id),
       })))
+    }
+    const publicVehicleMatch = path.match(/^\/public\/vehicles\/([^/]+)$/)
+    if (publicVehicleMatch) {
+      if (method !== 'GET') return json(405, { error: `Method not allowed: ${method}` })
+      const id = decodeURIComponent(publicVehicleMatch[1])
+      const { Item } = await doc.send(new GetCommand({ TableName: TABLES.vehicles, Key: { id } }))
+      if (!Item || Item.archived) return json(404, { error: 'Vehicle not found' })
+      return json(200, Item)
     }
     if (path === '/staff/invitations') {
       if (method !== 'POST') return json(405, { error: `Method not allowed: ${method}` })
