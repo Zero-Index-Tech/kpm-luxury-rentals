@@ -22,6 +22,7 @@ import {
 import { scrollToHash } from '@/lib/lenis'
 import { CONTACT } from '@/lib/site'
 import { cn } from '@/lib/utils'
+import { usePageMetadata } from '@/hooks/usePageMetadata'
 
 /* ---------- data ---------- */
 
@@ -43,6 +44,7 @@ const RENTAL_TYPES = [
   'Short-Term Rental',
   'Long-Term / Corporate Lease',
   'Wedding / Event',
+  'Matric Dance',
   'Airport Transfer',
   'Chauffeur Service',
 ]
@@ -52,6 +54,7 @@ const RENTAL_HINTS: Record<string, string> = {
   'short-term': 'Short-Term Rental',
   corporate: 'Long-Term / Corporate Lease',
   wedding: 'Wedding / Event',
+  matric: 'Matric Dance',
   airport: 'Airport Transfer',
   chauffeur: 'Chauffeur Service',
 }
@@ -129,6 +132,11 @@ function chars(text: string, className?: string): ReactNode[] {
 /* ---------- page ---------- */
 
 export default function Contact() {
+  usePageMetadata(
+    'Contact KPM Luxury Rentals | Sandton, Johannesburg',
+    'Contact KPM Luxury Rentals to enquire about luxury car hire, corporate leases, weddings, airport transfers and chauffeur services in Johannesburg. Call +27 81 409 3805.',
+  )
+
   return (
     <PageTransition>
       <Hero />

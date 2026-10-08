@@ -13,6 +13,7 @@ import KineticHeadline from '@/components/anim/KineticHeadline'
 import Reveal from '@/components/anim/Reveal'
 import Parallax from '@/components/anim/Parallax'
 import { cn } from '@/lib/utils'
+import { usePageMetadata } from '@/hooks/usePageMetadata'
 
 const STATS = [
   { value: 3, label: 'Years of Excellence' },
@@ -121,6 +122,11 @@ function chars(text: string, className?: string): ReactNode[] {
  * glass value-pillars band, client-sector tiles, testimonials, CTA slab.
  */
 export default function About() {
+  usePageMetadata(
+    'About KPM Luxury Rentals | Sandton, Johannesburg',
+    'Learn about KPM Luxury Rentals, a Sandton-based luxury vehicle hire and chauffeur service serving private, corporate and diplomatic clients across Gauteng.',
+  )
+
   return (
     <PageTransition>
       <Hero />

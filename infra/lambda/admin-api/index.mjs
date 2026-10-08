@@ -1,4 +1,5 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb'
+import { BedrockRuntimeClient, ConverseCommand } from '@aws-sdk/client-bedrock-runtime'
 import { CognitoIdentityProviderClient, AdminCreateUserCommand } from '@aws-sdk/client-cognito-identity-provider'
 import {
   DynamoDBDocumentClient,
@@ -10,6 +11,8 @@ import {
 
 const doc = DynamoDBDocumentClient.from(new DynamoDBClient({}))
 const cognito = new CognitoIdentityProviderClient({})
+const bedrock = new BedrockRuntimeClient({})
+const BEDROCK_MODEL_ID = process.env.BEDROCK_MODEL_ID ?? 'amazon.nova-lite-v1:0'
 
 const TABLES = {
   vehicles: process.env.VEHICLES_TABLE,
@@ -61,6 +64,72 @@ export async function handler(event) {
       const { Item } = await doc.send(new GetCommand({ TableName: TABLES.vehicles, Key: { id } }))
       if (!Item || Item.archived) return json(404, { error: 'Vehicle not found' })
       return json(200, Item)
+    }
+    if (path === '/public/chat') {
+      if (method !== 'POST') return json(405, { error: `Method not allowed: ${method}` })
+      let messages
+      try {
+        const body = JSON.parse(event.body ?? '{}')
+        if (!Array.isArray(body.messages) || body.messages.length < 1 || body.messages.length > 10) {
+          return json(400, { error: 'Send between 1 and 10 messages.' })
+        }
+        messages = body.messages.map((message) => {
+          if (!['user', 'assistant'].includes(message?.role) || typeof message.content !== 'string') {
+            throw new Error('Invalid message format.')
+          }
+          const content = message.content.trim()
+          if (!content || content.length > 1500) throw new Error('Each message must be 1-1500 characters.')
+          return { role: message.role, content }
+        })
+        if (messages[messages.length - 1].role !== 'user' || messages.reduce((total, message) => total + message.content.length, 0) > 7000) {
+          return json(400, { error: 'Invalid conversation.' })
+        }
+      } catch (error) {
+        return json(400, { error: String(error?.message ?? 'Invalid request body.') })
+      }
+
+      try {
+        const { Items = [] } = await doc.send(new ScanCommand({
+          TableName: TABLES.vehicles,
+          ProjectionExpression: '#id, #name, #category, #rate, #status, #archived',
+          ExpressionAttributeNames: {
+            '#id': 'id',
+            '#name': 'name',
+            '#category': 'category',
+            '#rate': 'rate',
+            '#status': 'status',
+            '#archived': 'archived',
+          },
+        }))
+        const fleetContext = Items
+          .filter((vehicle) => !vehicle.archived)
+          .map((vehicle) => `${vehicle.name} (${vehicle.category}) — R ${Number(vehicle.rate).toLocaleString('en-ZA')} per day; status: ${vehicle.status}.`)
+          .join('\n')
+        const systemPrompt = [
+          'You are the KPM Luxury Rentals AI Concierge for a premium vehicle rental company in Sandton, Johannesburg, South Africa.',
+          'Be warm, polished, concise, and useful. Reply in the user’s language when practical.',
+          'Use the fleet and daily rates below as the only authoritative vehicle data. Rates are indicative daily rates in South African rand; do not invent discounts, availability, vehicle specifications, deposits, age rules, or rental terms.',
+          'Never confirm a booking or live availability. For an exact quote, availability, or unsupported detail, direct the customer to the human concierge.',
+          'Services include luxury self-drive rentals, chauffeured hire, weddings and events, airport transfers, and corporate or diplomatic leases in Gauteng.',
+          'Contact: +27 81 409 3805, info@kpmluxerentals.co.za. Address: 82 Rivonia Road, Sandton, Johannesburg, 2196, South Africa.',
+          `Active fleet and rates:\n${fleetContext || 'Fleet details are currently unavailable.'}`,
+        ].join('\n\n')
+        const result = await bedrock.send(new ConverseCommand({
+          modelId: BEDROCK_MODEL_ID,
+          system: [{ text: systemPrompt }],
+          messages: messages.map((message) => ({ role: message.role, content: [{ text: message.content }] })),
+          inferenceConfig: { maxTokens: 400, temperature: 0.3, topP: 0.9 },
+        }))
+        const reply = result.output?.message?.content
+          ?.map((part) => part.text ?? '')
+          .join('')
+          .trim()
+        if (!reply) throw new Error('Bedrock returned an empty response.')
+        return json(200, { reply })
+      } catch (error) {
+        console.error('Bedrock concierge request failed', error)
+        return json(503, { error: 'The concierge is temporarily unavailable.' })
+      }
     }
     if (path === '/staff/invitations') {
       if (method !== 'POST') return json(405, { error: `Method not allowed: ${method}` })

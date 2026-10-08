@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin
+Disallow: /c1/
+Disallow: /c2/
+
+Sitemap: https://kpmluxerentals.co.za/sitemap.xml

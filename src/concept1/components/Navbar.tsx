@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { ChevronDown, Menu, X } from 'lucide-react'
 import { NAV_LINKS } from '@/concept1/lib/site'
-import { scrollToHash } from '@/lib/lenis'
+import { SERVICE_PAGES } from '@/lib/services'
 import { cn } from '@/lib/utils'
 
 /**
@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils'
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [servicesOpen, setServicesOpen] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -31,12 +32,7 @@ export default function Navbar() {
     }
   }, [open])
 
-  const goServices = (e: React.MouseEvent) => {
-    e.preventDefault()
-    setOpen(false)
-    if (location.pathname === '/c1') scrollToHash('#services')
-    else navigate('/c1/#services')
-  }
+  const servicePath = (slug: string) => `/c1/services/${slug}`
 
   return (
     <>
@@ -65,11 +61,40 @@ export default function Navbar() {
 
           <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
             {NAV_LINKS.map((link) =>
-              link.hash ? (
+              link.label === 'Services' ? (
+                <div
+                  key={link.label}
+                  className="group relative"
+                  onMouseEnter={() => setServicesOpen(true)}
+                  onMouseLeave={() => setServicesOpen(false)}
+                  onFocus={() => setServicesOpen(true)}
+                >
+                  <button
+                    type="button"
+                    aria-expanded={servicesOpen}
+                    aria-haspopup="true"
+                    onClick={() => setServicesOpen((value) => !value)}
+                    className="flex items-center gap-1 text-[12px] font-medium uppercase tracking-[0.16em] text-white/60 transition-colors duration-300 hover:text-white"
+                  >
+                    Services <ChevronDown size={14} className={servicesOpen ? 'rotate-180 transition-transform' : 'transition-transform'} />
+                  </button>
+                  {servicesOpen && (
+                    <div className="absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 pt-4">
+                      <div className="overflow-hidden rounded-[4px] border border-white/10 bg-lxr-black p-2 shadow-xl">
+                        {SERVICE_PAGES.map((service) => (
+                          <Link key={service.slug} to={servicePath(service.slug)} onClick={() => setServicesOpen(false)} className="block px-4 py-3 text-sm text-white/75 transition-colors hover:bg-white/5 hover:text-white">
+                            {service.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : link.hash ? (
                 <a
                   key={link.label}
                   href={link.to}
-                  onClick={goServices}
+                  onClick={(event) => { event.preventDefault(); navigate('/c1/#services') }}
                   className="text-[12px] font-medium uppercase tracking-[0.16em] text-white/60 transition-colors duration-300 hover:text-white"
                 >
                   {link.label}
@@ -121,10 +146,25 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.08 + i * 0.06, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  {link.hash ? (
+                  {link.label === 'Services' ? (
+                    <div>
+                      <button type="button" aria-expanded={servicesOpen} onClick={() => setServicesOpen((value) => !value)} className="flex items-center gap-3 font-lxrtitle text-[1.9rem] font-semibold text-white">
+                        Services <ChevronDown size={22} className={servicesOpen ? 'rotate-180 transition-transform' : 'transition-transform'} />
+                      </button>
+                      {servicesOpen && (
+                        <div className="mt-3 flex flex-col gap-3 border-l border-white/25 pl-5">
+                          {SERVICE_PAGES.map((service) => (
+                            <Link key={service.slug} to={servicePath(service.slug)} onClick={() => { setOpen(false); setServicesOpen(false) }} className="text-base text-white/70 hover:text-white">
+                              {service.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : link.hash ? (
                     <a
                       href={link.to}
-                      onClick={goServices}
+                      onClick={(event) => { event.preventDefault(); setOpen(false); navigate('/c1/#services') }}
                       className="font-lxrtitle text-[1.9rem] font-semibold text-white"
                     >
                       {link.label}

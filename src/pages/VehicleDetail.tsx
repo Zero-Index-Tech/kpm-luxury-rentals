@@ -25,6 +25,7 @@ import type { AdminVehicle } from '@/lib/admin'
 import { getSiblingVehicles, getVehicleDetail, resolveVehicle, VEHICLE_DETAILS } from '@/lib/site'
 import type { Vehicle, VehicleDetail } from '@/lib/site'
 import { cn } from '@/lib/utils'
+import { usePageMetadata } from '@/hooks/usePageMetadata'
 
 /* ---------- Static shared content (identical across vehicles, vehicle.md §4/§5) ---------- */
 
@@ -110,6 +111,11 @@ export default function VehicleDetailPage() {
     card: vehicle,
   } : baseDetail
   const gallery = detail.gallery
+
+  usePageMetadata(
+    `${vehicle.name} Hire in Johannesburg | KPM Luxury Rentals`,
+    `Explore the ${vehicle.name}, a ${vehicle.category.toLowerCase()} available from KPM Luxury Rentals in Sandton, Johannesburg. View vehicle details and enquire about availability.`,
+  )
 
   const [activeIdx, setActiveIdx] = useState(0)
   const [heroSrc, setHeroSrc] = useState(detail.heroImage)

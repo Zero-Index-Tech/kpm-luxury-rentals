@@ -7,6 +7,7 @@ import CustomCursor from '@/components/CustomCursor'
 import { getLenis, scrollToHash } from '@/lib/lenis'
 import { ScrollTrigger } from '@/lib/gsap'
 import { NAV_HEIGHT } from '@/lib/site'
+import SeoSchema from '@/components/SeoSchema'
 
 /**
  * Shared layout (nested-route pattern: renders <Outlet/>).
@@ -38,6 +39,7 @@ export default function Layout() {
 
   return (
     <div className="min-h-[100dvh] bg-taupe theme-canvas text-copy">
+      <SeoSchema />
       <Navbar />
       <main style={{ paddingTop: NAV_HEIGHT }}>
         <Outlet />

@@ -28,25 +28,21 @@ const SERVICES = [
     icon: Car,
     title: 'Short-Term Rentals',
     body: "Drive premium for a weekend escape, business trip, or a personal statement across Johannesburg's finest quarters.",
-    rentalType: 'short-term',
   },
   {
     icon: Briefcase,
     title: 'Corporate Leases',
     body: 'Tailored long-term corporate mobility solutions designed for executives, diplomats, and international embassies in Gauteng.',
-    rentalType: 'corporate',
   },
   {
     icon: Heart,
     title: 'Wedding & Events',
     body: 'Arrive in peerless sophistication. Curated fleet options and chauffeur assistance specifically coordinated for your signature day.',
-    rentalType: 'wedding',
   },
   {
     icon: Plane,
     title: 'Airport Transfers',
     body: 'Reliable white-glove chauffeur transfers servicing OR Tambo International and Lanseria Private Airport seamlessly.',
-    rentalType: 'airport',
   },
 ]
 
@@ -246,8 +242,6 @@ function Services() {
               icon={s.icon}
               title={s.title}
               body={s.body}
-              to="/c2/contact"
-              state={{ rentalType: s.rentalType }}
             />
           ))}
         </Reveal>

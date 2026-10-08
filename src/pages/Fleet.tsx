@@ -11,6 +11,7 @@ import { ScrollTrigger } from '@/lib/gsap'
 import { FLEET_VEHICLES } from '@/lib/site'
 import { fetchPublicFleetVehicles } from '@/lib/admin'
 import { cn } from '@/lib/utils'
+import { usePageMetadata } from '@/hooks/usePageMetadata'
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as [number, number, number, number]
 
@@ -21,6 +22,11 @@ const EASE_OUT = [0.16, 1, 0.3, 1] as [number, number, number, number]
  * stat-strip grid, and the BrandMarquee band.
  */
 export default function Fleet() {
+  usePageMetadata(
+    'Luxury Car Rental Fleet in Johannesburg | KPM Luxury Rentals',
+    'Explore luxury cars for hire in Johannesburg, including premium SUVs, sports cars, sedans and chauffeur vehicles. View the KPM fleet and enquire about availability.',
+  )
+
   const [active, setActive] = useState('All Vehicles')
   const [fleet, setFleet] = useState(FLEET_VEHICLES)
   /** Distinguishes the initial load stagger (0.08s, rise 40px, after tabs)

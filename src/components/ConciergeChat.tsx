@@ -6,6 +6,7 @@ import { CONTACT } from '@/lib/site'
 import { cn } from '@/lib/utils'
 
 type Msg = { from: 'ai' | 'user'; text: string }
+type ChatApiMessage = { role: 'assistant' | 'user'; content: string }
 
 const QUICK_CHIPS = ['Fleet & rates', 'Wedding hire', 'Corporate leases', 'Book a viewing']
 
@@ -14,38 +15,23 @@ const GREETING: Msg = {
   text: "Good day — I'm the KPM AI Concierge. Whether it's a weekend escape, a wedding arrival, or a long-term corporate fleet, I'll point you in the right direction. How may I assist?",
 }
 
-/** Scripted concierge responses (frontend demo — no live AI wired up). */
-function conciergeReply(q: string): string {
-  const s = q.toLowerCase()
-  if (/(rate|price|cost|fee|charge|how much)/.test(s))
-    return 'Our rates are tailored to the vehicle, duration and occasion — day, weekend and long-term structures are all available. Share the vehicle and dates you have in mind on the contact page, or call our concierge line, and we will prepare a precise quotation within the hour.'
-  if (/(fleet|car|vehicle|ferrari|lamborghini|porsche|range rover|rolls|mercedes|bmw|bentley|audi)/.test(s))
-    return 'The collection spans grand tourers, supercars and executive SUVs — from the Rolls-Royce Ghost and Range Rover to the Ferrari F8 Tributo and Lamborghini Huracán. You can browse the full fleet on the Fleet page; every listing includes specifications and a direct reservation option.'
-  if (/(wed|bride|groom|matric)/.test(s))
-    return 'For weddings and matric dances we arrange chauffeured or self-drive packages with red-carpet delivery, ribbon dressing and photography time built in. Dates around peak season book out quickly — I recommend reserving 4–6 weeks ahead.'
-  if (/(corpor|embassy|business|lease|long.?term)/.test(s))
-    return 'Our corporate and diplomatic programmes cover long-term leases, chauffeur services and multi-vehicle fleets, with dedicated account management for boards and embassies across Gauteng. The concierge team will draft a proposal around your fleet requirements.'
-  if (/(airport|transfer|chauffeur|driver)/.test(s))
-    return 'Chauffeured airport transfers to and from OR Tambo and Lanseria are available across the executive range — meet-and-greet, flight tracking and waiting time are all included.'
-  if (/(book|reserve|view|appointment|test|visit)/.test(s))
-    return `Wonderful — viewings at our Sandton showroom are by private appointment. Leave your details on the contact page or call ${CONTACT.phone} and we will confirm a time that suits you.`
-  if (/(where|location|address|find you|sandton|johannesburg)/.test(s))
-    return `You'll find us at ${CONTACT.address.join(' ')} — viewings and handovers are by appointment, and delivery is available throughout Gauteng.`
-  if (/(hour|open|when)/.test(s))
-    return `The showroom operates by appointment seven days a week, and the concierge line — ${CONTACT.phone} — is answered around the clock for existing clients.`
-  if (/(deposit|license|licence|require|document|age)/.test(s))
-    return "For self-drive hire we require a valid driver's licence, ID or passport, and a refundable security deposit that varies by vehicle. Chauffeured hire has no deposit requirements."
-  if (/(human|person|call|phone|email|whatsapp|contact)/.test(s))
-    return `Of course — our human concierge is on ${CONTACT.phone} or ${CONTACT.email}. Mention anything I've promised you here and they will pick it right up.`
-  if (/(hi|hello|hey|good)/.test(s))
-    return 'A warm welcome to KPM Luxury Rentals. Are you hiring for an occasion — a wedding, a weekend, or business travel? I can tailor a recommendation.'
-  return `I'd love to help with that. For anything detailed, our concierge team responds within minutes on ${CONTACT.phone} or ${CONTACT.email} — or ask me about the fleet, rates, weddings, or corporate leases.`
+async function requestConciergeReply(messages: ChatApiMessage[]) {
+  const apiUrl = import.meta.env.VITE_ADMIN_API_URL as string | undefined
+  if (!apiUrl) throw new Error('Chat service is not configured.')
+  const response = await fetch(`${apiUrl}/public/chat`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messages }),
+  })
+  const result = await response.json() as { reply?: string }
+  if (!response.ok || !result.reply) throw new Error('Chat service request failed.')
+  return result.reply
 }
 
 /**
  * Floating AI concierge (landing pages of both concepts only). Gold pill —
  * styled after the client's reference mockup — opens a dark-glass chat panel
- * with a scripted concierge (frontend demo).
+ * backed by the server-side KPM Bedrock concierge.
  */
 export default function ConciergeChat() {
   const { pathname } = useLocation()
@@ -69,10 +55,17 @@ export default function ConciergeChat() {
     setMsgs((m) => [...m, { from: 'user', text }])
     setInput('')
     setTyping(true)
-    window.setTimeout(() => {
-      setMsgs((m) => [...m, { from: 'ai', text: conciergeReply(text) }])
-      setTyping(false)
-    }, 900)
+    const history: ChatApiMessage[] = msgs
+      .slice(1)
+      .slice(-8)
+      .map((message) => ({ role: message.from === 'ai' ? 'assistant' : 'user', content: message.text }))
+    void requestConciergeReply([...history, { role: 'user', content: text }])
+      .then((reply) => setMsgs((current) => [...current, { from: 'ai', text: reply }]))
+      .catch(() => setMsgs((current) => [...current, {
+        from: 'ai',
+        text: `I’m having trouble connecting right now. Please reach our concierge at ${CONTACT.phone} or ${CONTACT.email}.`,
+      }]))
+      .finally(() => setTyping(false))
   }
 
   return (
@@ -130,7 +123,7 @@ export default function ConciergeChat() {
                 </p>
                 <p className="mt-0.5 flex items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] text-white/45">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                  Online · replies instantly
+                  Live AI concierge
                 </p>
               </div>
             </div>
@@ -193,6 +186,8 @@ export default function ConciergeChat() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask about the fleet, rates, occasions…"
                 aria-label="Message the AI concierge"
+                maxLength={1500}
+                disabled={typing}
                 className="h-10 flex-1 rounded-full border border-white/12 bg-white/[0.05] px-4 text-[13px] text-[#F4F2EF] outline-none placeholder:text-white/35 focus:border-gold/60"
               />
               <button

@@ -107,6 +107,13 @@ Resources:
               - Effect: Allow
                 Action: cognito-idp:AdminCreateUser
                 Resource: !GetAtt AdminUserPool.Arn
+        - PolicyName: bedrock-concierge
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: bedrock:InvokeModel
+                Resource: !Sub arn:aws:bedrock:${AWS::Region}::foundation-model/amazon.nova-lite-v1:0
 
   AdminApiFunction:
     Type: AWS::Lambda::Function
@@ -118,13 +125,14 @@ Resources:
         S3Bucket: kpm-rentals-bucket
         S3Key: admin-api.zip
       Role: !GetAtt AdminApiRole.Arn
-      Timeout: 10
+      Timeout: 30
       MemorySize: 256
       Environment:
         Variables:
           VEHICLES_TABLE: !Ref VehiclesTable
           RENTALS_TABLE: !Ref RentalsTable
           USER_POOL_ID: !Ref AdminUserPool
+          BEDROCK_MODEL_ID: amazon.nova-lite-v1:0
 
   # ---------- API Gateway ----------
   AdminApi:
@@ -215,6 +223,14 @@ Resources:
       Target: !Sub integrations/${AdminApiIntegration}
       AuthorizationType: NONE
 
+  PublicChatPreflightRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref AdminApi
+      RouteKey: 'OPTIONS /public/chat'
+      Target: !Sub integrations/${AdminApiIntegration}
+      AuthorizationType: NONE
+
   PublicVehiclesRoute:
     Type: AWS::ApiGatewayV2::Route
     Properties:
@@ -228,6 +244,14 @@ Resources:
     Properties:
       ApiId: !Ref AdminApi
       RouteKey: GET /public/vehicles/{id}
+      Target: !Sub integrations/${AdminApiIntegration}
+      AuthorizationType: NONE
+
+  PublicChatRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref AdminApi
+      RouteKey: 'POST /public/chat'
       Target: !Sub integrations/${AdminApiIntegration}
       AuthorizationType: NONE
 
@@ -282,6 +306,10 @@ Resources:
       ApiId: !Ref AdminApi
       StageName: $default
       AutoDeploy: true
+      RouteSettings:
+        'POST /public/chat':
+          ThrottlingBurstLimit: 5
+          ThrottlingRateLimit: 2
 
   AdminApiLambdaPermission:
     Type: AWS::Lambda::Permission

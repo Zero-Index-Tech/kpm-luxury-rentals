@@ -18,6 +18,7 @@ import Parallax from '@/components/anim/Parallax'
 import HeroSection from '@/pages/home/HeroSection'
 import { CONTACT, FLEET_VEHICLES, VEHICLES } from '@/lib/site'
 import { fetchHomepageVehicles } from '@/lib/admin'
+import { usePageMetadata } from '@/hooks/usePageMetadata'
 
 const STATS = [
   { value: 3, label: 'Years of Excellence' },
@@ -31,25 +32,21 @@ const SERVICES = [
     icon: Car,
     title: 'Short-Term Rentals',
     body: "Drive premium for a weekend escape, business trip, or a personal statement across Johannesburg's finest quarters.",
-    rentalType: 'short-term',
   },
   {
     icon: Briefcase,
     title: 'Corporate Leases',
     body: 'Tailored long-term corporate mobility solutions designed for executives, diplomats, and international embassies in Gauteng.',
-    rentalType: 'corporate',
   },
   {
     icon: Heart,
     title: 'Wedding & Events',
     body: 'Arrive in peerless sophistication. Curated fleet options and chauffeur assistance specifically coordinated for your signature day.',
-    rentalType: 'wedding',
   },
   {
     icon: Plane,
     title: 'Airport Transfers',
     body: 'Reliable white-glove chauffeur transfers servicing OR Tambo International and Lanseria Private Airport seamlessly.',
-    rentalType: 'airport',
   },
 ]
 
@@ -102,6 +99,11 @@ const TESTIMONIALS = [
  * band → why-KPM split → testimonials → rounded CTA slab.
  */
 export default function Home() {
+  usePageMetadata(
+    'Luxury Car Hire in Sandton & Johannesburg | KPM Luxury Rentals',
+    'Hire premium cars in Sandton and Johannesburg, from sports cars and luxury SUVs to chauffeur-driven vehicles. Explore the KPM Luxury Rentals fleet.',
+  )
+
   return (
     <PageTransition>
       <HeroSection />
@@ -389,8 +391,6 @@ function Services() {
                 icon={s.icon}
                 title={s.title}
                 body={s.body}
-                to="/contact"
-                state={{ rentalType: s.rentalType }}
               />
             </div>
           ))}

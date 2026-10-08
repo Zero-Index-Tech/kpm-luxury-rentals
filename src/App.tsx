@@ -27,6 +27,7 @@ import VehicleDetailC3 from '@/pages/VehicleDetail'
 import AboutC3 from '@/pages/About'
 import ContactC3 from '@/pages/Contact'
 import MerchC3 from '@/pages/Merch'
+import ServicePage from '@/pages/ServicePage'
 
 import ConciergeChat from '@/components/ConciergeChat'
 import ShopBag from '@/store/Bag'
@@ -58,6 +59,7 @@ export default function App() {
             <Route path="merch/account" element={<ShopAccount />} />
             <Route path="merch/checkout" element={<ShopCheckout />} />
             <Route path="contact" element={<ContactC1 />} />
+            <Route path="services/:slug" element={<ServicePage />} />
           </Route>
 
           <Route path="/c2" element={<LayoutC2 />}>
@@ -70,6 +72,7 @@ export default function App() {
             <Route path="merch/account" element={<ShopAccount />} />
             <Route path="merch/checkout" element={<ShopCheckout />} />
             <Route path="contact" element={<ContactC2 />} />
+            <Route path="services/:slug" element={<ServicePage />} />
           </Route>
 
           <Route path="/" element={<LayoutC3 />}>
@@ -82,6 +85,7 @@ export default function App() {
             <Route path="merch/account" element={<ShopAccount />} />
             <Route path="merch/checkout" element={<ShopCheckout />} />
             <Route path="contact" element={<ContactC3 />} />
+            <Route path="services/:slug" element={<ServicePage />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />

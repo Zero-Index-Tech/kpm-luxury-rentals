@@ -50,6 +50,7 @@ const RENTAL_TYPES = [
   'Short-Term Rental',
   'Long-Term / Corporate Lease',
   'Wedding / Event',
+  'Matric Dance',
   'Airport Transfer',
   'Chauffeur Service',
 ]
@@ -59,6 +60,7 @@ const RENTAL_HINTS: Record<string, string> = {
   'short-term': 'Short-Term Rental',
   corporate: 'Long-Term / Corporate Lease',
   wedding: 'Wedding / Event',
+  matric: 'Matric Dance',
   airport: 'Airport Transfer',
   chauffeur: 'Chauffeur Service',
 }

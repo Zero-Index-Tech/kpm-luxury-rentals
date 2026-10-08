@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { ChevronDown, Menu, X } from 'lucide-react'
 import { NAV_LINKS } from '@/lib/site'
-import { scrollToHash } from '@/lib/lenis'
+import { SERVICE_PAGES } from '@/lib/services'
 import { cn } from '@/lib/utils'
 
 /**
@@ -18,6 +18,7 @@ import { cn } from '@/lib/utils'
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [servicesOpen, setServicesOpen] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -37,15 +38,7 @@ export default function Navbar() {
     }
   }, [open])
 
-  const goServices = (e: React.MouseEvent) => {
-    e.preventDefault()
-    setOpen(false)
-    if (location.pathname === '/') {
-      scrollToHash('#services')
-    } else {
-      navigate('/#services')
-    }
-  }
+  const servicePath = (slug: string) => `/services/${slug}`
 
   return (
     <>
@@ -98,11 +91,50 @@ export default function Navbar() {
                   className="absolute -bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 scale-0 rounded-full bg-taupe transition-transform duration-300 group-hover:scale-100 group-[.active]:scale-100"
                 />
               )
-              return link.hash ? (
+              return link.label === 'Services' ? (
+                <div
+                  key={link.label}
+                  className="group relative"
+                  onMouseEnter={() => setServicesOpen(true)}
+                  onMouseLeave={() => setServicesOpen(false)}
+                  onFocus={() => setServicesOpen(true)}
+                >
+                  <button
+                    type="button"
+                    aria-expanded={servicesOpen}
+                    aria-haspopup="true"
+                    onClick={() => setServicesOpen((value) => !value)}
+                    className="nav-link group flex items-center gap-1"
+                    data-cursor
+                  >
+                    Services <ChevronDown size={14} className={cn('transition-transform', servicesOpen && 'rotate-180')} />
+                    {dot}
+                  </button>
+                  {servicesOpen && (
+                    <div className="absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 pt-4">
+                      <div className="overflow-hidden rounded-lg border border-copy/10 bg-ivory p-2 shadow-xl">
+                        {SERVICE_PAGES.map((service) => (
+                          <Link
+                            key={service.slug}
+                            to={servicePath(service.slug)}
+                            onClick={() => setServicesOpen(false)}
+                            className="block rounded-md px-4 py-3 text-sm text-copy transition-colors hover:bg-copy/5"
+                          >
+                            {service.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : link.hash ? (
                 <a
                   key={link.label}
                   href={link.to}
-                  onClick={goServices}
+                  onClick={(event) => {
+                    event.preventDefault()
+                    navigate('/#services')
+                  }}
                   className="nav-link group"
                   data-cursor
                 >
@@ -185,10 +217,39 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 + i * 0.07, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  {link.hash ? (
+                  {link.label === 'Services' ? (
+                    <div>
+                      <button
+                        type="button"
+                        aria-expanded={servicesOpen}
+                        onClick={() => setServicesOpen((value) => !value)}
+                        className="flex items-center gap-3 font-display text-[2.2rem] font-bold text-ivory"
+                      >
+                        Services <ChevronDown size={23} className={cn('transition-transform', servicesOpen && 'rotate-180')} />
+                      </button>
+                      {servicesOpen && (
+                        <div className="mt-4 flex flex-col gap-3 border-l border-ivory/30 pl-5">
+                          {SERVICE_PAGES.map((service) => (
+                            <Link
+                              key={service.slug}
+                              to={servicePath(service.slug)}
+                              onClick={() => { setOpen(false); setServicesOpen(false) }}
+                              className="text-base text-ivory/75 transition-colors hover:text-ivory"
+                            >
+                              {service.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : link.hash ? (
                     <a
                       href={link.to}
-                      onClick={goServices}
+                      onClick={(event) => {
+                        event.preventDefault()
+                        setOpen(false)
+                        navigate('/#services')
+                      }}
                       className="font-display text-[2.2rem] font-bold text-ivory transition-colors hover:text-ivory-70"
                     >
                       {link.label}
